@@ -1,12 +1,9 @@
-<template>
-  <div class="container-fluid">
-    <div class="container"></div>
-  </div>
-</template>
+<template></template>
 
 <script>
 export default {};
 </script>
+
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
@@ -15,3 +12,6 @@ export default {};
   background-color: $primary;
 }
 </style>
+
+
+
