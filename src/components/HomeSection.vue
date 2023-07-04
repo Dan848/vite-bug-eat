@@ -9,7 +9,8 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/partials/var.scss" as *;
+@use "../assets/partials/variable.scss" as *;
+
 .container-fluid {
   background-color: $primary;
 }

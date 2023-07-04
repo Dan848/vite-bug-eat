@@ -1,21 +1,40 @@
 <template>
-  <Header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link" href="#">Features</a>
-          <a class="nav-item nav-link" href="#">Pricing</a>
-          <a class="nav-item nav-link disabled" href="#">Disabled</a>
+  <header class="bg-primary">
+    <nav class="navbar fw-semibold container navbar-expand-lg">
+      <div class="container-fluid">
+        <!-- {{ --Logo --}} -->
+
+        <a class="navbar-brand" href="/">
+          <img src="" alt="logo" width="40" height="40" />
+        </a>
+
+        <!-- {{ --Burger Menù-- }} -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- {{ --Navbar Start-- }} -->
+        <div class="collapse navbar-collapse w-100 justify-content-between" id="navbarNavDropdown">
+          <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
+            <!-- {{ --Simple Anchor Link-- }} -->
+            <li class="nav-item text-white pe-2">
+              Ristoranti
+            </li>
+            <li class="nav-item text-white pe-2">
+              Contatti
+            </li>
+            <li class="nav-item text-white pe-2">
+              Lavora con noi
+            </li>
+          </ul>
+          <div class="text-center">
+            MANGIA
+          </div>
+
         </div>
       </div>
     </nav>
-  </Header>
+  </header>
 </template>
 
 <script>
@@ -24,4 +43,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "../assets/partials/variable.scss" as *;
+</style>
