@@ -17,18 +17,14 @@
         <div class="collapse navbar-collapse w-100 justify-content-between" id="navbarNavDropdown">
           <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
             <!-- {{ --Simple Anchor Link-- }} -->
-            <li class="nav-item text-white pe-2">
-              Ristoranti
-            </li>
-            <li class="nav-item text-white pe-2">
-              Contatti
-            </li>
-            <li class="nav-item text-white pe-2">
-              Lavora con noi
+            <li class="nav-item text-white pe-3" v-for="item in store.headerLinks">
+
+              <a href="">{{ item.label }}</a>
+
             </li>
           </ul>
           <div class="text-center">
-            MANGIA
+            <a href="">MANGIA</a>
           </div>
 
         </div>
@@ -38,11 +34,25 @@
 </template>
 
 <script>
+import { store } from "../data/store";
 export default {
-  name: 'HeaderComponent'
+  name: 'HeaderComponent',
+  data() {
+    return {
+      store,
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary;
+  }
+}
 </style>
