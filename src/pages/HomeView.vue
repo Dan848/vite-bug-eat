@@ -9,33 +9,57 @@
         <div class="col-md-6">
           <div class="form">
             <i class="fa fa-search"></i>
-            <input
-              type="text"
-              class="form-control form-input"
-              placeholder="Cerca il ristorante più vicino a te..."
-            />
+            <input type="text" class="form-control form-input" placeholder="Cerca il ristorante più vicino a te..." />
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Types slider -->
+  <div class="d-flex justify-content-center my-5">
+    <div class="w-75">
+      <SliderComponent :types="store.types" :imageBaseUrl="store.imageBaseUrl" />
     </div>
   </div>
 </template>
 
 <script>
 import HomeSection from "../components/HomeSection.vue";
+import SliderComponent from "../components/SliderComponent.vue";
+import axios from "axios";
+import { store } from "../data/store";
 export default {
   name: "HomeView",
   components: {
     HomeSection,
+    SliderComponent
   },
+  data() {
+    return {
+      store
+    }
+  },
+  methods: {
+    getTypes() {
+      axios.get(`${store.apiUrl}/types`).then((res) => {
+        store.types = res.data.results
+      })
+    }
+  },
+  mounted() {
+    this.getTypes();
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
+
 .container-fluid {
   background-color: $primary;
 }
+
 // SEARCH BAR
 .form {
   position: relative;
