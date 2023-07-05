@@ -18,9 +18,20 @@
 
   <!-- Types slider -->
   <div class="d-flex justify-content-center my-5">
-    <div class="w-75">
-      <SliderComponent :types="store.types" :imageBaseUrl="store.imageBaseUrl" />
-    </div>
+    <SliderComponent :types="store.types" :imageBaseUrl="store.imageBaseUrl" />
+  </div>
+
+
+  <div>
+    <HomeSection :section="store.FirstSection" />
+  </div>
+
+  <div>
+    <HomeSection :section="store.SecondSection" />
+  </div>
+
+  <div>
+    <HomeSection :section="store.ThirdSection" />
   </div>
 </template>
 
@@ -55,10 +66,6 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
-
-.container-fluid {
-  background-color: $primary;
-}
 
 // SEARCH BAR
 .form {
