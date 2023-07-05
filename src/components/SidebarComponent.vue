@@ -1,63 +1,47 @@
 <template>
-  <div class="d-flex flex-column flex-shrink-0 bg-light mt-5">
+  <div class="d-flex flex-column flex-shrink-0 mt-5">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32">
-        <use xlink:href="#bootstrap"></use>
-      </svg>
-      <span class="fs-4">Bug Eat</span>
+      <span class="fs-4">Filtri</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#home"></use>
-          </svg>
-          Home
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#speedometer2"></use>
-          </svg>
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#table"></use>
-          </svg>
-          Orders
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#grid"></use>
-          </svg>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16">
-            <use xlink:href="#people-circle"></use>
-          </svg>
-          Customers
+      <li class="nav-item" v-for="item in types">
+        <a href="#" class="nav-link" aria-current="page">
+          {{ item.name }}
         </a>
       </li>
     </ul>
-
-
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  name: 'SidebarComponent'
+  name: 'SidebarComponent',
+  props: {
+    types: Object
+  },
+  data() {
+    return{}
+  },
+  methods: {
+    
+  }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use "../assets/partials/variable.scss" as *;
+li{
+  margin: .2rem 0;
+  border: 1px solid transparent;
+  color: black;
+  a{
+    color: black;
+  }
+  &:hover{
+    border: 1px solid $primary;
+    border-radius: 80px;
+  }
+}
+</style>
