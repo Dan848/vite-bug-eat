@@ -2,8 +2,8 @@
     <div>
         <div class="container">
             <div class="position-relative">
-                <div class="d-flex flex-nowrap row py-5" ref="sliderContainer">
-                    <div class="col-6 col-md-4 col-lg-2" v-for="(type, index) in  types ">
+                <div class="d-flex flex-nowrap row" ref="sliderContainer">
+                    <div class="col-6 col-md-4 col-lg-2 gap-5" v-for="(type, index) in  types ">
                         <!-- <div class="card">
                             <div class="card-image rounded-top-4">
                                 <img :src="imageBaseUrl + type.image" :alt="type.name">
@@ -15,7 +15,10 @@
                         </div> -->
 
                         <article class="card">
-                            <img class="card__image" :src="imageBaseUrl + type.image" :alt="type.name" />
+                            <div class="card__image">
+                                <img class="img-fluid" :src="imageBaseUrl + type.image" :alt="type.name" />
+                            </div>
+
                             <div class="card__data">
                                 <div class="card__info text-center">
                                     <h2>{{ type.name }}</h2>
@@ -76,11 +79,15 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/partials/variable.scss' as *;
 
+.row {
+    padding: 7rem 0;
+}
+
 //Card config
 
 .card {
     position: relative;
-    max-width: 80%;
+    width: 100%;
     margin: 0 auto;
     background-color: transparent;
     border: 0;
@@ -92,9 +99,12 @@ export default {
 
 .card__image {
     position: absolute;
-    width: 130%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     height: 80%;
-    left: -15%;
+    left: 0;
     right: 0;
     margin: 0 auto;
     top: -18%;
@@ -110,7 +120,7 @@ export default {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: #ededed;
-    padding-top: calc(100% * 1.18);
+    padding-top: 10rem;
     transition: all 0.3s ease-out 0.1s;
 }
 
@@ -120,7 +130,7 @@ export default {
 }
 
 .card__info h2 {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 800;
 }
 
