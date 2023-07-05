@@ -23,7 +23,7 @@
       </div>
       
       <div v-for="restaurant in store.restaurants"
-          class="mb-5 d-flex justify-content-center col-12 col-md-6 col-lg-4 g-5">
+          class="mb-5 d-flex justify-content-center col-12 col-sm-6 col-md-4 col-lg-3 g-5">
               <RestaurantCardComponent :key="restaurant.id" :restaurant="restaurant" :imgStartUrl="store.imgStartUrl"
                   :isSelected="false" />
       </div>

@@ -2,7 +2,9 @@
         <div class="outer">
             <div class="inner">
                 <div class="box-img w-100 h-100 d-flex justify-content-center">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" :alt="restaurant.name" class="w-100">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" 
+                    :alt="restaurant.name" 
+                    class="w-100">
                 </div>
             </div>
             <div class="item py-2">
@@ -11,10 +13,12 @@
                     <span>{{ restaurant.address }}</span>
                 </div>
                 <div class="item-types-km d-flex flex-column justify-content-end">
-                    <span class="type" v-for="type in restaurant.types" :key="type.id">{{ type.name }}</span>
+                    <span class="type" v-for="(type) in restaurant.types">
+                      {{ type.name }}
+                    </span>
                     <div class="kilometers">
                         <span>Distanza: 5 km</span>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
