@@ -12,6 +12,10 @@ $fa-font-path: "./webfonts" !default;
 @import 'bootstrap/scss/bootstrap';
 
 //GENERAL
+a {
+  text-decoration: none;
+  color: white;
+}
 
 .pixel-text {
   font-family: 'Silkscreen', cursive;
@@ -188,4 +192,10 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.navbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
 }
