@@ -24,7 +24,7 @@ export const store = reactive({
   ],
   FirstSection: {
     title: "Ci impegniamo a salvaguardare l’ambiente...",
-    content: "...adottando pratiche virtuose lungo tutta la catena “dal campo al vassoio”, partendo dalla scelta dei fornitori e arrivando fino alla gestione dei rifiuti, passando per una politica di risparmio energetico e per l’adozione di packaging a basso impatto.",
+    content: "...adottando pratiche virtuose lungo tutta la catena “dal campo al vassoio”, partendo dalla scelta dei fornitori e arrivando fino alla gestione dei rifiuti, passando per una politica di risparmio energetico e per l’adozione di packaging a impatto zero.",
     subtitle: "",
     image: "/img/eco-images/firstEco.png",
     inverted: false,
