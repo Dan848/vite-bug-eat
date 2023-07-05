@@ -5,7 +5,7 @@
         <!-- {{ --Logo --}} -->
 
         <a class="navbar-brand" href="/">
-          <img src="" alt="logo" width="40" height="40" />
+          <img src="../../public/img/general/logo-white.png" alt="logo" width="40" height="40" />
         </a>
 
         <!-- {{ --Burger Menù-- }} -->
