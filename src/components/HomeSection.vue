@@ -1,5 +1,5 @@
 <template>
-  <section class="container-fluid d-flex" :class="section.inverted ? 'bg-inverted py-5' : 'bm-py-5'">
+  <section class="container-fluid d-flex" :class="section.inverted ? 'bg-inverted py-3' : 'bm-py-3'">
     <div class="container w-75">
       <div class="align-items-center flex-wrap" :class="section.inverted ? 'd-flex flex-row-reverse' : 'row'">
         <!-- Content Col N.1 -->
@@ -28,8 +28,8 @@
         </div>
 
         <!-- Image Col -->
-        <div class="col-12 col-md-6 sectionImg-box" :class="section.inverted ? 'pe-5' : 'ps-5'">
-          <img :src="section.image" :alt="section.title" class="img-fluid w-100">
+        <div class="col-12 col-md-6 d-flex justify-content-center" :class="section.inverted ? 'pe-5' : 'ps-5'">
+          <img :src="section.image" :alt="section.title" class="sectionImg-box">
         </div>
       </div>
     </div>
@@ -60,14 +60,17 @@ export default {
 }
 
 .section-content:hover {
-  transform: scale(1.1);
   color: $primary;
   transition: 1s;
   cursor: pointer;
 }
 
-.bm-py-5 {
-  padding: 5rem 0;
+.bm-py-3 {
+  padding: 3rem 0;
+}
+
+.sectionImg-box {
+  max-width: 400px;
 }
 </style>
 
