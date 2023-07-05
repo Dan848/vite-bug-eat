@@ -41,6 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@use "../assets/partials/variable.scss" as *;
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 .outer {
@@ -102,7 +103,7 @@ export default {
 .item-types-km span {
   font-size: 0.8rem;
   font-weight: bold;
-  color: #f7736e;
+  color: $primary;
   text-align: right;
 }
 
