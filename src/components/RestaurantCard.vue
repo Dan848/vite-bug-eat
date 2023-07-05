@@ -3,7 +3,7 @@
     <div class="inner">
       <div class="box-img w-100 h-100 d-flex justify-content-center">
         <img
-          src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+          src="https://img.freepik.com/free-photo/view-arrangement-with-delicious-burgers_23-2148308811.jpg?w=1380&t=st=1688546437~exp=1688547037~hmac=a251e4ce6bfab4f64a3f9fc6d908c08d6a953e71c43bcc2d407669927dd52fec"
           alt="{{ restaurant.name }}"
           class="w-100"
         />
@@ -15,12 +15,9 @@
         <span>{{ restaurant.address }}</span>
       </div>
       <div class="item-types-km d-flex flex-column justify-content-end">
-        <span class="type" v-for="type in restaurant.types">{{
+        <span class="type" v-for="(type) in restaurant.types">{{
           type.name
         }}</span>
-        <div class="kilometers">
-          <span>Distanza: 5 km</span>
-        </div>
       </div>
     </div>
   </div>
@@ -28,7 +25,7 @@
 
 <script>
 export default {
-  name: "RestaurantCardComponent",
+  name: "RestaurantCard",
   props: {
     restaurant: Object,
     imgStartUrl: String,
@@ -80,7 +77,7 @@ export default {
 }
 
 .item-name-address {
-  width: 60%;
+  width: 70%;
 }
 .item-name-address h4 {
   font-size: 1rem;
@@ -105,10 +102,6 @@ export default {
   font-weight: bold;
   color: $primary;
   text-align: right;
-}
-
-.kilometers span {
-  font-size: 0.6rem;
 }
 
 .outer:hover {
