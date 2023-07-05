@@ -9,12 +9,12 @@
         />
       </div>
     </div>
-    <div class="item py-2">
+    <div class="item py-3 pb-5">
       <div class="item-name-address">
         <h4>{{ restaurant.name }}</h4>
         <span>{{ restaurant.address }}</span>
       </div>
-      <div class="item-types-km d-flex flex-column justify-content-end">
+      <div class="item-types d-flex flex-column justify-content-center align-items-center pt-4">
         <span class="type" v-for="(type) in restaurant.types">{{
           type.name
         }}</span>
@@ -91,13 +91,13 @@ export default {
   color: #949a98;
 }
 
-.item-types-km {
+.item-types {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.item-types-km span {
+.item-types span {
   font-size: 0.8rem;
   font-weight: bold;
   color: $primary;
