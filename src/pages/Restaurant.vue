@@ -3,31 +3,31 @@
     <SliderComponent :types="store.types" :imageBaseUrl="store.imageBaseUrl" />
     <div class="row">
       <div class="col-2">
-        <SidebarComponent />
+        <SidebarComponent :types="store.types"/>
       </div>
       <div class="col-10">
         <div class="row mt-5">
           <!-- Page navigation -->
-          <div class="d-flex justify-content-between">
-            <form action="" method="GET" class="w-75">
+          <div class="row justify-content-between">
+            <form action="" method="GET" class="col-auto">
                 <div class="form">
                   <i class="fa fa-search"></i>
                   <input type="text" class="form-control form-input" placeholder="Cerca un ristorante">
                 </div>
             </form>
-            <ul class="pagination d-flex justify-content-end my-auto">
-              <li class="page-item">
+            <ul class="d-flex justify-content-end my-md-auto col mt-3 list-unstyled rounded-pill py-2">
+              <li class="page-item px-2 fs-4">
                 <button :class="{ 'page-link': true, disabled: store.currentPage === 1 }"
                   @click="getRestaurant(store.currentPage - 1)">
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
-              <li class="page-item" v-for="n in store.lastPage">
+              <li class="page-itempx-2 fs-4 mx-1" v-for="n in store.lastPage">
                 <button :class="{ 'page-link': true, active: store.currentPage === n }" @click="getRestaurant(n)">
                   {{ n }}
                 </button>
               </li>
-              <li class="page-item">
+              <li class="page-item px-2 fs-4">
                 <button :class="{
                   'page-link': true,
                   disabled: store.currentPage === store.lastPage,
@@ -51,7 +51,6 @@
 
 <script>
 import { store } from "../data/store";
-import HomeSection from "../components/HomeSection.vue";
 import RestaurantCard from "../components/RestaurantCard.vue";
 import SliderComponent from "../components/SliderComponent.vue"
 import SidebarComponent from "../components/SidebarComponent.vue"
@@ -59,7 +58,6 @@ import axios from "axios";
 export default {
   name: "RestaurantListView",
   components: {
-    HomeSection,
     RestaurantCard,
     SliderComponent,
     SidebarComponent
@@ -101,8 +99,19 @@ export default {
 //form search bar
 form{
   input[type="text"]{
-    width: 80%;
     border-radius: 80px;
+  }
+  +ul{
+    border: 1px solid $primary;
+    transition: 1s;
+    li{
+      width: 30px;
+      border-radius: 50%;
+      transition: .4s;
+      &:hover{
+        background-color: $primary;
+      }
+    }
   }
 }
 .form{
@@ -141,7 +150,5 @@ padding-left: 10px;
 .form-input:focus{
   box-shadow: $primary;
 }
-@media screen and (max-width: 845px) {
 
-}
 </style>
