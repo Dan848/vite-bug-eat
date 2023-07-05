@@ -15,6 +15,10 @@ const router = createRouter({
       name: "restaurantList",
       component: RestaurantList,
     },
+    {
+      path: "/single-restaurant",
+      name: "singleRestaurant",
+    }
     // {
     //   path: '/about',
     //   name: 'about',
