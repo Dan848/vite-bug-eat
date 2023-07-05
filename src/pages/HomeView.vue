@@ -1,7 +1,6 @@
 <template>
-  <div class="container-fluid vh-100">
+  <div class="container-fluid">
     <div class="container">
-      <h1 class="text-center mx-auto">Ordina da BUG-EAT</h1>
       <div class="box-img d-flex justify-content-center">
         <img src="public/img/eco-bg (1).png" class="" alt="" />
       </div>
@@ -13,9 +12,8 @@
             <input
               type="text"
               class="form-control form-input"
-              placeholder="Search anything..."
+              placeholder="Cerca il ristorante più vicino a te..."
             />
-            <span class="left-pan"><i class="fa fa-microphone"></i></span>
           </div>
         </div>
       </div>
@@ -38,6 +36,7 @@ export default {
 .container-fluid {
   background-color: $primary;
 }
+// SEARCH BAR
 .form {
   position: relative;
 }
@@ -75,4 +74,6 @@ export default {
   box-shadow: none;
   border: none;
 }
+
+// END SEARCH BAR
 </style>
