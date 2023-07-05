@@ -10,13 +10,13 @@ export const store = reactive({
       label: "Ordina",
       routeName: "restaurantList",
     },
-    {
-      label: "Contatti",
-      routeName: "contatti",
-    },
-    {
-      label: "Lavora con Noi",
-      routeName: "lavora-con-noi",
-    },
+    // {
+    //   label: "Contatti",
+    //   routeName: "contatti",
+    // },
+    // {
+    //   label: "Lavora con Noi",
+    //   routeName: "lavora-con-noi",
+    // },
   ],
 });
