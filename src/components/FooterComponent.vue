@@ -3,9 +3,7 @@
     <!-- Footer -->
     <footer class="text-center text-lg-start text-muted">
       <!-- Section: Social media -->
-      <section
-        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
-      >
+      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         <div class="div"></div>
         <!-- Right -->
         <div>
@@ -33,7 +31,7 @@
       <!-- Section: Social media -->
 
       <!-- Section: Links  -->
-      <section class="">
+      <section class="text-white">
         <div class="container text-center text-md-start mt-5">
           <!-- Grid row -->
           <div class="row mt-3">
@@ -54,39 +52,39 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 link-container">
               <!-- Links -->
               <h6 class="text-uppercase fw-bold mb-4">Prodotti più ordinati</h6>
               <p>
-                <a href="/" class="text-reset">Pizza</a>
+                <a href="/">Pizza</a>
               </p>
               <p>
-                <a href="/" class="text-reset">Hamburger</a>
+                <a href="/">Hamburger</a>
               </p>
               <p>
-                <a href="/" class="text-reset">Sushi</a>
+                <a href="/">Sushi</a>
               </p>
               <p>
-                <a href="/" class="text-reset">Pokè</a>
+                <a href="/">Pokè</a>
               </p>
             </div>
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 link-container">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+              <h6 class="text-uppercase fw-bold mb-4 ">Useful links</h6>
               <p>
-                <a href="#!" class="text-reset">Pricing</a>
+                <a href="#!">Pricing</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Settings</a>
+                <a href="#!">Settings</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Orders</a>
+                <a href="#!">Orders</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Help</a>
+                <a href="#!">Help</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -115,9 +113,9 @@
       <!-- Section: Links  -->
 
       <!-- Copyright -->
-      <div class="text-center p-4">
+      <div class="text-center p-4 text-white">
         © 2021 Copyright:
-        <a class="text-reset fw-bold" href="https://google.com/">B-Maker.com</a>
+        <a class="fw-bold" href="https://google.com/">B-Maker.com</a>
       </div>
       <!-- Copyright -->
     </footer>
@@ -131,7 +129,17 @@ export default {};
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
+
 .bm-footer {
   background-color: $primary;
+}
+
+.link-container {
+  p {
+    a:hover {
+      color: $secondary;
+
+    }
+  }
 }
 </style>
