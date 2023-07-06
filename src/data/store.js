@@ -13,13 +13,13 @@ export const store = reactive({
       routeName: "home",
     },
     {
-      label: "Ordina",
+      label: "Ristoranti",
       routeName: "restaurantList",
     },
-    // {
-    //   label: "Contatti",
-    //   routeName: "contatti",
-    // },
+    {
+      label: "About us",
+      routeName: "about-us",
+    },
     // {
     //   label: "Lavora con Noi",
     //   routeName: "lavora-con-noi",

@@ -22,7 +22,7 @@
   </div>
 
 
-  <div>
+  <div id="mission">
     <HomeSection :section="store.FirstSection" />
   </div>
 
@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     getTypes() {
-      axios.get(`${ store.apiURL }/types`).then((res) => {
+      axios.get(`${store.apiURL}/types`).then((res) => {
         store.types = res.data.results
       })
     }
