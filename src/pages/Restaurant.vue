@@ -15,19 +15,19 @@
                   <input type="text" class="form-control form-input" placeholder="Cerca un ristorante">
                 </div>
             </form>
-            <ul class="d-flex justify-content-end my-md-auto col mt-3 list-unstyled rounded-pill py-2">
-              <li class="page-item px-2 fs-4">
+            <ul class="pagination d-flex justify-content-end my-md-auto col mt-3">
+              <li class="page-item">
                 <button :class="{ 'page-link': true, disabled: store.currentPage === 1 }"
                   @click="getRestaurant(store.currentPage - 1)">
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
-              <li class="page-itempx-2 fs-4 mx-1" v-for="n in store.lastPage">
+              <li class="page-item" v-for="n in store.lastPage">
                 <button :class="{ 'page-link': true, active: store.currentPage === n }" @click="getRestaurant(n)">
                   {{ n }}
                 </button>
               </li>
-              <li class="page-item px-2 fs-4">
+              <li class="page-item">
                 <button :class="{
                   'page-link': true,
                   disabled: store.currentPage === store.lastPage,
@@ -100,18 +100,6 @@ export default {
 form{
   input[type="text"]{
     border-radius: 80px;
-  }
-  +ul{
-    border: 1px solid $primary;
-    transition: 1s;
-    li{
-      width: 30px;
-      border-radius: 50%;
-      transition: .4s;
-      &:hover{
-        background-color: $primary;
-      }
-    }
   }
 }
 .form{
