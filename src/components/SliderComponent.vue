@@ -6,7 +6,7 @@
                     <div style="min-width:;">
                         <div class="card">
                             <div class="card__image">
-                                <img class="img-fluid" :src="imageBaseUrl + type.image" :alt="type.name" />
+                                <img class="img-fluid" :src="imgStartUrl + type.image" :alt="type.name" />
                             </div>
 
                             <div class="card__data">
@@ -36,7 +36,7 @@ export default {
     name: 'SliderComponent',
     props: {
         'types': Array,
-        'imageBaseUrl': String
+        'imgStartUrl': String
     },
     data() {
         return {

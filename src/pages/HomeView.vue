@@ -1,10 +1,24 @@
 <template>
-  <HomeSection />
+  <div class="container-fluid">
+    <div class="container">
+      <div class="box-img d-flex justify-content-center">
+        <img src="public/img/eco-bg (1).png" class="" alt="" />
+      </div>
+
+      <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+          <div class="form">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control form-input" placeholder="Cerca il ristorante più vicino a te..." />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Types slider -->
   <div class="d-flex justify-content-center my-5">
-
-    <SliderComponent :types="store.types" :imageBaseUrl="store.imageBaseUrl" />
+    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
   </div>
 
 
@@ -30,26 +44,25 @@ export default {
   name: "HomeView",
   components: {
     HomeSection,
-    SliderComponent,
+    SliderComponent
   },
   data() {
     return {
-      store,
-    };
+      store
+    }
   },
   methods: {
     getTypes() {
-      axios.get(`${store.apiUrl}/types`).then((res) => {
-        store.types = res.data.results;
-      });
-    },
+      axios.get(`${ store.apiURL }/types`).then((res) => {
+        store.types = res.data.results
+      })
+    }
   },
   mounted() {
     this.getTypes();
-  },
+  }
 };
 </script>
-
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
