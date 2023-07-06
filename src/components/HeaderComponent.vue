@@ -68,9 +68,4 @@ export default {
   margin-top: -13px;
   padding: 15px 0px 15px 0px;
 }
-
-.navbar-brand:hover img {
-  filter: invert(20);
-  transition: 1.1s;
-}
 </style>
