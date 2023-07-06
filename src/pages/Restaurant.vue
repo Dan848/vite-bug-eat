@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SliderComponent :types="store.types" :imageBaseUrl="store.imageBaseUrl" />
+    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
     <div class="row">
       <div class="col-2">
         <SidebarComponent :types="store.types"/>
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     getRestaurant(numPage) {
-      axios.get(`${store.apiUrl}/restaurants`, {
+      axios.get(`${store.apiURL}/restaurants`, {
         params: {
           page: numPage,
         },
@@ -81,7 +81,7 @@ export default {
         });
     },
     getTypes() {
-      axios.get(`${store.apiUrl}/types`).then((res) => {
+      axios.get(`${store.apiURL}/types`).then((res) => {
         store.types = res.data.results;
       });
     },
