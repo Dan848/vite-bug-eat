@@ -5,10 +5,11 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item" v-for="item in types">
+      <li class="nav-item d-flex justify-content-between align-items-center" v-for="item in types">
         <a href="#" class="nav-link" aria-current="page">
           {{ item.name }}
         </a>
+        <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2">
       </li>
     </ul>
   </div>
@@ -19,7 +20,8 @@ import axios from 'axios';
 export default {
   name: 'SidebarComponent',
   props: {
-    types: Object
+    types: Object,
+    imgStartUrl: String
   },
   data() {
     return{}
@@ -42,6 +44,11 @@ li{
   &:hover{
     border: 1px solid $primary;
     border-radius: 80px;
+    cursor: pointer;
+  }
+  img{
+    width: 30px;
+    height: 30px;
   }
 }
 </style>

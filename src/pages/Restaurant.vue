@@ -3,7 +3,7 @@
     <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
     <div class="row">
       <div class="col-2">
-        <SidebarComponent :types="store.types"/>
+        <SidebarComponent :types="store.types" :imgStartUrl="store.imgStartUrl"/>
       </div>
       <div class="col-10">
         <div class="row mt-5">
@@ -83,6 +83,7 @@ export default {
     getTypes() {
       axios.get(`${store.apiURL}/types`).then((res) => {
         store.types = res.data.results;
+        console.log(store.types);
       });
     },
   },
