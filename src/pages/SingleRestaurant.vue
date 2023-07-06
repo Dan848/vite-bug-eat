@@ -1,14 +1,12 @@
 <template>
   <div v-if="store.restaurant">
-    <div class="container background d-flex justify-content-center">
-      <div class="d-flex">
-        <div class="row">
-
+    <div class="container background">
+      <div class="row justify-content-center">
           <!-- Restaurant Info -->
-          <div class="col-8">
-            <div class="card d-flex">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card d-flex position-relative">
               <div class="card-header border-0 d-flex flex-column align-items-center">
-                <h1>{{ store.restaurant.name }}</h1>
+                <h1 class="text-center">{{ store.restaurant.name }}</h1>
                 <div class="d-flex justify-content-center types">
                   <span :class="`span-${index}` " v-for="(type,index) in store.restaurant.types">
                     {{type.name}}
@@ -23,20 +21,24 @@
               </div>
             </div>
           </div>
-
-          <!-- Cart -->
-          <div class="col-4">
-            <div class="cart card">
-              <h1>sugnu u carrellu</h1>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="container menu">
       <h2>Il nostro Menu</h2>
-      <div class="card col-8">
-        ul
+      <div class="row">
+        <div class="card col-8">
+          <ul class="list-unstyled">
+            <li>
+              <h3>{{ store.restaurant.name }}</h3>
+            </li>
+          </ul>
+        </div>
+        <!-- Cart -->
+        <div class="col-4">
+          <div class="cart card">
+            <h1>sugnu u carrellu</h1>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -68,6 +70,14 @@ export default {
           store.restaurant = res.data.results;
         });
     },
+    getProducts() {
+      axios
+        .get(`${store.apiURL}/products/${this.$route.params.slug}`)
+        .then((res) => {
+          store.products = res.data.results;
+          console.log(res);
+        });
+    },
     scrollToTop() {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
@@ -75,6 +85,7 @@ export default {
   },
   mounted() {
     this.getRestaurant();
+    this.getProducts();
     this.scrollToTop();
   },
 };
@@ -94,7 +105,6 @@ export default {
 .card{
   background: white;
   border-radius: 35px;
-  padding: 1rem;
   .span-1{
     &::before{
     color: rgb(60, 76, 79);
@@ -113,10 +123,17 @@ export default {
 }
 .menu{
   margin-top: 120px;
-  .card{
-    padding-right: 1rem;
-  }
-  
-  padding: 1rem;
+  margin-bottom: 4rem;
 }
+
+// @media screen and (max-width: 633px) {
+//   .span-1{
+//     &::before{
+//     color: rgb(60, 76, 79);
+//     content: "•";
+//     margin: 0 .5rem;
+//     padding: 0 !important;
+//     }
+//   }
+// }
 </style>
