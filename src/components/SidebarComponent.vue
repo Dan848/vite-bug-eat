@@ -45,6 +45,9 @@ li{
     border: 1px solid $primary;
     border-radius: 80px;
     cursor: pointer;
+    a{
+      color: $primary;
+    }
   }
   img{
     width: 30px;

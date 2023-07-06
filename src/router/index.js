@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../pages/HomeView.vue";
 import RestaurantList from "../pages/Restaurant.vue";
 import SingleRestaurant from "../pages/SingleRestaurant.vue";
+import AboutUs from '../pages/AboutUs.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,16 @@ const router = createRouter({
     //   // which is lazy-loaded when the route is visited.
     //   component: () => import('../views/AboutView.vue')
     // }
+    {
+      path: "/single-restaurant",
+      name: "singleRestaurant",
+    },
+    {
+      path: '/about-us',
+      name: 'about-us',
+      component: AboutUs
+
+    }
   ],
 });
 

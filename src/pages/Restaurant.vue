@@ -2,29 +2,21 @@
   <div class="container">
     <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
     <div class="row">
-      <div class="col-2">
-        <SidebarComponent
-          :types="store.types"
-          :imgStartUrl="store.imgStartUrl"
-        />
+      <div class="col-2 sidebar">
+        <SidebarComponent :types="store.types" :imgStartUrl="store.imgStartUrl"/>
       </div>
       <div class="col-10">
         <div class="row mt-5">
           <!-- Page navigation -->
-          <div class="row justify-content-between">
-            <form action="" method="GET" class="col-auto">
-              <div class="form">
-                <i class="fa fa-search"></i>
-                <input
-                  type="text"
-                  class="form-control form-input"
-                  placeholder="Cerca un ristorante"
-                />
-              </div>
+
+          <div class="row justify-content-between search">
+            <form action="" method="GET" class="col-12 col-md-6">
+                <div class="form">
+                  <i class="fa fa-search"></i>
+                  <input type="text" class="form-control form-input" placeholder="Cerca un ristorante">
+                </div>
             </form>
-            <ul
-              class="pagination d-flex justify-content-end my-md-auto col mt-3"
-            >
+            <ul class="pagination d-flex my-md-auto col-12 col-md-6 mt-3">
               <li class="page-item">
                 <button
                   :class="{
@@ -174,5 +166,25 @@ form {
 
 .form-input:focus {
   box-shadow: $primary;
+}
+@media screen and (max-width: 844px) {
+  .sidebar{
+    display: none;
+  }
+  ul{
+    justify-content: center;
+  }
+  // .search{
+  //   flex-direction: column;
+  //   align-items: center !important;
+  //   justify-content: center !important;
+  //   margin-top: 1.5rem;
+  // }
+}
+
+@media screen and (min-width: 845px) {
+ul{
+    justify-content: end;
+  }
 }
 </style>

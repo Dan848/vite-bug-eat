@@ -51,21 +51,20 @@ export default {
 @use "../assets/partials/variable.scss" as *;
 
 .bg-inverted {
-  background-color: $primary;
-  color: white;
-
   .section-content:hover {
-    color: $secondary;
+    color: $primary;
   }
 }
 
 .section-content:hover {
-  color: $primary;
+  color: $secondary;
   transition: 1s;
   cursor: pointer;
 }
 
 .bm-py-3 {
+  color: white;
+  background-color: $primary;
   padding: 3rem 0;
 }
 
