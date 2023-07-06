@@ -24,15 +24,11 @@ export const store = reactive({
     {
       label: "La nostra Mission",
       routeName: "restaurantList",
-    }
-    // {
-    //   label: "Contatti",
-    //   routeName: "contatti",
-    // },
-    // {
-    //   label: "Lavora con Noi",
-    //   routeName: "lavora-con-noi",
-    // },
+    },
+    {
+       label: "Lavora con Noi",
+       routeName: "restaurantList",
+     },
   ],
   FirstSection: {
     title: "Ci impegniamo a salvaguardare l’ambiente...",
