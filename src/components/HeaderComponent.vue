@@ -60,37 +60,6 @@ export default {
   }
 }
 
-.link-effect-3 {
-  a {
-    padding: 10px 0;
-    margin: 0 20px;
-    color: #797878;
-    text-shadow: none;
-    position: relative;
-
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      overflow: hidden;
-      padding: 10px 0;
-      max-width: 0;
-      border-bottom: 2px solid #fff;
-      color: #fff;
-      content: attr(data-hover);
-      -webkit-transition: max-width 0.5s;
-      -moz-transition: max-width 0.5s;
-      transition: max-width 0.5s;
-    }
-
-    &:hover {
-      &::before {
-        max-width: 100%;
-      }
-    }
-  }
-}
-
 .navbar {
   height: 100px;
 }
@@ -98,5 +67,10 @@ export default {
 .drop-menu {
   margin-top: -13px;
   padding: 15px 0px 15px 0px;
+}
+
+.navbar-brand:hover img {
+  filter: invert(20);
+  transition: 1.1s;
 }
 </style>

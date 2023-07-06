@@ -1,49 +1,31 @@
 <template>
   <div class="container-fluid">
     <div class="container">
-      <div class="box-img d-flex justify-content-center">
-        <img src="public/img/eco-bg (1).png" class="" alt="" />
-      </div>
-
-      <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-6">
-          <div class="form">
-            <i class="fa fa-search"></i>
-            <input type="text" class="form-control form-input" placeholder="Cerca il ristorante più vicino a te..." />
-          </div>
-        </div>
-      </div>
+      <JumbotronHome />
     </div>
   </div>
 
   <!-- Types slider -->
-  <div class="d-flex justify-content-center my-5">
+  <div class="slider d-flex justify-content-center my-5">
     <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
   </div>
 
-
-  <div id="mission">
-    <HomeSection :section="store.FirstSection" />
-  </div>
-
-  <div>
-    <HomeSection :section="store.SecondSection" />
-  </div>
-
-  <div>
-    <HomeSection :section="store.ThirdSection" />
+  <div v-for="section in store.sections">
+    <HomeSection :section="section" />
   </div>
 </template>
 
 <script>
 import HomeSection from "../components/HomeSection.vue";
 import SliderComponent from "../components/SliderComponent.vue";
+import JumbotronHome from "../components/JumbotronHome.vue";
 import axios from "axios";
 import { store } from "../data/store";
 export default {
   name: "HomeView",
   components: {
     HomeSection,
+    JumbotronHome,
     SliderComponent
   },
   data() {
@@ -107,4 +89,19 @@ export default {
 }
 
 // END SEARCH BAR
+
+//JUMBOTRON
+
+.jumbo-logo {
+  width: 250px;
+}
+
+h2 {
+  text-align: left;
+}
+
+p {
+  font-size: 1.4rem;
+  text-align: right;
+}
 </style>

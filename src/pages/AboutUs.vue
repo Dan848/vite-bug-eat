@@ -2,7 +2,7 @@
   <div class="container">
     <h2 class="text-center my-5 pixel-text text-secondary">Conosci meglio il nostro Team!</h2>
     <div class="row align-items-stretch">
-      <AboutUsCard v-for="team in store.Teams" :key="team.id" :team="team" />
+      <AboutUsCard v-for="team in store.teams" :key="team.id" :team="team" />
 
     </div>
   </div>
