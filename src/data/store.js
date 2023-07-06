@@ -13,17 +13,22 @@ export const store = reactive({
       routeName: "home",
     },
     {
-      label: "Ordina",
+      label: "Ristoranti",
       routeName: "restaurantList",
     },
-    // {
-    //   label: "Contatti",
-    //   routeName: "contatti",
-    // },
-    // {
-    //   label: "Lavora con Noi",
-    //   routeName: "lavora-con-noi",
-    // },
+  
+    {
+      label: "About Us",
+      routeName: "about-us",
+    },
+    {
+      label: "La nostra Mission",
+      routeName: "restaurantList",
+    },
+    {
+       label: "Lavora con Noi",
+       routeName: "restaurantList",
+     },
   ],
   FirstSection: {
     title: "Ci impegniamo a salvaguardare l’ambiente...",
@@ -48,5 +53,44 @@ export const store = reactive({
     image: "/img/eco-images/thirdEco.png",
     inverted: false,
     routerLink: {}
-  }
+  },
+  Teams: [
+    {
+      name: "De Palma Vito",
+      role: "Junior Full stack developper",
+      description: "Che ve posso dire, al massimo vi posso cantare una canzone",
+      profile_img: "/img/team/dp-vito.jpeg",
+    },
+    {
+      name: "Lucà Giuseppe",
+      role: "Mental Coach",
+      description: "Forza Messina",
+      profile_img: "/img/team/g-luca.jpg",
+    },
+    {
+      name: "Rossi Aniello",
+      role: "Junior Full stack developper",
+      description:
+        "Sono un ragazzo a cui piace programmare, risolvendo problemi, ma soprattutto creandone di nuovi",
+      profile_img: "/img/team/n-rossi.jpg",
+    },
+    {
+      name: "Ceravolo Daniele",
+      role: "Project manager",
+      description: "IL PAZZO CHE HA DECISO DI FARLO FUNZIONANTE IL GIOCO",
+      profile_img: "/img/team/d-ceravolo.jpeg",
+    },
+    {
+      name: "Libralato Michele ",
+      role: "Junior RE web Developer",
+      description: " Junior solo nell'anima. So de LATINA.",
+      profile_img: "/img/team/m-librato.png",
+    },
+    {
+      name: "Lumia Giorgio ",
+      role: "Full Stack Celiaco",
+      description: "Mi definisco un uomo pieno di inventiva e di problemi.",
+      profile_img: "/img/team/g-lumia.jpg",
+    },
+  ]
 });
