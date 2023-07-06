@@ -1,24 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="container">
-      <div class="jumbotron d-flex justify-content-center py-5">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-          <img src="public/img/bees.gif" class="jumbo-logo" alt="" />
-          <div class="pt-5">
-            <h2> Qualcosa ronza in giro... </h2>
-            <p> ...sono i nostri rider! </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-6">
-          <div class="form">
-            <i class="fa fa-search"></i>
-            <input type="text" class="form-control form-input" placeholder="Cerca il ristorante più vicino a te..." />
-          </div>
-        </div>
-      </div>
+      <JumbotronHome />
     </div>
   </div>
 
@@ -30,18 +13,19 @@
   <div v-for="section in store.sections">
     <HomeSection :section="section" />
   </div>
-
 </template>
 
 <script>
 import HomeSection from "../components/HomeSection.vue";
 import SliderComponent from "../components/SliderComponent.vue";
+import JumbotronHome from "../components/JumbotronHome.vue";
 import axios from "axios";
 import { store } from "../data/store";
 export default {
   name: "HomeView",
   components: {
     HomeSection,
+    JumbotronHome,
     SliderComponent
   },
   data() {
@@ -51,7 +35,7 @@ export default {
   },
   methods: {
     getTypes() {
-      axios.get(`${ store.apiURL }/types`).then((res) => {
+      axios.get(`${store.apiURL}/types`).then((res) => {
         store.types = res.data.results
       })
     }
@@ -108,18 +92,16 @@ export default {
 
 //JUMBOTRON
 
-.jumbo-logo
-{
-  width:250px;
+.jumbo-logo {
+  width: 250px;
 }
 
-h2{
+h2 {
   text-align: left;
 }
 
-p{
+p {
   font-size: 1.4rem;
   text-align: right;
-  }
-
+}
 </style>
