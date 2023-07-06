@@ -14,7 +14,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- {{ --Navbar Start-- }} -->
-        <div class="drop-menu collapse navbar-collapse justify-content-between bg-primary" id="navbarNavDropdown" :class="{ show : show }">
+        <div class="drop-menu collapse navbar-collapse justify-content-between bg-primary" id="navbarNavDropdown"
+          :class="{ show: show }">
           <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
             <!-- {{ --Simple Anchor Link-- }} -->
             <li class="nav-item text-white px-3 text-uppercase mt-3" v-for="item in store.headerLinks">
@@ -26,7 +27,7 @@
           </ul>
 
         </div>
-        
+
       </div>
     </nav>
   </header>
@@ -39,7 +40,7 @@ export default {
   data() {
     return {
       store,
-      show:false,
+      show: false,
     };
   },
 };
@@ -54,11 +55,8 @@ export default {
   font-size: 1rem;
 
   &:hover {
-    color: $primary;
-    background-color: $secondary;
-    padding: 10px;
-    border-radius: 5px;
-    transition: 0.5s;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid $secondary;
   }
 }
 
@@ -97,9 +95,8 @@ export default {
   height: 100px;
 }
 
-.drop-menu{
+.drop-menu {
   margin-top: -13px;
   padding: 15px 0px 15px 0px;
 }
-
 </style>
