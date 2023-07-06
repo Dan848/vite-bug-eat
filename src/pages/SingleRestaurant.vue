@@ -26,10 +26,14 @@
     <div class="container menu">
       <h2>Il nostro Menu</h2>
       <div class="row">
-        <div class="card col-8">
+        <div class="col-8">
           <ul class="list-unstyled">
-            <li>
-              <h3>{{ store.restaurant.name }}</h3>
+            <li v-for="product in store.restaurant.products" class="card py-3 my-3">
+              <div class="ps-4">
+                <h3>{{ product.name }}</h3>
+                <p v-if="product.description"> {{ product.description }}</p>
+                <span class="fw-bold">{{ product.price }} &euro;</span>
+              </div>
             </li>
           </ul>
         </div>
@@ -72,7 +76,7 @@ export default {
     },
     getProducts() {
       axios
-        .get(`${store.apiURL}/products/${this.$route.params.slug}`)
+        .get(`${store.apiURL}/restaurants/${this.$route.params.slug}/products`)
         .then((res) => {
           store.products = res.data.results;
           console.log(res);
@@ -85,13 +89,13 @@ export default {
   },
   mounted() {
     this.getRestaurant();
-    this.getProducts();
     this.scrollToTop();
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@use "../assets/partials/variable.scss" as *;
 .background{
   padding-top: 3rem;
   background: url('https://img.freepik.com/free-photo/view-arrangement-with-delicious-burgers_23-2148308811.jpg?w=1380&t=st=1688546437~exp=1688547037~hmac=a251e4ce6bfab4f64a3f9fc6d908c08d6a953e71c43bcc2d407669927dd52fec');
@@ -124,6 +128,14 @@ export default {
 .menu{
   margin-top: 120px;
   margin-bottom: 4rem;
+  .card{
+    border-radius: 20px;
+    transition: .3s;
+    &:hover{
+      cursor: pointer;
+      background-color: lightgray;
+    }
+  }
 }
 
 // @media screen and (max-width: 633px) {
