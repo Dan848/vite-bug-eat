@@ -4,8 +4,8 @@
       <div class="container-fluid">
         <!-- {{ --Logo --}} -->
 
-        <a class="navbar-brand" href="/">
-          <img src="../../public/img/general/logo-white.png" alt="logo" width="80" />
+        <a class="navbar-brand pb-4" href="/">
+          <img src="../../public/img/general/logo-white.png" alt="logo" width="160" />
         </a>
 
         <!-- {{ --Burger Menù-- }} -->
@@ -17,16 +17,19 @@
         <div class="collapse navbar-collapse w-100 justify-content-between" id="navbarNavDropdown">
           <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
             <!-- {{ --Simple Anchor Link-- }} -->
-            <li class="nav-item text-white pe-3" v-for="item in store.headerLinks">
+            <li class="nav-item text-white px-3 text-uppercase" v-for="item in store.headerLinks">
+
               <router-link :to="{ name: item.routeName }">
                 {{ item.label }}
               </router-link>
             </li>
+            <li class="nav-item text-white px-3 text-uppercase">
+              <a href="./#mission">La nostra Mission</a>
+            </li>
           </ul>
-          <div class="text-center">
-            <a href="">MANGIA</a>
-          </div>
+
         </div>
+
       </div>
     </nav>
   </header>
@@ -47,11 +50,52 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
 
-a {
+.nav-item a {
   text-decoration: none;
+  padding: 10px;
+  font-size: 1rem;
 
   &:hover {
-    color: $secondary;
+    color: $primary;
+    background-color: $secondary;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.5s;
   }
+}
+
+.link-effect-3 {
+  a {
+    padding: 10px 0;
+    margin: 0 20px;
+    color: #797878;
+    text-shadow: none;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      padding: 10px 0;
+      max-width: 0;
+      border-bottom: 2px solid #fff;
+      color: #fff;
+      content: attr(data-hover);
+      -webkit-transition: max-width 0.5s;
+      -moz-transition: max-width 0.5s;
+      transition: max-width 0.5s;
+    }
+
+    &:hover {
+      &::before {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.navbar {
+  height: 100px;
 }
 </style>

@@ -13,9 +13,10 @@ export const store = reactive({
       routeName: "home",
     },
     {
-      label: "Ordina",
+      label: "Ristoranti",
       routeName: "restaurantList",
     },
+  
     {
       label: "About Us",
       routeName: "restaurantList",
