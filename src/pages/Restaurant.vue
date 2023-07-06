@@ -83,7 +83,6 @@ export default {
     getTypes() {
       axios.get(`${store.apiURL}/types`).then((res) => {
         store.types = res.data.results;
-        console.log(store.types);
       });
     },
   },
