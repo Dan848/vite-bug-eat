@@ -16,6 +16,14 @@ export const store = reactive({
       label: "Ordina",
       routeName: "restaurantList",
     },
+    {
+      label: "About Us",
+      routeName: "restaurantList",
+    },
+    {
+      label: "La nostra Mission",
+      routeName: "restaurantList",
+    }
     // {
     //   label: "Contatti",
     //   routeName: "contatti",
