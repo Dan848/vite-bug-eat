@@ -1,6 +1,4 @@
-@use './partials/variable.scss' as *;
-
-
+@use "./partials/variable.scss" as *;
 
 $fa-font-path: "./webfonts" !default;
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
@@ -9,8 +7,11 @@ $fa-font-path: "./webfonts" !default;
 @import "@fortawesome/fontawesome-free/scss/brands";
 
 //Bootstrap
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
+body {
+  font-family: "Quicksand", sans-serif;
+}
 //GENERAL
 a {
   text-decoration: none;
@@ -18,7 +19,7 @@ a {
 }
 
 .pixel-text {
-  font-family: 'Silkscreen', cursive;
+  font-family: "Silkscreen", cursive;
 }
 
 main {
@@ -27,7 +28,7 @@ main {
 
 // Custom Button
 .bm-btn {
-  font-family: 'Silkscreen', cursive;
+  font-family: "Silkscreen", cursive;
   font-size: 1.5rem;
   cursor: pointer;
   color: white;
@@ -37,14 +38,14 @@ main {
   background: #c0c0c0;
   border: 0px;
   position: relative;
-  transition: .3s;
+  transition: 0.3s;
   box-shadow:
     // up and right color shadow
     inset -2px 2px 1px 1px #cccccc,
     // bottom color shadow
     inset -2px -2px 1px 1px #757575,
     // left color shadow
-    inset 2px 0px 1px 1px #8d8d8d
+    inset 2px 0px 1px 1px #8d8d8d;
 }
 
 .bm-btn:active {
@@ -60,33 +61,32 @@ main {
     // bottom color shadow
     inset -2px -2px 1px 1px #b27d01,
     // left color shadow
-    inset 2px 0px 1px 1px #cc8f01
+    inset 2px 0px 1px 1px #cc8f01;
 }
 
 .bm-btn::after {
-  content: '';
+  content: "";
   background: #000;
   position: absolute;
   left: -2%;
   top: 0;
   width: 104%;
   height: 100%;
-  z-index: -1
+  z-index: -1;
 }
 
 .bm-btn::before {
-  content: '';
+  content: "";
   background: #000;
   position: absolute;
   left: 0;
   top: -5%;
   width: 100%;
   height: 110%;
-  z-index: -2
+  z-index: -2;
 }
 
 // /Custom Button
-
 
 //CHARACTER START
 // Character Info Page Style Config
@@ -120,7 +120,7 @@ main {
 
 //Form
 .form-floating {
-  >label {
+  > label {
     top: -8px;
 
     &::after {
