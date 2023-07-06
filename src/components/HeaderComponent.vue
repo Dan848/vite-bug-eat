@@ -61,6 +61,8 @@ export default {
 
 .navbar {
   height: 100px;
+  display: flex;
+  align-items: center;
 }
 
 .drop-menu {
