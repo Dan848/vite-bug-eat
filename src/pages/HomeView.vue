@@ -1,8 +1,14 @@
 <template>
   <div class="container-fluid">
     <div class="container">
-      <div class="box-img d-flex justify-content-center">
-        <img src="public/img/eco-bg (1).png" class="" alt="" />
+      <div class="jumbotron d-flex justify-content-center py-5">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <img src="public/img/bees.gif" class="jumbo-logo" alt="" />
+          <div class="pt-5">
+            <h2> Qualcosa ronza in giro... </h2>
+            <p> ...sono i nostri rider! </p>
+          </div>
+        </div>
       </div>
 
       <div class="row height d-flex justify-content-center align-items-center">
@@ -17,22 +23,14 @@
   </div>
 
   <!-- Types slider -->
-  <div class="d-flex justify-content-center my-5">
+  <div class="slider d-flex justify-content-center my-5">
     <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
   </div>
 
-
-  <div>
-    <HomeSection :section="store.FirstSection" />
+  <div v-for="section in store.sections">
+    <HomeSection :section="section" />
   </div>
 
-  <div>
-    <HomeSection :section="store.SecondSection" />
-  </div>
-
-  <div>
-    <HomeSection :section="store.ThirdSection" />
-  </div>
 </template>
 
 <script>
@@ -107,4 +105,21 @@ export default {
 }
 
 // END SEARCH BAR
+
+//JUMBOTRON
+
+.jumbo-logo
+{
+  width:250px;
+}
+
+h2{
+  text-align: left;
+}
+
+p{
+  font-size: 1.4rem;
+  text-align: right;
+  }
+
 </style>

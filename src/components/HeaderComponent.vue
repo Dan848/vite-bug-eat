@@ -52,6 +52,13 @@ a {
 
   &:hover {
     color: $secondary;
+    transition:1s;
   }
 }
+
+.navbar-brand:hover img{
+  filter:invert(20);
+  transition: 1.1s;
+}
+
 </style>
