@@ -47,15 +47,17 @@
                 <CounterProduct/>
               </li>
               <li class="d-flex justify-content-between align-items-center">
-                  piatto 2
-                  <CounterProduct/>
-                </li><li class="d-flex justify-content-between align-items-center">
-                  piatto 3
-                  <CounterProduct/>
-                </li><li class="d-flex justify-content-between align-items-center">
-                  piatto 4
-                  <CounterProduct/>
-                </li>
+                piatto 2
+                <CounterProduct/>
+              </li>
+              <li class="d-flex justify-content-between align-items-center">
+                piatto 3
+                <CounterProduct/>
+              </li>
+              <li class="d-flex justify-content-between align-items-center">
+                piatto 4
+                <CounterProduct/>
+              </li>
             </ul>
             <hr>
             <div class="d-flex justify-content-center pb-3">
@@ -174,6 +176,9 @@ export default {
     div{
       width: 30%;
     }
+  }
+  .input-group{
+    min-width: 40%;
   }
 }
 

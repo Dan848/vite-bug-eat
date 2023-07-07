@@ -33,6 +33,11 @@ input::-webkit-inner-spin-button {
     border-right: none;
     border-top: 1px solid $primary;
     border-bottom: 1px solid $primary;
+    &:focus{
+      border: 1px solid $primary;
+      border-left: none;
+      outline: 0;
+    }
   }
 }
 .plus,
