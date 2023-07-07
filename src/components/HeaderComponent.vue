@@ -5,7 +5,7 @@
         <!-- {{ --Logo --}} -->
 
         <a class="navbar-brand" href="/">
-          <img class="pt-2" src="../../public/img/general/logo-white.png" alt="logo" width="160" />
+          <img class="logo" src="../../public/img/general/logo-white.png" alt="logo" />
         </a>
 
         <!-- {{ --Burger Menù-- }} -->
@@ -54,13 +54,14 @@ export default {
   font-size: 1rem;
 
   &:hover {
-    padding-bottom: 1rem;
+    padding-bottom: 10px;
     border-bottom: 2px solid $secondary;
+    color: $secondary;
   }
 }
 
 .navbar {
-  height: 100px;
+  height: 70px;
   display: flex;
   align-items: center;
 }
@@ -68,5 +69,22 @@ export default {
 .drop-menu {
   padding: 0px 0px 15px 0px;
   z-index: 1010;
+}
+
+.logo {
+  width: 100px;
+}
+
+@media screen and (max-width:768px) {
+  .nav-item a {
+    text-decoration: none;
+    font-size: 1rem;
+
+    &:hover {
+      padding-bottom: 0px;
+      border-bottom: 0px solid $secondary;
+      color: white;
+    }
+  }
 }
 </style>
