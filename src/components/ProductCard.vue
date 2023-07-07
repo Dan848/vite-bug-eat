@@ -3,7 +3,7 @@
         <div class="px-4">
             <h3>{{ product.name }}</h3>
             <p v-if="product.description"> {{ product.description }}</p>
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
                 <span class="fw-bold">{{ product.price }} &euro;</span>
                 <div class="pe-3">
                     <CounterProduct/>

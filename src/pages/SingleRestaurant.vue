@@ -31,16 +31,40 @@
     <div class="container menu">
       <h2>Il nostro Menu</h2>
       <div class="row">
-        <div class="col-8">
-          <ul class="list-unstyled">
+        <div class="col-12 col-md-8">
+          <ul class="list-unstyled product">
             <ProductCard v-for="(product, index) in store.restaurant.products" :product="store.restaurant.products[index]"/>
           </ul>
         </div>
         <!-- Cart -->
         <div class="col-4">
-          <div class="cart card">
-            <h1>sugnu u carrellu</h1>
+          <div class="cart card d-none d-md-block px-3 py-1">
+            <h4 class="text-center fw-bold">Il tuo ordine</h4>
+            <hr>
+            <ul class="list-unstyled cart-products">
+              <li class="d-flex justify-content-between align-items-center">
+                <span>Nuggets di Cheddar e Jalapenos</span>
+                <CounterProduct/>
+              </li>
+              <li class="d-flex justify-content-between align-items-center">
+                  piatto 2
+                  <CounterProduct/>
+                </li><li class="d-flex justify-content-between align-items-center">
+                  piatto 3
+                  <CounterProduct/>
+                </li><li class="d-flex justify-content-between align-items-center">
+                  piatto 4
+                  <CounterProduct/>
+                </li>
+            </ul>
+            <hr>
+            <div class="d-flex justify-content-center pb-3">
+              <button class="btn btn-primary rounded-4">Vai al pagamento</button>
+            </div>
           </div>
+        </div>
+        <div class="sticky-cart d-flex justify-content-center align-items-center d-md-none  bg-primary rounded-circle">
+          <i class="fa-solid fa-cart-shopping fs-3"></i>
         </div>
       </div>
     </div>
@@ -131,7 +155,7 @@ export default {
 .menu {
   margin-top: 120px;
   margin-bottom: 4rem;
-  li{
+  .product li{
     border-radius: 20px;
     transition: 0.3s;
     &:hover {
@@ -139,6 +163,26 @@ export default {
       background-color: lightgray;
     }
   }
+}
+.cart-products{
+  li{
+    margin-bottom: 1rem;
+    font-size: .8rem;
+    span{
+      width: 70%;
+    }
+    div{
+      width: 30%;
+    }
+  }
+}
+
+.sticky-cart{
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  bottom: 20px;
+  right: 5px;
 }
 
 </style>
