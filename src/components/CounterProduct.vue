@@ -1,17 +1,22 @@
 <template>
   <div class="input-group">
     <div class="input-group-button">
-      <input type="submit" class="button minus" value="-" disabled="disabled" />
+      <input type="button" class="button minus" value="-" disabled="disabled" />
     </div>
-    <input class="input-group-field" value="0" type="number" />
+    <input class=" text-center" value="0" min="0" type="number" />
     <div class="input-group-button">
-      <input type="submit" class="button plus" value="+" />
+      <input type="button" class="button plus" value="+" />
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -24,11 +29,11 @@ input::-webkit-inner-spin-button {
 }
 // INput group
 .input-group {
-  width: 150px;
   border-left: none;
   border-right: none;
+  width: fit-content;
   input[type="number"] {
-    width: 50%;
+    max-width: 30px;
     border-left: none;
     border-right: none;
     border-top: 1px solid $primary;

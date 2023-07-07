@@ -1,13 +1,11 @@
 <template>
-    <li class="card py-3 my-3">
+    <li class="card py-3 my-3" v-if="product.visible == true">
         <div class="px-4">
-            <h3>{{ product.name }}</h3>
+            <h3 class="fw-bold">{{ product.name }}</h3>
             <p v-if="product.description"> {{ product.description }}</p>
             <div class="d-flex justify-content-between align-items-center">
-                <span class="fw-bold">{{ product.price }} &euro;</span>
-                <div class="pe-3">
-                    <CounterProduct/>
-                </div>
+                <span>{{ product.price }} &euro;</span>
+                <CounterProduct/>
             </div>
         </div>
     </li>

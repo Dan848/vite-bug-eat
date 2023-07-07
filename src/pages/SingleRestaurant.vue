@@ -1,33 +1,35 @@
 <template>
   <div v-if="store.restaurant">
-    <div class="container background">
-      <div class="row justify-content-center">
-        <!-- Restaurant Info -->
-        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-          <div class="card d-flex position-relative">
-            <div
-              class="card-header border-0 d-flex flex-column align-items-center"
-            >
-              <h1 class="text-center">{{ store.restaurant.name }}</h1>
-              <div class="d-flex justify-content-center types">
-                <span
-                  :class="`span-${index}`"
-                  v-for="(type, index) in store.restaurant.types"
-                >
-                  {{ type.name }}
-                  <img src="" alt="" />
-                </span>
+    <div class="background">
+      <div class="container">
+        <div class="row justify-content-center">
+          <!-- Restaurant Info -->
+          <div class="col-10 col-sm-9 col-md-7 col-lg-6 col-xl-5 restaurant-card">
+            <div class="card d-flex position-relative bg-primary text-white">
+              <div
+                class="border-0 d-flex flex-column align-items-center pt-3"
+              >
+                <h1 class="text-center">{{ store.restaurant.name }}</h1>
+                <div class="d-flex justify-content-center types">
+                  <span
+                    :class="`span-${index}`"
+                    v-for="(type, index) in store.restaurant.types"
+                  >
+                    {{ type.name }}
+                  </span>
+                </div>
+                <p>{{ store.restaurant.address }}</p>
               </div>
-              <p>{{ store.restaurant.address }}</p>
-            </div>
-            <div class="card-body d-flex flex-column align-items-center pb-0">
-              <p class="m-0">{{ store.restaurant.email }}</p>
-              <p>{{ store.restaurant.phone_num }}</p>
+              <div class="card-body d-flex flex-column align-items-center pb-0">
+                <p class="m-0">{{ store.restaurant.email }}</p>
+                <p>{{ store.restaurant.phone_num }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
     <div class="container menu">
       <h2>Il nostro Menu</h2>
       <div class="row">
@@ -38,7 +40,7 @@
         </div>
         <!-- Cart -->
         <div class="col-4">
-          <div class="cart card d-none d-md-block px-3 py-1">
+          <div class="cart card d-none d-md-block px-3 py-1 mt-3">
             <h4 class="text-center fw-bold">Il tuo ordine</h4>
             <hr>
             <ul class="list-unstyled cart-products">
@@ -64,10 +66,11 @@
               <button class="btn btn-primary rounded-4">Vai al pagamento</button>
             </div>
           </div>
-        </div>
-        <div class="sticky-cart d-flex justify-content-center align-items-center d-md-none  bg-primary rounded-circle">
-          <i class="fa-solid fa-cart-shopping fs-3"></i>
-        </div>
+          <div class="sticky-cart d-flex justify-content-center align-items-center d-md-none  bg-primary rounded-circle">
+            <i class="fa-solid fa-cart-shopping fs-3"></i>
+          </div>
+          </div>
+        
       </div>
     </div>
   </div>
@@ -115,6 +118,18 @@ export default {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     },
+    scrollCart() {
+      window.addEventListener("scroll", function () {
+      const cart = document.querySelector('.cart');
+      const rect = cart.getBoundingClientRect();
+      if (rect.top <= 0) {
+        cart.classList.add("sticky");
+      } else {
+        cart.classList.remove("sticky");
+      }
+    });
+    }
+    
   },
   mounted() {
     this.getRestaurant();
@@ -134,6 +149,11 @@ export default {
     position: relative;
     bottom: -100px;
   }
+}
+.card-body{
+  background: #8cad6c;
+  border-bottom-right-radius: 35px;
+  border-bottom-left-radius: 35px;
 }
 .card {
   background: white;
@@ -160,10 +180,19 @@ export default {
   .product li{
     border-radius: 20px;
     transition: 0.3s;
-    &:hover {
+    .input-group{
+      transform: scale(2);
+    }
+    &:hover{
       cursor: pointer;
       background-color: lightgray;
-    }
+      .input-group{
+        display: block !important;
+      } 
+    } 
+      
+      
+   
   }
 }
 .cart-products{
@@ -189,5 +218,8 @@ export default {
   bottom: 20px;
   right: 5px;
 }
-
+.sticky {
+  position: fixed;
+  top: 0;
+}
 </style>
