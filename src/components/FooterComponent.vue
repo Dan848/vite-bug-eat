@@ -115,7 +115,7 @@
       <!-- Copyright -->
       <div class="text-center p-4 text-white">
         © 2021 Copyright:
-        <a class="fw-bold" href="https://google.com/">B-Maker.com</a>
+        <a class="fw-bold" href="http://localhost:8000">B-Maker.com</a>
       </div>
       <!-- Copyright -->
     </footer>
