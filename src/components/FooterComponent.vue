@@ -114,8 +114,14 @@
 
       <!-- Copyright -->
       <div class="text-center p-4 text-white">
-        © 2021 Copyright:
-        <a class="fw-bold" href="http://localhost:8000">B-Maker.com</a>
+        <ul class="copyright d-flex justify-content-center">
+
+          <li>© 2021 Copyright:
+            <a class="fw-bold" href="#">B-Maker.com</a>
+            <a class="" href="http://localhost:8000"> - Area Riservata</a>
+          </li>
+        </ul>
+
       </div>
       <!-- Copyright -->
     </footer>
@@ -141,5 +147,9 @@ export default {};
 
     }
   }
+}
+
+li {
+  list-style: none;
 }
 </style>
