@@ -1,11 +1,10 @@
 <template>
   <header class="bg-primary">
-    <nav class="navbar fw-semibold container navbar-expand-xl">
+    <nav class="navbar fw-semibold container navbar-expand-lg">
       <div class="container-fluid">
         <!-- {{ --Logo --}} -->
-
-        <a class="navbar-brand" href="/">
-          <img class="pt-2" src="../../public/img/general/logo-white.png" alt="logo" width="160" />
+        <a class="" href="/">
+          <img class="logo" src="../../public/img/general/logo-white.png" alt="logo" />
         </a>
 
         <!-- {{ --Burger Menù-- }} -->
@@ -16,11 +15,12 @@
         <!-- {{ --Navbar Start-- }} -->
         <div class="drop-menu collapse navbar-collapse justify-content-between bg-primary rounded-bottom-5"
           id="navbarNavDropdown" :class="{ show: show }">
-          <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
+          <ul class="navbar-nav mb-2 mb-lg-0">
             <!-- {{ --Simple Anchor Link-- }} -->
-            <li class="nav-item text-white px-3 text-uppercase mt-3" v-for="item in store.headerLinks">
+            <li class="px-3 text-uppercase pb-2 pb-lg-0" v-for="(item, index) in store.headerLinks"
+              @click="getActive(index)">
 
-              <router-link :to="{ name: item.routeName }">
+              <router-link :to="{ name: item.routeName }" :class="index === currentIndex ? 'active' : ''">
                 {{ item.label }}
               </router-link>
             </li>
@@ -39,32 +39,66 @@ export default {
     return {
       store,
       show: false,
+      currentIndex: 0
     };
   },
+  methods: {
+    getActive(index) {
+      this.currentIndex = index
+
+      console.log(this.currentIndex);
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
 
-.nav-item a {
-  text-decoration: none;
-  font-size: 1rem;
 
-  &:hover {
-    padding-bottom: 1rem;
-    border-bottom: 2px solid $secondary;
+
+.navbar {
+  height: 70px;
+  display: flex;
+  align-items: center;
+
+  .logo {
+    width: 100px;
+  }
+
+  .drop-menu {
+    z-index: 1010;
+
+    li a {
+      font-size: 1rem;
+      color: white;
+
+      &:hover {
+        padding-bottom: 10px;
+        border-bottom: 2px solid $secondary;
+        color: $secondary;
+      }
+    }
   }
 }
 
-.navbar {
-  height: 100px;
-  display: flex;
-  align-items: center;
+.active {
+  padding-bottom: 10px;
+  border-bottom: 2px solid $secondary;
+  color: $secondary !important;
 }
 
-.drop-menu {
-  padding: 0px 0px 15px 0px;
-  z-index: 1010;
+@media screen and (max-width:768px) {
+  li a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: white;
+
+    &:hover {
+      padding-bottom: 0px;
+      border-bottom: 0px solid $secondary;
+      color: white;
+    }
+  }
 }
 </style>
