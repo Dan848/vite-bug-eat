@@ -28,13 +28,7 @@
       <div class="row">
         <div class="col-8">
           <ul class="list-unstyled">
-            <li v-for="product in store.restaurant.products" class="card py-3 my-3">
-              <div class="ps-4">
-                <h3>{{ product.name }}</h3>
-                <p v-if="product.description"> {{ product.description }}</p>
-                <span class="fw-bold">{{ product.price }} &euro;</span>
-              </div>
-            </li>
+            <ProductCard v-for="(product, index) in store.restaurant.products" :product="store.restaurant.products[index]"/>
           </ul>
         </div>
         <!-- Cart -->
@@ -53,6 +47,8 @@ import { store } from "../data/store";
 import RestaurantCard from "../components/RestaurantCard.vue";
 import SliderComponent from "../components/SliderComponent.vue";
 import SidebarComponent from "../components/SidebarComponent.vue";
+import ProductCard from "../components/ProductCard.vue";
+import CounterProduct from "../components/CounterProduct.vue";
 import axios from "axios";
 export default {
   name: "RestaurantListView",
@@ -60,6 +56,8 @@ export default {
     RestaurantCard,
     SliderComponent,
     SidebarComponent,
+    ProductCard,
+    CounterProduct
   },
   data() {
     return {
@@ -128,7 +126,7 @@ export default {
 .menu{
   margin-top: 120px;
   margin-bottom: 4rem;
-  .card{
+  li{
     border-radius: 20px;
     transition: .3s;
     &:hover{
@@ -138,14 +136,4 @@ export default {
   }
 }
 
-// @media screen and (max-width: 633px) {
-//   .span-1{
-//     &::before{
-//     color: rgb(60, 76, 79);
-//     content: "•";
-//     margin: 0 .5rem;
-//     padding: 0 !important;
-//     }
-//   }
-// }
 </style>
