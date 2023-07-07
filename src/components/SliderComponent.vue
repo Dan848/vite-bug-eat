@@ -1,8 +1,9 @@
 <template>
-  <div class="container w-75">
+  <div class="container">
     <div class="position-relative">
       <div class="d-flex flex-nowrap row" ref="sliderContainer">
-        <div class="col-6 col-md-4 col-lg-3 col-xxl-2 gap-5" v-for="(type, index) in  types ">
+        <div class="myCol gap-5" v-for="(type, index) in  types ">
+          <!-- col-6 col-md-4 col-lg-3 col-xxl-2 -->
           <div style="min-width:;">
             <div class="card">
               <div class="card__image">
@@ -35,8 +36,9 @@
 export default {
   name: 'SliderComponent',
   props: {
-    'types': Array,
-    'imgStartUrl': String
+    types: Array,
+    imgStartUrl: String,
+    numCol: Number
   },
   data() {
     return {
@@ -46,6 +48,7 @@ export default {
       // adding: 8
     }
   },
+
   methods: {
     nextCard() {
       this.sliderContainer.scrollBy(this.sliderWidth / this.divider, 0);
@@ -97,10 +100,16 @@ export default {
     this.handleWindowSize();
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
 @use '../assets/partials/variable.scss' as *;
+
+
+.myCol {
+  width: calc(100% / v-bind(numCol));
+}
 
 .row {
   padding: 7rem 0 1rem 0;
@@ -183,9 +192,7 @@ hr {
     font-size: 15px;
   }
 
-  &:active {
-    // background-color: ;
-  }
+
 }
 
 .prevBtn {
@@ -217,13 +224,5 @@ hr {
 
   scroll-behavior: smooth;
 
-}
-
-.active {
-  opacity: 1;
-}
-
-.deactive {
-  opacity: 0;
 }
 </style>

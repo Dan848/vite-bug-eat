@@ -7,7 +7,7 @@
 
   <!-- Types slider -->
   <div class="slider d-flex justify-content-center my-5">
-    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
+    <SliderComponent :numCol="8" :types="store.types" :imgStartUrl="store.imgStartUrl" />
   </div>
 
   <div v-for="section in store.sections">
