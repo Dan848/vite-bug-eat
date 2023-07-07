@@ -2,25 +2,30 @@
   <div v-if="store.restaurant">
     <div class="container background">
       <div class="row justify-content-center">
-          <!-- Restaurant Info -->
-          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-            <div class="card d-flex position-relative">
-              <div class="card-header border-0 d-flex flex-column align-items-center">
-                <h1 class="text-center">{{ store.restaurant.name }}</h1>
-                <div class="d-flex justify-content-center types">
-                  <span :class="`span-${index}` " v-for="(type,index) in store.restaurant.types">
-                    {{type.name}}
-                    <img src="" alt="">
-                  </span>
-                </div>
-                <p>{{ store.restaurant.address }}</p>
+        <!-- Restaurant Info -->
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+          <div class="card d-flex position-relative">
+            <div
+              class="card-header border-0 d-flex flex-column align-items-center"
+            >
+              <h1 class="text-center">{{ store.restaurant.name }}</h1>
+              <div class="d-flex justify-content-center types">
+                <span
+                  :class="`span-${index}`"
+                  v-for="(type, index) in store.restaurant.types"
+                >
+                  {{ type.name }}
+                  <img src="" alt="" />
+                </span>
               </div>
-              <div class="card-body d-flex flex-column align-items-center pb-0">
-                <p class="m-0">{{ store.restaurant.email }}</p>
-                <p>{{ store.restaurant.phone_num }}</p>
-              </div>
+              <p>{{ store.restaurant.address }}</p>
+            </div>
+            <div class="card-body d-flex flex-column align-items-center pb-0">
+              <p class="m-0">{{ store.restaurant.email }}</p>
+              <p>{{ store.restaurant.phone_num }}</p>
             </div>
           </div>
+        </div>
       </div>
     </div>
     <div class="container menu">
@@ -83,7 +88,7 @@ export default {
     scrollToTop() {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
-    }
+    },
   },
   mounted() {
     this.getRestaurant();
@@ -94,42 +99,42 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
-.background{
+.background {
   padding-top: 3rem;
-  background: url('https://img.freepik.com/free-photo/view-arrangement-with-delicious-burgers_23-2148308811.jpg?w=1380&t=st=1688546437~exp=1688547037~hmac=a251e4ce6bfab4f64a3f9fc6d908c08d6a953e71c43bcc2d407669927dd52fec');
+  background: url("https://img.freepik.com/free-photo/view-arrangement-with-delicious-burgers_23-2148308811.jpg?w=1380&t=st=1688546437~exp=1688547037~hmac=a251e4ce6bfab4f64a3f9fc6d908c08d6a953e71c43bcc2d407669927dd52fec");
   background-position: center;
   background-size: cover;
-  .row{
+  .row {
     position: relative;
     bottom: -100px;
   }
 }
-.card{
+.card {
   background: white;
   border-radius: 35px;
-  .span-1{
-    &::before{
-    color: rgb(60, 76, 79);
-    content: "•";
-    margin: 0 .5rem;
-    padding: 0 !important;
+  .span-1 {
+    &::before {
+      color: rgb(60, 76, 79);
+      content: "•";
+      margin: 0 0.5rem;
+      padding: 0 !important;
     }
   }
-  .span-2{
-    &::before{
-    color: rgb(60, 76, 79);
-    content: "•";
-    margin: 0 .5rem;
+  .span-2 {
+    &::before {
+      color: rgb(60, 76, 79);
+      content: "•";
+      margin: 0 0.5rem;
     }
   }
 }
-.menu{
+.menu {
   margin-top: 120px;
   margin-bottom: 4rem;
   li{
     border-radius: 20px;
-    transition: .3s;
-    &:hover{
+    transition: 0.3s;
+    &:hover {
       cursor: pointer;
       background-color: lightgray;
     }
