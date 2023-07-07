@@ -116,9 +116,9 @@
       <div class="text-center p-4 text-white">
         <ul class="copyright d-flex justify-content-center">
 
-          <li>© 2021 Copyright:
-            <a class="fw-bold" href="#">B-Maker.com</a>
-            <a class="" href="http://localhost:8000"> - Area Riservata</a>
+          <li class="admin">© 2021 Copyright:
+            <a class="fw-bold" href="#">B-Maker.com</a><span> | </span>
+            <a class="" href="http://localhost:8000">Area Riservata</a>
           </li>
         </ul>
 
@@ -146,6 +146,13 @@ export default {};
       color: $secondary;
 
     }
+  }
+}
+
+.admin {
+  a:last-child:hover {
+    color: $secondary;
+    text-decoration: underline;
   }
 }
 
