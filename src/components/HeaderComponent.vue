@@ -58,7 +58,7 @@ export default {
 
 
 .navbar {
-  height: 70px;
+  height: 60px;
   display: flex;
   align-items: center;
 

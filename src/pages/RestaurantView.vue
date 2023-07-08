@@ -65,14 +65,19 @@ export default {
   data() {
     return {
       store,
+      checkedTypes: [],
     };
   },
   methods: {
     getRestaurant(numPage) {
-      axios.get(`${store.apiURL}/restaurants`, {
-        params: {
+      let params = {
           page: numPage,
-        },
+      };
+      if (this.checkedTypes){
+        params.checkedTypes = this.checkedTypes;
+      }
+      axios.get(`${store.apiURL}/restaurants`, {
+        params
       })
         .then((res) => {
           store.restaurants = res.data.results.data;

@@ -2,8 +2,8 @@
   <div class="container">
     <div class="position-relative">
       <div class="d-flex flex-nowrap row" ref="sliderContainer">
-        <div class="myCol gap-5" v-for="(type, index) in  types ">
-          <!-- col-6 col-md-4 col-lg-3 col-xxl-2 -->
+        <div class="my-col col-6 col-sm-4 col-md-3 gap-5" v-for="(type, index) in  types ">
+          <!--  -->
           <div style="min-width:;">
             <div class="card">
               <div class="card__image">
@@ -38,7 +38,6 @@ export default {
   props: {
     types: Array,
     imgStartUrl: String,
-    numCol: Number
   },
   data() {
     return {
@@ -71,15 +70,17 @@ export default {
     handleWindowSize() {
       const windowWidth = window.innerWidth;
 
-      if (windowWidth >= 1400) { //Col XXL 2
+      if (windowWidth >= 1400) { //my-col
+        this.divider = 8
+      } else if ((windowWidth < 1400) && (windowWidth >= 1200)) { //my-col
+        this.divider = 7
+      } else if ((windowWidth < 1200) && (windowWidth >= 992)) { // my-col
         this.divider = 6
-
-      } else if ((windowWidth < 1400) && (windowWidth >= 992)) { //Col LG 3
+      } else if ((windowWidth < 992) && (windowWidth >= 768)) { //col-md-3
         this.divider = 4
-      } else if ((windowWidth < 992) && (windowWidth >= 768)) { //Col MD 4 
+      } else if ((windowWidth < 768) && (windowWidth >= 576)) { //col-sm-4 
         this.divider = 3
-      }
-      else { //Col SM 6
+      } else { //col-6 xs
         this.divider = 2
       }
 
@@ -106,64 +107,9 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/partials/variable.scss' as *;
 
-
-.myCol {
-  width: calc(100% / v-bind(numCol));
-}
-
-.row {
-  padding: 7rem 0 1rem 0;
-}
-
 //Card config
-
-.card {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  background-color: transparent;
-  border: 0;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.card__image {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 200px;
-  height: 80%;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  top: -30%;
-  z-index: 2;
-  transition: all 0.3s ease-out;
-  -webkit-filter: drop-shadow(5px 5px 5px #222);
-  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
-}
-
-.card__data {
-  border-top-right-radius: 50%;
-  border-top-left-radius: 50%;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: #ededed;
-  padding-top: 8rem;
-  transition: all 0.3s ease-out 0.1s;
-}
-
-.card__info {
-  padding: 0 10px;
-  margin-bottom: 10px;
-}
-
 .card:hover .card__image {
-  top: -35%;
+  top: -45%;
 }
 
 .card:hover .card__data {
@@ -210,19 +156,78 @@ hr {
 }
 
 .row {
+  padding: 6rem 0 1rem 0;
   overflow-x: auto;
+  -ms-overflow-style:none;
+  scrollbar-width:none;
+  scroll-behavior: smooth;
   // overflow-y: hidden;
-
   // Scrollbar config
   &::-webkit-scrollbar {
     display: none;
   }
+  .card {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    background-color: transparent;
+    border: 0;
 
-  -ms-overflow-style:none;
+    &:hover {
+      cursor: pointer;
+    }
+    .card__image {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 150px;
+      height: 80%;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      top: -40%;
+      z-index: 2;
+      transition: all 0.3s ease-out;
+      -webkit-filter: drop-shadow(5px 5px 5px #222);
+      filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+    }
+    .card__data {
+      border-top-right-radius: 50%;
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      background-color: #ededed;
+      padding-top: 5rem;
+      transition: all 0.3s ease-out 0.1s;
 
-  scrollbar-width:none;
-
-  scroll-behavior: smooth;
-
+      .card__info {
+        padding: 0 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
+
+//Media Query
+
+@media screen and (min-width: 992px) {
+  .my-col {
+    width: calc(100% / 6);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .my-col {
+    width: calc(100% / 7);
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .my-col {
+    width: calc(100% / 8);
+  }
+}
+
 </style>

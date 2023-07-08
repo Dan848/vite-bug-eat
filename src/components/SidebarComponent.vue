@@ -24,7 +24,9 @@ export default {
     imgStartUrl: String
   },
   data() {
-    return{}
+    return{
+      
+    }
   },
   methods: {
     
