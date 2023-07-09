@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <!-- {{ --Logo --}} -->
         <a class="" href="/">
-          <img class="logo" src="../../public/img/general/logo-white.png" alt="logo" />
+          <img class="logo" src="/img/general/logo-white.png" alt="logo" />
         </a>
 
         <!-- {{ --Burger Menù-- }} -->

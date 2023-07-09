@@ -1,10 +1,13 @@
 <template>
   <div class="container">
+    <!-- Slider -->
     <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
     <div class="row justify-content-center">
+      <!-- Aside -->
       <div class="col-2 sidebar">
-        <SidebarComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
+        <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl" />
       </div>
+      <!-- Main -->
       <div class="col-10">
         <div class="row mt-5">
           <!-- Page navigation -->
@@ -15,6 +18,7 @@
                 <input type="text" class="form-control form-input" placeholder="Cerca un ristorante">
               </div>
             </form>
+            <!-- PAGINATION -->
             <ul class="pagination d-flex my-md-auto col-12 col-md-6 mt-3">
               <li class="page-item">
                 <button :class="{ 'page-link': true, disabled: store.currentPage === 1 }"
@@ -37,7 +41,7 @@
               </li>
             </ul>
           </div>
-
+          <!-- Rstaurant List -->
           <div v-for="restaurant in store.restaurants"
             class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
             <RestaurantCard :key="restaurant.id" :restaurant="restaurant" :imgStartUrl="store.imgStartUrl"
@@ -65,16 +69,16 @@ export default {
   data() {
     return {
       store,
-      checkedTypes: [],
     };
   },
   methods: {
-    getRestaurant(numPage) {
+    getRestaurant(numPage, checkboxTypes) {
       let params = {
           page: numPage,
       };
-      if (this.checkedTypes){
-        params.checkedTypes = this.checkedTypes;
+      if (checkboxTypes){
+        params.types = checkboxTypes;
+        console.log(params.types);
       }
       axios.get(`${store.apiURL}/restaurants`, {
         params

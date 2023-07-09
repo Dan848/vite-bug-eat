@@ -1,35 +1,35 @@
 <template>
   <div class="d-flex flex-column flex-shrink-0 mt-5">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <span class="fs-4">Filtri</span>
-    </a>
+    <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto">
+      <div class="fs-4">Filtri</div>
+    </div>
     <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item d-flex justify-content-between align-items-center" v-for="item in types">
-        <a href="#" class="nav-link" aria-current="page">
+    <ul class="list-unstyled m-0 p-0">
+      <li class="p-0" v-for="item in items">
+        <label class="d-flex justify-content-between align-items-center">
+          <input type="checkbox" class="" name="checkTypes[]" id="checkTypes[]" v-model="checkboxTypes" :value="item.id" @change="$emit('onChange', 1, checkboxTypes)">
           {{ item.name }}
-        </a>
-        <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2">
+          <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2">
+        </label>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   name: 'SidebarComponent',
   props: {
-    types: Object,
+    items: Object,
     imgStartUrl: String
   },
   data() {
     return{
-      
+     checkboxTypes: []
     }
   },
   methods: {
-    
+
   }
 }
 </script>
@@ -37,23 +37,33 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
 li{
-  margin: .2rem 0;
-  border: 1px solid transparent;
-  color: black;
-  a{
+  label {
+    background-color: #ececec;
+    padding: .3rem .5rem;
+    margin: .3rem 0;
     color: black;
-  }
-  &:hover{
-    border: 1px solid $primary;
     border-radius: 80px;
     cursor: pointer;
-    a{
-      color: $primary;
+      &:hover img{
+        border-radius: 50%;
+        border: 2px solid $primary;
+      }
+    input {
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
+      pointer-events: none;
+    }
+    input:checked+img {
+        padding: 1px;
+        border-radius: 50%;
+        border: 2px solid $primary;
+    }
+    img {
+        width: 35px;
+        height: 35px;
     }
   }
-  img{
-    width: 30px;
-    height: 30px;
-  }
+
+
 }
 </style>
