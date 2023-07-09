@@ -108,14 +108,7 @@ export default {
 @use '../assets/partials/variable.scss' as *;
 
 //Card config
-.card:hover .card__image {
-  top: -45%;
-}
 
-.card:hover .card__data {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
 
 hr {
   width: 50px;
@@ -175,7 +168,14 @@ hr {
 
     &:hover {
       cursor: pointer;
-    }
+        .card__image {
+          top: -45%;
+        }
+        .card__data {
+          transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+      }
     .card__image {
       position: absolute;
       display: flex;
