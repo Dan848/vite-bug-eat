@@ -40,7 +40,7 @@
         </div>
         <!-- Cart -->
         <div class="col-4">
-          <div class="cart card d-none d-md-block px-3 py-1 mt-3" :class="{'sticky' : cartSticky}">
+          <div class="cart card d-none d-md-block px-3 py-1 mt-3" :class="{'sticky' : cartSticky, 'd-md-none' : cartHide}">
             <h4 class="text-center fw-bold">Il tuo ordine</h4>
             <hr>
             <ul class="list-unstyled cart-products">
@@ -63,13 +63,13 @@
             </ul>
             <hr>
             <div class="d-flex justify-content-center pb-3">
-              <button class="btn btn-primary rounded-4">Vai al pagamento</button>
+              <button class="btn btn-primary rounded-4 text-white">Vai al pagamento</button>
             </div>
           </div>
-          <div class="sticky-cart d-flex justify-content-center align-items-center d-md-none  bg-primary rounded-circle">
+          <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle" :class="{'d-none' : cartStickyHide}">
             <i class="fa-solid fa-cart-shopping fs-3"></i>
           </div>
-          </div>
+        </div>
         
       </div>
     </div>
@@ -96,7 +96,9 @@ export default {
   data() {
     return {
       store,
-      cartSticky: false
+      cartSticky: false,
+      cartStickyHide: false,
+      cartHide: false
     };
   },
   methods: {
@@ -120,20 +122,28 @@ export default {
       document.body.scrollTop = 0;
     },
     handleScroll() {
-      // const cart = this.$refs.cart.offset().top;
-      const currentPosition = window.scrollTo();
       const scrollTop = document.documentElement.scrollTop;
       this.cartSticky = scrollTop > 450;
-      console.log(scrollTop);
+      // console.log(scrollTop);
+    },
+    handleScrollFromBottom() {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const viewportHeight = window.innerHeight;
+      const scrollFromBottom = scrollHeight - (window.scrollY + viewportHeight);
+      this.cartStickyHide = scrollFromBottom < 1098;
+      this.cartHide = scrollFromBottom < 116;
+      console.log(scrollFromBottom);
     }
   },
   mounted() {
     this.getRestaurant();
     this.scrollToTop();
     window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScrollFromBottom);
   },
   unmounted() {
     window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScrollFromBottom);
   },
 };
 </script>
@@ -214,19 +224,28 @@ export default {
   max-width: 300px;
   
 }
-.sticky-cart{
+.sticky-bubble{
   position: fixed;
   width: 50px;
   height: 50px;
-  bottom: 20px;
+  bottom: 10px;
   right: 5px;
+  background-color: $primary;
+  color: white;
+  &:hover{
+    cursor: pointer;
+    background-color: #8cad6c;
+  }
 }
 .sticky {
-    position: fixed;
-    top: 0;
-    min-width: 216px;
-  }
+  position: fixed;
+  top: 0;
+  min-width: 216px;
+}
 
+.cartHide{
+  display: none;
+}
 @media screen and (min-width: 845px) and (max-width: 991px){
   .cart{
     max-width: 216px;
