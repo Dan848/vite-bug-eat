@@ -40,7 +40,7 @@
         </div>
         <!-- Cart -->
         <div class="col-4">
-          <div class="cart card d-none d-md-block px-3 py-1 mt-3">
+          <div class="cart card d-none d-md-block px-3 py-1 mt-3" :class="{'sticky' : cartSticky}">
             <h4 class="text-center fw-bold">Il tuo ordine</h4>
             <hr>
             <ul class="list-unstyled cart-products">
@@ -96,6 +96,7 @@ export default {
   data() {
     return {
       store,
+      cartSticky: false
     };
   },
   methods: {
@@ -118,22 +119,21 @@ export default {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     },
-    scrollCart() {
-      window.addEventListener("scroll", function () {
-      const cart = document.querySelector('.cart');
-      const rect = cart.getBoundingClientRect();
-      if (rect.top <= 0) {
-        cart.classList.add("sticky");
-      } else {
-        cart.classList.remove("sticky");
-      }
-    });
+    handleScroll() {
+      // const cart = this.$refs.cart.offset().top;
+      const currentPosition = window.scrollTo();
+      const scrollTop = document.documentElement.scrollTop;
+      this.cartSticky = scrollTop > 450;
+      console.log(scrollTop);
     }
-    
   },
   mounted() {
     this.getRestaurant();
     this.scrollToTop();
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
 };
 </script>
@@ -210,7 +210,10 @@ export default {
     min-width: 40%;
   }
 }
-
+.cart{
+  max-width: 300px;
+  
+}
 .sticky-cart{
   position: fixed;
   width: 50px;
@@ -219,7 +222,14 @@ export default {
   right: 5px;
 }
 .sticky {
-  position: fixed;
-  top: 0;
+    position: fixed;
+    top: 0;
+    min-width: 216px;
+  }
+
+@media screen and (min-width: 845px) and (max-width: 991px){
+  .cart{
+    max-width: 216px;
+  }
 }
 </style>
