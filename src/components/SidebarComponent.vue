@@ -9,7 +9,7 @@
         <label class="d-flex justify-content-between align-items-center">
           <input type="checkbox" class="" name="checkTypes[]" :id="'checkTypes[]' + item.id" v-model="store.checkboxTypes" :value="item.id" @change="$emit('onChange', 1, store.checkboxTypes)">
           {{ item.name }}
-          <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2">
+          <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2 d-none d-xl-block position-relative">
         </label>
       </li>
     </ul>
@@ -44,27 +44,29 @@ li{
     margin: .3rem 0;
     color: black;
     border-radius: 80px;
+    border: 2px solid transparent;
     cursor: pointer;
-      &:hover img{
-        border-radius: 50%;
-        border: 2px solid $primary;
-      }
     input {
       position: absolute;
       clip: rect(0, 0, 0, 0);
       pointer-events: none;
     }
     input:checked+img {
-        padding: 1px;
-        border-radius: 50%;
-        border: 2px solid $primary;
+      padding: 1px;
+      border-radius: 50%;
+      border: 2px solid lightgray;
+      filter: grayscale(1);
     }
     img {
-        width: 35px;
-        height: 35px;
+      width: 35px;
+      height: 35px;
+    }
+    &:hover{
+      border: 2px solid $primary;
+    }
+    &:has(input:checked){
+      border: 2px solid $primary;
     }
   }
-
-
 }
 </style>

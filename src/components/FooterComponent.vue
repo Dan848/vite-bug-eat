@@ -3,9 +3,7 @@
     <!-- Footer -->
     <footer class="text-center text-lg-start text-muted">
       <!-- Section: Social media -->
-      <section
-        class="d-flex justify-content-center justify-content-lg-between p-4"
-      >
+      <section class="d-flex justify-content-center justify-content-lg-between p-4">
         <div class="div"></div>
         <!-- Right -->
         <div>
@@ -117,9 +115,15 @@
       <!-- Copyright -->
       <div class="text-center p-4 text-white">
         <ul class="copyright d-flex justify-content-center">
+<<<<<<< HEAD
           <li class="admin">
             © 2021 Copyright: <a class="fw-bold" href="#">B-Maker.com</a
             ><span> | </span>
+=======
+
+          <li class="admin">© 2021 Copyright:
+            <a class="fw-bold text-white" href="#">B-Maker.com</a><span> | </span>
+>>>>>>> fe770f551b17cf5c1e7c88375fe4eab7ce2d1a85
             <a class="" href="http://localhost:8000">Area Riservata</a>
           </li>
         </ul>
@@ -143,16 +147,24 @@ export default {};
 
 .link-container {
   p {
-    a:hover {
-      color: $secondary;
+    a {
+      color: white;
+
+      &:hover {
+        color: $secondary;
+      }
     }
   }
 }
 
 .admin {
-  a:last-child:hover {
-    color: $secondary;
-    text-decoration: underline;
+  a:last-child {
+    color: white;
+
+    &:hover {
+      color: $secondary;
+      text-decoration: underline;
+    }
   }
 }
 
