@@ -1,4 +1,7 @@
 <template>
+  <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
+    <i class="fa-solid fa-filter"></i> <span class="fw-bold">Filtri</span>
+  </div>
   <div class="container">
     <!-- Slider -->
     <SliderComponent
@@ -8,9 +11,11 @@
     />
     <div class="row">
       <!-- Aside -->
-      <div class="col d-none d-md-block">
-        <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl" />
-      </div>
+      <SidebarComponent @onChange="getRestaurant" 
+      :items="store.types" 
+      :imgStartUrl="store.imgStartUrl"
+      :class="filtersOpen ? 'd-block col' : 'd-none'"
+      @onClick="filtersOpen = false"/>
       <!-- Main -->
       <div class="col-12 col-md-8 col-lg-9 col-xl-10">
         <div class="container-fluid mt-5">
@@ -107,6 +112,7 @@ export default {
   data() {
     return {
       store,
+      filtersOpen: false
     };
   },
   methods: {
@@ -138,11 +144,18 @@ export default {
         store.types = res.data.results;
       });
     },
+    handleWindowResize() {
+      this.filtersOpen = window.innerWidth <= 768 ? false : true;
+    },
   },
   mounted() {
     this.getRestaurant(1);
     this.getTypes();
+    window.addEventListener('resize', this.handleWindowResize);
   },
+  unmounted() {
+    window.removeEventListener('resize', this.handleWindowResize);
+  }
 };
 </script>
 
@@ -191,5 +204,22 @@ form {
 
 .form-input:focus {
   box-shadow: $primary;
+}
+.sticky-filters{
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 100px;
+  left: 0;
+  width: fit-content;
+  padding: 0 5px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: 1005;
+  background: $primary;
+  transition: .3s;
+  &:hover{
+    cursor: pointer;
+    background-color: #8cad6c;
+  }
 }
 </style>
