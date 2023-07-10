@@ -9,7 +9,7 @@
         <label class="d-flex justify-content-between align-items-center">
           <input type="checkbox" class="" name="checkTypes[]" :id="'checkTypes[]' + item.id" v-model="store.checkboxTypes" :value="item.id" @change="$emit('onChange', 1, store.checkboxTypes)">
           {{ item.name }}
-          <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2 d-none d-lg-block position-relative">
+          <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2 d-none d-xl-block position-relative">
         </label>
       </li>
     </ul>
