@@ -75,7 +75,7 @@
                 :class="{ 'border-top': index != 0 }"
                 class="py-2 row align-items-center"
               >
-                <div class="col-5">{{ product.name }}</div>
+                <div class="col-4">{{ product.name }}</div>
                 <div class="col-4">
                   <CounterProduct
                     @onMinus="removeCart(product, index)"
@@ -83,13 +83,12 @@
                     :quantity="product.quantity"
                   />
                 </div>
-                <div
-                  class="col d-flex align-items-center justify-content-center"
-                >
-                  <div class="fs-6 text-start ms-0">{{ product.price }}€</div>
-                  <div>
-                    <i class="fa-solid fa-trash ms-2 me-0 delete-item"></i>
-                  </div>
+                <div class="col-4 text-end">
+                  <div class="text-end d-inline">{{ product.price }}€</div>
+                  <i
+                    @click.stop="deleteItem(index, product)"
+                    class="fa-solid fa-trash ms-2 delete-item p-1"
+                  ></i>
                 </div>
               </li>
               <!-- Cart Total -->
@@ -128,7 +127,7 @@
 import { store } from "../data/store";
 import ProductCard from "../components/ProductCard.vue";
 import CounterProduct from "../components/CounterProduct.vue";
-import axios from "axios";
+import axios, { all } from "axios";
 export default {
   name: "RestaurantListView",
   components: {
@@ -195,7 +194,15 @@ export default {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     },
+    deleteItem(index, item) {
+      const cart = this.cart;
+      const cartItem = item;
+      cart.products.splice(index, 1);
+      console.log(cartItem.quantity);
+      cart.totalPrice -= parseFloat(cartItem.price * cartItem.quantity);
+    },
   },
+
   mounted() {
     this.getRestaurant();
     this.scrollToTop();
@@ -238,6 +245,7 @@ export default {
     }
 
     .delete-item {
+      background-color: white;
       &:hover {
         color: red;
         cursor: pointer;
