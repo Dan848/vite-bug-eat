@@ -1,3 +1,4 @@
+<template>
   <div class="d-flex flex-column flex-shrink-0 mt-5">
     <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto">
       <div class="fs-4">Filtri</div>
