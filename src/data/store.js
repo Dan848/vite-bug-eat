@@ -5,6 +5,7 @@ export const store = reactive({
   apiURL: 'http://127.0.0.1:8000/api',
   restaurants: [],
   types: [],
+  checkboxTypes: [],
   currentPage: 1,
   lastPage: null,
   headerLinks: [

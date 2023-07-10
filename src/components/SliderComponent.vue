@@ -2,22 +2,19 @@
   <div class="container">
     <div class="position-relative">
       <div class="d-flex flex-nowrap row" ref="sliderContainer">
-        <div class="my-col col-6 col-sm-4 col-md-3 gap-5" v-for="(type, index) in  types ">
-          <!--  -->
-          <div style="min-width:;">
-            <div class="card">
-              <div class="card__image">
-                <img class="img-fluid" :src="imgStartUrl + type.image" :alt="type.name" />
-              </div>
-
-              <div class="card__data">
-                <div class="card__info text-center">
-                  <h5 class="text-nowrap">{{ type.name }}</h5>
-                </div>
+        <div class="my-col col-6 col-sm-4 col-md-3 gap-5" v-for="(type, index) in  types" @click="$emit('onClick', type.id)">
+          <!-- card -->
+          <div class="card">
+            <div class="card__image">
+              <img class="img-fluid" :src="imgStartUrl + type.image" :alt="type.name" />
+            </div>
+          
+            <div class="card__data">
+              <div class="card__info text-center">
+                <h5 class="text-nowrap">{{ type.name }}</h5>
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <!-- Change slide buttons -->
@@ -33,6 +30,7 @@
 </template>
 
 <script>
+import {store} from "../data/store";
 export default {
   name: 'SliderComponent',
   props: {
@@ -44,7 +42,7 @@ export default {
       sliderContainer: null,
       sliderWidth: null,
       divider: null,
-      // adding: 8
+      store
     }
   },
 
@@ -57,8 +55,6 @@ export default {
       if ((this.sliderContainer.scrollLeft + this.sliderWidth + 10) >= this.sliderContainer.scrollWidth) {
         this.sliderContainer.scrollLeft = 0
       }
-
-      console.log(result, this.sliderWidth, this.divider);
     },
     prevCard() {
       this.sliderContainer.scrollBy(- this.sliderWidth / this.divider, 0);

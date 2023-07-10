@@ -5,9 +5,9 @@
     </div>
     <hr>
     <ul class="list-unstyled m-0 p-0">
-      <li class="p-0" v-for="item in items">
+      <li class="p-0" v-for="item in items" :key="item.id">
         <label class="d-flex justify-content-between align-items-center">
-          <input type="checkbox" class="" name="checkTypes[]" id="checkTypes[]" v-model="checkboxTypes" :value="item.id" @change="$emit('onChange', 1, checkboxTypes)">
+          <input type="checkbox" class="" name="checkTypes[]" :id="'checkTypes[]' + item.id" v-model="store.checkboxTypes" :value="item.id" @change="$emit('onChange', 1, store.checkboxTypes)">
           {{ item.name }}
           <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2">
         </label>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import {store} from "../data/store";
 export default {
   name: 'SidebarComponent',
   props: {
@@ -25,7 +26,7 @@ export default {
   },
   data() {
     return{
-     checkboxTypes: []
+      store
     }
   },
   methods: {

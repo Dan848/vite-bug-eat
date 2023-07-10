@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <!-- Slider -->
-    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
+    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"/>
     <div class="row justify-content-center">
       <!-- Aside -->
       <div class="col-2 sidebar">
-        <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl" />
+        <SidebarComponent :checkboxTypes="store.checkboxTypes" @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl" />
       </div>
       <!-- Main -->
       <div class="col-10">
@@ -72,13 +72,18 @@ export default {
     };
   },
   methods: {
+    handleSlider(id){
+      store.checkboxTypes = [];
+      store.checkboxTypes.push(id);
+      const type = store.checkboxTypes;
+      this.getRestaurant(1 , type)
+    },
     getRestaurant(numPage, checkboxTypes) {
       let params = {
           page: numPage,
       };
       if (checkboxTypes){
         params.types = checkboxTypes;
-        console.log(params.types);
       }
       axios.get(`${store.apiURL}/restaurants`, {
         params
