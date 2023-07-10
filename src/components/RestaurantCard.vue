@@ -14,8 +14,10 @@
         <h4>{{ restaurant.name }}</h4>
         <span>{{ restaurant.address }}</span>
       </div>
-      <div class="item-types d-flex flex-column justify-content-center align-items-center pt-4">
-        <span class="type" v-for="(type) in restaurant.types">{{
+      <div
+        class="item-types d-flex flex-column justify-content-center align-items-center pt-4"
+      >
+        <span class="type" v-for="type in restaurant.types">{{
           type.name
         }}</span>
       </div>
@@ -105,7 +107,9 @@ export default {
 }
 
 .outer:hover {
-  transform: scale(1.01);
+  transform: scale(1.05);
+  transition: 500ms;
   cursor: pointer;
+  box-shadow: 0px 21px 24px -15px #789f52;
 }
 </style>

@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <!-- Slider -->
-    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"/>
+    <SliderComponent
+      :types="store.types"
+      :imgStartUrl="store.imgStartUrl"
+      @onClick="handleSlider"
+    />
     <div class="row justify-content-center">
       <!-- Aside -->
       <div class="col">
@@ -13,9 +17,14 @@
           <!-- Search Bar -->
           <div class="row justify-content-center">
             <form action="" method="GET" class="col-12">
+
               <div class="form">
                 <i class="fa fa-search"></i>
-                <input type="text" class="form-control form-input" placeholder="Cerca un ristorante">
+                <input
+                  type="text"
+                  class="form-control form-input"
+                  placeholder="Cerca un ristorante"
+                />
               </div>
             </form>
           </div>
@@ -45,25 +54,58 @@
           <div class="row">
             <ul class="pagination col-12 mt-3 mb-5">
               <li class="page-item">
-                <button :class="{ 'page-link': true, disabled: store.currentPage === 1 }"
-                  @click="getRestaurant(store.currentPage - 1)">
+                <button
+                  :class="{
+                    'page-link': true,
+                    disabled: store.currentPage === 1,
+                  }"
+                  @click="getRestaurant(store.currentPage - 1)"
+                >
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
               <li class="page-item" v-for="n in store.lastPage">
-                <button :class="{ 'page-link': true, active: store.currentPage === n }" @click="getRestaurant(n)">
+                <button
+                  :class="{
+                    'page-link': true,
+                    active: store.currentPage === n,
+                  }"
+                  @click="getRestaurant(n)"
+                >
                   {{ n }}
                 </button>
               </li>
               <li class="page-item">
-                <button :class="{
-                  'page-link': true,
-                  disabled: store.currentPage === store.lastPage,
-                }" @click="getRestaurant(store.currentPage + 1)">
+                <button
+                  :class="{
+                    'page-link': true,
+                    disabled: store.currentPage === store.lastPage,
+                  }"
+                  @click="getRestaurant(store.currentPage + 1)"
+                >
                   <i class="fa-solid fa-angle-right"></i>
                 </button>
               </li>
             </ul>
+          </div>
+          <!-- Restaurant List -->
+          <div
+            v-for="restaurant in store.restaurants"
+            class="my-1 d-flex justify-content-center col-12 col-lg-6 col-xl-4 p-3"
+          >
+            <router-link
+              :to="{
+                name: 'single-restaurant',
+                params: { slug: restaurant.slug },
+              }"
+            >
+              <RestaurantCard
+                :key="restaurant.id"
+                :restaurant="restaurant"
+                :imgStartUrl="store.imgStartUrl"
+                :isSelected="false"
+              />
+            </router-link>
           </div>
         </div>
       </div>
@@ -74,15 +116,15 @@
 <script>
 import { store } from "../data/store";
 import RestaurantCard from "../components/RestaurantCard.vue";
-import SliderComponent from "../components/SliderComponent.vue"
-import SidebarComponent from "../components/SidebarComponent.vue"
+import SliderComponent from "../components/SliderComponent.vue";
+import SidebarComponent from "../components/SidebarComponent.vue";
 import axios from "axios";
 export default {
   name: "RestaurantView",
   components: {
     RestaurantCard,
     SliderComponent,
-    SidebarComponent
+    SidebarComponent,
   },
   data() {
     return {
@@ -90,22 +132,23 @@ export default {
     };
   },
   methods: {
-    handleSlider(id){
+    handleSlider(id) {
       store.checkboxTypes = [];
       store.checkboxTypes.push(id);
       const type = store.checkboxTypes;
-      this.getRestaurant(1 , type)
+      this.getRestaurant(1, type);
     },
     getRestaurant(numPage, checkboxTypes) {
       let params = {
-          page: numPage,
+        page: numPage,
       };
-      if (checkboxTypes){
+      if (checkboxTypes) {
         params.types = checkboxTypes;
       }
-      axios.get(`${store.apiURL}/restaurants`, {
-        params
-      })
+      axios
+        .get(`${store.apiURL}/restaurants`, {
+          params,
+        })
         .then((res) => {
           store.restaurants = res.data.results.data;
           store.currentPage = res.data.results.current_page;

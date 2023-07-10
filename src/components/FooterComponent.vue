@@ -3,7 +3,9 @@
     <!-- Footer -->
     <footer class="text-center text-lg-start text-muted">
       <!-- Section: Social media -->
-      <section class="d-flex justify-content-center justify-content-lg-between p-4">
+      <section
+        class="d-flex justify-content-center justify-content-lg-between p-4"
+      >
         <div class="div"></div>
         <!-- Right -->
         <div>
@@ -115,13 +117,13 @@
       <!-- Copyright -->
       <div class="text-center p-4 text-white">
         <ul class="copyright d-flex justify-content-center">
-
-          <li class="admin">© 2021 Copyright:
-            <a class="fw-bold text-white" href="#">B-Maker.com</a><span> | </span>
+          <li class="admin">
+            © 2021 Copyright:
+            <a class="fw-bold text-white" href="#">B-Maker.com</a
+            ><span> | </span>
             <a class="" href="http://localhost:8000">Area Riservata</a>
           </li>
         </ul>
-
       </div>
       <!-- Copyright -->
     </footer>
