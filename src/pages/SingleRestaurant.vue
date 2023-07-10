@@ -83,8 +83,8 @@
                     :quantity="product.quantity"
                   />
                 </div>
-                <div class="col-4 text-end">
-                  <div class="text-end d-inline">{{ product.price }}€</div>
+                <div class="col-4 text-end text-nowrap">
+                  <div class="text-end d-inline">{{ (product.price * product.quantity).toFixed(2) }}€</div>
                   <i
                     @click.stop="deleteItem(index, product)"
                     class="fa-solid fa-trash ms-2 delete-item p-1"
