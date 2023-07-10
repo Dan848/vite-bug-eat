@@ -4,18 +4,12 @@
   </div>
   <div class="container">
     <!-- Slider -->
-    <SliderComponent
-      :types="store.types"
-      :imgStartUrl="store.imgStartUrl"
-      @onClick="handleSlider"
-    />
+    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
+      class="px-4 px-sm-2 px-lg-5" />
     <div class="row">
       <!-- Aside -->
-      <SidebarComponent @onChange="getRestaurant" 
-      :items="store.types" 
-      :imgStartUrl="store.imgStartUrl"
-      :class="filtersOpen ? 'd-block col' : 'd-none'"
-      @onClick="filtersOpen = false"/>
+      <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl"
+        :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" />
       <!-- Main -->
       <div class="col-12 col-md-8 col-lg-9 col-xl-10">
         <div class="container-fluid mt-5">
@@ -25,11 +19,7 @@
 
               <div class="form">
                 <i class="fa fa-search"></i>
-                <input
-                  type="text"
-                  class="form-control form-input"
-                  placeholder="Cerca un ristorante"
-                />
+                <input type="text" class="form-control form-input" placeholder="Cerca un ristorante" />
               </div>
             </form>
           </div>
@@ -37,18 +27,12 @@
           <div class="row">
             <div v-for="restaurant in store.restaurants"
               class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
-              <router-link
-                :to="{
-                  name: 'single-restaurant',
-                  params: { slug: restaurant.slug },
-                }"
-              >
-                <RestaurantCard
-                  :key="restaurant.id"
-                  :restaurant="restaurant"
-                  :imgStartUrl="store.imgStartUrl"
-                  :isSelected="false"
-                />
+              <router-link :to="{
+                name: 'single-restaurant',
+                params: { slug: restaurant.slug },
+              }">
+                <RestaurantCard :key="restaurant.id" :restaurant="restaurant" :imgStartUrl="store.imgStartUrl"
+                  :isSelected="false" />
               </router-link>
             </div>
           </div>
@@ -56,35 +40,26 @@
           <div class="row">
             <ul class="pagination col-12 mt-3 mb-5">
               <li class="page-item">
-                <button
-                  :class="{
-                    'page-link': true,
-                    disabled: store.currentPage === 1,
-                  }"
-                  @click="getRestaurant(store.currentPage - 1)"
-                >
+                <button :class="{
+                  'page-link': true,
+                  disabled: store.currentPage === 1,
+                }" @click="getRestaurant(store.currentPage - 1)">
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
               <li class="page-item" v-for="n in store.lastPage">
-                <button
-                  :class="{
-                    'page-link': true,
-                    active: store.currentPage === n,
-                  }"
-                  @click="getRestaurant(n)"
-                >
+                <button :class="{
+                  'page-link': true,
+                  active: store.currentPage === n,
+                }" @click="getRestaurant(n)">
                   {{ n }}
                 </button>
               </li>
               <li class="page-item">
-                <button
-                  :class="{
-                    'page-link': true,
-                    disabled: store.currentPage === store.lastPage,
-                  }"
-                  @click="getRestaurant(store.currentPage + 1)"
-                >
+                <button :class="{
+                  'page-link': true,
+                  disabled: store.currentPage === store.lastPage,
+                }" @click="getRestaurant(store.currentPage + 1)">
                   <i class="fa-solid fa-angle-right"></i>
                 </button>
               </li>
@@ -112,7 +87,7 @@ export default {
   data() {
     return {
       store,
-      filtersOpen: false
+      filtersOpen: window.innerWidth <= 768 ? false : true
     };
   },
   methods: {
@@ -205,7 +180,8 @@ form {
 .form-input:focus {
   box-shadow: $primary;
 }
-.sticky-filters{
+
+.sticky-filters {
   position: -webkit-sticky !important;
   position: sticky !important;
   top: 100px;
@@ -217,7 +193,8 @@ form {
   z-index: 1005;
   background: $primary;
   transition: .3s;
-  &:hover{
+
+  &:hover {
     cursor: pointer;
     background-color: #8cad6c;
   }
