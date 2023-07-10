@@ -63,9 +63,15 @@
         <div class="col">
           <!-- Cart Card -->
           <div
-            class="cart d-none d-md-block mt-3 rounded-5 py-2 px-3 d-flex flex-column"
+            class="cart py-2 px-3 flex-column"
+            :class="cartOpen ? 'd-flex' : 'd-none'"
           >
             <!-- Cart Title -->
+
+            <i
+              class="fa-solid fa-xmark fs-4 fw-bolder d-md-none"
+              @click="cartOpen = false"
+            ></i>
             <h3 class="text-center fw-bold mt-3 pb-0 px-3">Il tuo ordine</h3>
             <hr class="mb-2" />
             <ul class="list-unstyled cart-products container-fluid">
@@ -84,7 +90,9 @@
                   />
                 </div>
                 <div class="col-4 text-end text-nowrap">
-                  <div class="text-end d-inline">{{ (product.price * product.quantity).toFixed(2) }}€</div>
+                  <div class="text-end d-inline">
+                    {{ (product.price * product.quantity).toFixed(2) }}€
+                  </div>
                   <i
                     @click.stop="deleteItem(index, product)"
                     class="fa-solid fa-trash ms-2 delete-item p-1"
@@ -111,7 +119,7 @@
           <!-- Cart Bubble -->
           <div
             class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle"
-            :class="{ 'd-none': cartStickyHide }"
+            @click="cartOpen = true"
           >
             <i class="fa-solid fa-cart-shopping fs-3"></i>
           </div>
@@ -137,6 +145,8 @@ export default {
   data() {
     return {
       store,
+      cartOpen: window.innerWidth >= 768 ? true : false,
+      cartItems: [],
       cart: {
         restaurantId: null,
         products: [],
@@ -194,6 +204,7 @@ export default {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     },
+
     deleteItem(index, item) {
       const cart = this.cart;
       const cartItem = item;
@@ -201,11 +212,22 @@ export default {
       console.log(cartItem.quantity);
       cart.totalPrice -= parseFloat(cartItem.price * cartItem.quantity);
     },
+    handleWindowResize() {
+      this.cartOpen = window.innerWidth <= 768 ? false : true;
+
+      console.log();
+    },
   },
 
   mounted() {
     this.getRestaurant();
     this.scrollToTop();
+    window.addEventListener("resize", this.handleWindowResize);
+
+    const cartData = localStorage.getItem("cart");
+    if (cartData) {
+      this.cartItems = JSON.parse(cartData);
+    }
   },
 };
 </script>
@@ -228,6 +250,7 @@ export default {
 .bm-border {
   border-bottom: 1px solid $primary;
 }
+// OFF CANVAS
 
 //BOTTOM PAGE
 .menu-cart {
@@ -236,12 +259,28 @@ export default {
   border-bottom: #8cad6c;
 
   .col {
+    // OFFCANVAS CART
     .cart {
       max-width: 100%;
-      position: -webkit-sticky !important;
-      position: sticky !important;
+      position: fixed !important;
       top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: white;
+      z-index: 1010;
       border: 1px solid $primary;
+      margin-top: none !important;
+      .fa-xmark {
+        position: absolute;
+        top: 18px;
+        right: 16px;
+        cursor: pointer;
+        background-color: $primary;
+        color: white;
+        border-radius: 50%;
+        padding: 0.4rem 0.5rem;
+      }
     }
 
     .delete-item {
@@ -262,6 +301,22 @@ export default {
       &:hover {
         cursor: pointer;
         background-color: #8cad6c;
+      }
+    }
+  }
+}
+// CART
+@media screen and (min-width: 768px) {
+  .menu-cart {
+    .col {
+      .cart {
+        max-width: 100%;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 0;
+        border: 1px solid $primary;
+        margin-top: 1rem;
+        border-radius: 2rem;
       }
     }
   }
