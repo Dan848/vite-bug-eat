@@ -25,11 +25,11 @@ export const store = reactive({
     },
     {
       label: "La nostra Mission",
-      routeName: "restaurantView",
+      routeName: "ourMission",
     },
     {
       label: "Lavora con Noi",
-      routeName: "restaurantView",
+      routeName: "workWithUs",
     },
   ],
   sections: [
