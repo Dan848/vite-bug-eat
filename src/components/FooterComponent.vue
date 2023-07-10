@@ -117,13 +117,13 @@
       <!-- Copyright -->
       <div class="text-center p-4 text-white">
         <ul class="copyright d-flex justify-content-center">
-
-          <li class="admin">© 2021 Copyright:
-            <a class="fw-bold" href="#">B-Maker.com</a><span> | </span>
+          <li class="admin">
+            © 2021 Copyright:
+            <a class="fw-bold text-white" href="#">B-Maker.com</a
+            ><span> | </span>
             <a class="" href="http://localhost:8000">Area Riservata</a>
           </li>
         </ul>
-
       </div>
       <!-- Copyright -->
     </footer>
@@ -144,16 +144,24 @@ export default {};
 
 .link-container {
   p {
-    a:hover {
-      color: $secondary;
+    a {
+      color: white;
+
+      &:hover {
+        color: $secondary;
+      }
     }
   }
 }
 
 .admin {
-  a:last-child:hover {
-    color: $secondary;
-    text-decoration: underline;
+  a:last-child {
+    color: white;
+
+    &:hover {
+      color: $secondary;
+      text-decoration: underline;
+    }
   }
 }
 
