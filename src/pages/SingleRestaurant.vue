@@ -74,7 +74,7 @@
           </div>
           <!-- /Cart Card -->
           <!-- Cart Bubble -->
-          <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle" :class="{'d-none' : cartStickyHide}">
+          <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle">
             <i class="fa-solid fa-cart-shopping fs-3"></i>
           </div>
           <!-- /Cart Bubble -->
