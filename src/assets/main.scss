@@ -1,6 +1,4 @@
-@use './partials/variable.scss' as *;
-
-
+@use "./partials/variable.scss" as *;
 
 $fa-font-path: "./webfonts" !default;
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
@@ -8,18 +6,21 @@ $fa-font-path: "./webfonts" !default;
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fortawesome/fontawesome-free/scss/brands";
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 //Bootstrap
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
+body {
+  font-family: 'Quicksand', sans-serif;
+}
 //GENERAL
 a {
   text-decoration: none;
 }
 
-
 //Form
 .form-floating {
-  >label {
+  > label {
     top: -8px;
 
     &::after {
@@ -81,3 +82,4 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+

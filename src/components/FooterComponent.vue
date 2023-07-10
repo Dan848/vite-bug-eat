@@ -3,7 +3,9 @@
     <!-- Footer -->
     <footer class="text-center text-lg-start text-muted">
       <!-- Section: Social media -->
-      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <section
+        class="d-flex justify-content-center justify-content-lg-between p-4"
+      >
         <div class="div"></div>
         <!-- Right -->
         <div>
@@ -73,7 +75,7 @@
             <!-- Grid column -->
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 link-container">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4 ">Useful links</h6>
+              <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
               <p>
                 <a href="#!">Pricing</a>
               </p>
@@ -144,7 +146,6 @@ export default {};
   p {
     a:hover {
       color: $secondary;
-
     }
   }
 }

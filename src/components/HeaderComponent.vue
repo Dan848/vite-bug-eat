@@ -1,4 +1,3 @@
-<template>
   <header class="bg-primary">
     <nav class="navbar fw-semibold container navbar-expand-lg">
       <div class="container-fluid">
