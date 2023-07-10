@@ -1,17 +1,16 @@
 <template>
-  <div class="input-group">
-    <div class="input-group-button">
-      <input type="button" class="button minus" value="-" disabled="disabled" />
-    </div>
-    <input class=" text-center" value="0" min="0" type="number" />
-    <div class="input-group-button">
-      <input type="button" class="button plus" value="+" />
-    </div>
+  <div class="counter rounded-pill d-flex">
+    <button @click="$emit('onMinus')" class="px-2 rounded-start-pill"> - </button> 
+    <input class="text-center" :value="quantity" min="0" max="50" type="number" readonly/>
+    <button @click="$emit('onPlus')" class="px-2 rounded-end-pill"> + </button>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    quantity: Number,
+  },
   data() {
     return {
     }
@@ -27,41 +26,30 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-// INput group
-.input-group {
-  border-left: none;
-  border-right: none;
-  width: fit-content;
-  input[type="number"] {
-    max-width: 30px;
-    border-left: none;
-    border-right: none;
-    border-top: 1px solid $primary;
-    border-bottom: 1px solid $primary;
+
+// Input group
+.counter {
+  max-width: 100%;
+  border: 1px solid $primary;
+  input {
+    width: 100%;
+    border: none;
     &:focus{
-      border: 1px solid $primary;
+      border: none;
       border-left: none;
       outline: 0;
     }
   }
-}
-.plus,
-.minus {
-  border: 1px solid $primary;
-  background-color: white;
-  color: $primary;
-  &:hover {
-    background-color: $secondary;
+  button {
+    border: none;
+    background-color: white;
+    color: $primary;
+    &:hover {
+      cursor: pointer;
+      background-color: $primary;
+      color: white;
+    }
   }
 }
-.plus {
-  border-top-right-radius: 10px;
-  border-end-end-radius: 10px;
-  border-left: 0px;
-}
-.minus {
-  border-top-left-radius: 10px;
-  border-end-start-radius: 10px;
-  border-right: 0px;
-}
+
 </style>

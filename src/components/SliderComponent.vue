@@ -95,6 +95,9 @@ export default {
     },
     created() {
         this.handleWindowSize();
+    },
+    unmounted(){
+        window.removeEventListener('resize', this.handleWindowResize);
     }
 }
 </script>
@@ -107,7 +110,6 @@ export default {
 }
 
 //Card config
-
 .card {
     position: relative;
     width: 100%;

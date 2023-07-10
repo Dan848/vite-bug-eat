@@ -1,76 +1,85 @@
 <template>
   <div v-if="store.restaurant">
+    <!-- Top Page -->
     <div class="background">
       <div class="container">
         <div class="row justify-content-center">
-          <!-- Restaurant Info -->
-          <div class="col-10 col-sm-9 col-md-7 col-lg-6 col-xl-5 restaurant-card">
-            <div class="card d-flex position-relative bg-primary text-white">
-              <div
-                class="border-0 d-flex flex-column align-items-center pt-3"
-              >
-                <h1 class="text-center">{{ store.restaurant.name }}</h1>
-                <div class="d-flex justify-content-center types">
-                  <span
-                    :class="`span-${index}`"
-                    v-for="(type, index) in store.restaurant.types"
-                  >
-                    {{ type.name }}
-                  </span>
-                </div>
-                <p>{{ store.restaurant.address }}</p>
+          <!-- Restaurant Card Info -->
+          <div class="col">
+            <!-- Card Start -->
+            <div class="rounded-5 border py-2 px-3 d-flex flex-column bg-primary text-white">
+              <!-- Name -->
+              <h1 class="text-center fw-medium py-2 px-3">{{ store.restaurant.name }}</h1>
+              <!-- Types -->
+              <div class="text-center px-3">
+                <span :class="`me-1 mb-5`"
+                  v-for="(type, index) in store.restaurant.types">
+                  {{ index == store.restaurant.types.length - 1 ? type.name : type.name + " •"}}
+                </span>
+                <div class="mt-2 mb-3">{{ store.restaurant.address }}</div>
               </div>
-              <div class="card-body d-flex flex-column align-items-center pb-0">
-                <p class="m-0">{{ store.restaurant.email }}</p>
-                <p>{{ store.restaurant.phone_num }}</p>
+              <!-- Contacts -->
+              <div class="container-fluid border-top py-2">
+                <div class="row flex-column justify-content-center">
+                  <div class="col-12 text-center">
+                    <div class="">{{ store.restaurant.email }}</div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <div>{{ store.restaurant.phone_num }}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <div class="container menu">
-      <h2>Il nostro Menu</h2>
+    <!-- Main Page -->
+    <div class="container menu-cart">
+      <h2 class="fw-bold">Menù</h2>
       <div class="row">
-        <div class="col-12 col-md-8">
-          <ul class="list-unstyled product">
-            <ProductCard v-for="(product, index) in store.restaurant.products" :product="store.restaurant.products[index]"/>
+        <!-- Menù Col -->
+        <div class="col-12 col-md-6 col-lg-7 col-xxl-8">
+          <ul class="list-unstyled">
+            <ProductCard @click="addCart(product)" v-for="(product, index) in store.restaurant.products" :product="product" :key="product.id"/>
           </ul>
         </div>
-        <!-- Cart -->
-        <div class="col-4">
-          <div class="cart card d-none d-md-block px-3 py-1 mt-3" :class="{'sticky' : cartSticky, 'd-md-none' : cartHide}">
-            <h4 class="text-center fw-bold">Il tuo ordine</h4>
-            <hr>
-            <ul class="list-unstyled cart-products">
-              <li class="d-flex justify-content-between align-items-center">
-                <span>Nuggets di Cheddar e Jalapenos</span>
-                <CounterProduct/>
+        <!-- Cart Col -->
+        <div class="col">
+          <!-- Cart Card -->
+          <div class="cart d-none d-md-block mt-3 rounded-5 border py-2 px-3 d-flex flex-column">
+            <!-- Cart Title -->
+            <h3 class="text-center fw-bold mt-3 pb-0 px-3">Il tuo ordine</h3>
+            <hr class="mb-2">
+            <ul class="list-unstyled cart-products container-fluid">
+              <!-- Single Product -->
+              <li v-for="(product, index) in cart.products" :class="{'border-top' : index != 0}" class="py-2 row align-items-center">
+                <div class="col-5">{{ product.name }}</div>
+                <div class="col-4">
+                  <CounterProduct @onMinus="removeCart(product, index)" @onPlus="addCart(product)" :quantity="product.quantity"/>
+                </div>
+                <div class="col text-end">{{ product.price }}€</div>
               </li>
-              <li class="d-flex justify-content-between align-items-center">
-                piatto 2
-                <CounterProduct/>
-              </li>
-              <li class="d-flex justify-content-between align-items-center">
-                piatto 3
-                <CounterProduct/>
-              </li>
-              <li class="d-flex justify-content-between align-items-center">
-                piatto 4
-                <CounterProduct/>
+              <!-- Cart Total -->
+              <hr class="my-2 row">
+              <li class="py-1 row align-items-center fw-bold">
+                <div class="col-5">Totale</div>
+                <div class="col text-end">{{ cart.totalPrice.toFixed(2) }}€</div>
               </li>
             </ul>
-            <hr>
-            <div class="d-flex justify-content-center pb-3">
-              <button class="btn btn-primary rounded-4 text-white">Vai al pagamento</button>
+            <!-- Cart Pay Button -->
+            <div class="d-flex justify-content-center mb-3">
+              <button class="btn btn-primary rounded-5 fw-bold text-white">Vai al pagamento</button>
             </div>
           </div>
+          <!-- /Cart Card -->
+          <!-- Cart Bubble -->
           <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle" :class="{'d-none' : cartStickyHide}">
             <i class="fa-solid fa-cart-shopping fs-3"></i>
           </div>
+          <!-- /Cart Bubble -->
         </div>
-        
+        <!-- /Cart Col -->
       </div>
     </div>
   </div>
@@ -78,30 +87,54 @@
 
 <script>
 import { store } from "../data/store";
-import RestaurantCard from "../components/RestaurantCard.vue";
-import SliderComponent from "../components/SliderComponent.vue";
-import SidebarComponent from "../components/SidebarComponent.vue";
 import ProductCard from "../components/ProductCard.vue";
 import CounterProduct from "../components/CounterProduct.vue";
 import axios from "axios";
 export default {
   name: "RestaurantListView",
   components: {
-    RestaurantCard,
-    SliderComponent,
-    SidebarComponent,
     ProductCard,
     CounterProduct
   },
   data() {
     return {
       store,
-      cartSticky: false,
-      cartStickyHide: false,
-      cartHide: false
+      cart: {
+        restaurantId: null,
+        products: [],
+        totalPrice: 0,
+      },
     };
   },
   methods: {
+    addCart(item){
+      // Recupera l'array esistente dal Local Storage o inizializza un array vuoto
+      const cart = this.cart;
+      const newItem = item;
+
+      if (cart.products.includes(newItem)) {
+        newItem.quantity++;
+      } else {
+        newItem.quantity = 1;
+        cart.products.push(newItem);
+      }
+      cart.totalPrice += parseFloat(newItem.price);
+      // Salva l'array aggiornato nel Local Storage
+      localStorage.setItem('cart', JSON.stringify(cart));
+    },
+    removeCart(item, index){
+      const cart = this.cart;
+      const cartItem = item;
+      console.log(cartItem);
+      if (cartItem.quantity > 1) {
+        cartItem.quantity--;
+      } else {
+        cart.products.splice(index, 1);
+      }
+      cart.totalPrice -= parseFloat(cartItem.price);
+      // Salva l'array aggiornato nel Local Storage
+    },
+    //Axios Start
     getRestaurant() {
       axios
         .get(`${store.apiURL}/restaurants/${this.$route.params.slug}`)
@@ -117,138 +150,62 @@ export default {
           console.log(res);
         });
     },
+    //Axios End
+    //Scroll to Top Page Start
     scrollToTop() {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     },
-    handleScroll() {
-      const scrollTop = document.documentElement.scrollTop;
-      this.cartSticky = scrollTop > 450;
-      // console.log(scrollTop);
-    },
-    handleScrollFromBottom() {
-      const scrollHeight = document.documentElement.scrollHeight;
-      const viewportHeight = window.innerHeight;
-      const scrollFromBottom = scrollHeight - (window.scrollY + viewportHeight);
-      this.cartStickyHide = scrollFromBottom < 1098;
-      this.cartHide = scrollFromBottom < 116;
-      console.log(scrollFromBottom);
-    }
   },
   mounted() {
     this.getRestaurant();
     this.scrollToTop();
-    window.addEventListener('scroll', this.handleScroll);
-    window.addEventListener('scroll', this.handleScrollFromBottom);
-  },
-  unmounted() {
-    window.removeEventListener('scroll', this.handleScroll);
-    window.removeEventListener('scroll', this.handleScrollFromBottom);
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
+//   Light Green #8cad6c;
+//Top Page
 .background {
   padding-top: 3rem;
   background: url("https://img.freepik.com/free-photo/view-arrangement-with-delicious-burgers_23-2148308811.jpg?w=1380&t=st=1688546437~exp=1688547037~hmac=a251e4ce6bfab4f64a3f9fc6d908c08d6a953e71c43bcc2d407669927dd52fec");
   background-position: center;
   background-size: cover;
-  .row {
-    position: relative;
-    bottom: -100px;
-  }
-}
-.card-body{
-  background: #8cad6c;
-  border-bottom-right-radius: 35px;
-  border-bottom-left-radius: 35px;
-}
-.card {
-  background: white;
-  border-radius: 35px;
-  .span-1 {
-    &::before {
-      color: rgb(60, 76, 79);
-      content: "•";
-      margin: 0 0.5rem;
-      padding: 0 !important;
+    .col {
+      position: relative;
+      bottom: -100px;
+      max-width: 550px;
     }
-  }
-  .span-2 {
-    &::before {
-      color: rgb(60, 76, 79);
-      content: "•";
-      margin: 0 0.5rem;
-    }
-  }
-}
-.menu {
-  margin-top: 120px;
-  margin-bottom: 4rem;
-  .product li{
-    border-radius: 20px;
-    transition: 0.3s;
-    .input-group{
-      transform: scale(2);
-    }
-    &:hover{
-      cursor: pointer;
-      background-color: lightgray;
-      .input-group{
-        display: block !important;
-      } 
-    } 
-      
-      
-   
-  }
-}
-.cart-products{
-  li{
-    margin-bottom: 1rem;
-    font-size: .8rem;
-    span{
-      width: 70%;
-    }
-    div{
-      width: 30%;
-    }
-  }
-  .input-group{
-    min-width: 40%;
-  }
-}
-.cart{
-  max-width: 300px;
-  
-}
-.sticky-bubble{
-  position: fixed;
-  width: 50px;
-  height: 50px;
-  bottom: 10px;
-  right: 5px;
-  background-color: $primary;
-  color: white;
-  &:hover{
-    cursor: pointer;
-    background-color: #8cad6c;
-  }
-}
-.sticky {
-  position: fixed;
-  top: 0;
-  min-width: 216px;
 }
 
-.cartHide{
-  display: none;
-}
-@media screen and (min-width: 845px) and (max-width: 991px){
-  .cart{
-    max-width: 216px;
+//BOTTOM PAGE
+.menu-cart {
+  margin-top: 120px;
+  margin-bottom: 4rem;
+
+  .col{
+    .cart{
+      max-width: 100%;
+      position: -webkit-sticky !important;
+      position: sticky !important;
+      top: 0;
+    }
+    .sticky-bubble{
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      bottom: 10px;
+      right: 5px;
+      background-color: $primary;
+      color: white;
+      &:hover{
+        cursor: pointer;
+        background-color: #8cad6c;
+      }
+    }
   }
+
 }
 </style>
