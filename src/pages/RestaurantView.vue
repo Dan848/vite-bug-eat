@@ -6,9 +6,9 @@
       :imgStartUrl="store.imgStartUrl"
       @onClick="handleSlider"
     />
-    <div class="row justify-content-center">
+    <div class="row">
       <!-- Aside -->
-      <div class="col">
+      <div class="col d-none d-md-block">
         <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl" />
       </div>
       <!-- Main -->
@@ -47,9 +47,6 @@
               </router-link>
             </div>
           </div>
-          
-          
-          
           <!-- PAGINATION -->
           <div class="row">
             <ul class="pagination col-12 mt-3 mb-5">
@@ -87,25 +84,6 @@
                 </button>
               </li>
             </ul>
-          </div>
-          <!-- Restaurant List -->
-          <div
-            v-for="restaurant in store.restaurants"
-            class="my-1 d-flex justify-content-center col-12 col-lg-6 col-xl-4 p-3"
-          >
-            <router-link
-              :to="{
-                name: 'single-restaurant',
-                params: { slug: restaurant.slug },
-              }"
-            >
-              <RestaurantCard
-                :key="restaurant.id"
-                :restaurant="restaurant"
-                :imgStartUrl="store.imgStartUrl"
-                :isSelected="false"
-              />
-            </router-link>
           </div>
         </div>
       </div>

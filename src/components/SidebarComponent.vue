@@ -1,5 +1,5 @@
 <template>
-  <div class="d-none d-md-block">
+  <div class="d-block">
     <div class="d-flex align-items-center mb-3 mt-5">
       <div class="fs-4">Filtri</div>
     </div>
