@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../pages/HomeView.vue";
-import RestaurantList from "../pages/Restaurant.vue";
 import SingleRestaurant from "../pages/SingleRestaurant.vue";
-import AboutUs from "../pages/AboutUs.vue";
+import RestaurantView from "../pages/RestaurantView.vue";
+import AboutUs from '../pages/AboutUs.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,9 +14,9 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/restaurantlist",
-      name: "restaurantList",
-      component: RestaurantList,
+      path: "/restaurantview",
+      name: "restaurantView",
+      component: RestaurantView,
     },
     {
       path: "/restaurants/:slug",

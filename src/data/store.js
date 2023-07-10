@@ -6,6 +6,7 @@ export const store = reactive({
   restaurants: [],
   restaurant: null,
   types: [],
+  checkboxTypes: [],
   currentPage: 1,
   lastPage: null,
   headerLinks: [
@@ -15,7 +16,7 @@ export const store = reactive({
     },
     {
       label: "Ristoranti",
-      routeName: "restaurantList",
+      routeName: "restaurantView",
     },
 
     {
@@ -24,11 +25,11 @@ export const store = reactive({
     },
     {
       label: "La nostra Mission",
-      routeName: "restaurantList",
+      routeName: "restaurantView",
     },
     {
       label: "Lavora con Noi",
-      routeName: "restaurantList",
+      routeName: "restaurantView",
     },
   ],
   sections: [
