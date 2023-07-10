@@ -88,17 +88,32 @@ export default {
   color: $secondary !important;
 }
 
-@media screen and (max-width:768px) {
-  li a {
-    text-decoration: none;
-    font-size: 1rem;
-    color: white;
+@media screen and (max-width:991px) {
 
-    &:hover {
-      padding-bottom: 0px;
-      border-bottom: 0px solid $secondary;
+  .drop-menu {
+    z-index: 1010;
+    padding-top: 1rem;
+    margin-top: 8px;
+    text-align: center;
+
+    li a {
+      text-decoration: none;
+      font-size: 1rem;
       color: white;
+
+      &:hover {
+        padding-bottom: 0px !important;
+        border-bottom: 0px solid $secondary !important;
+        color: $secondary;
+      }
     }
+  }
+
+
+  .active {
+    padding-bottom: 0px;
+    border-bottom: 0px solid $secondary;
+    color: $secondary !important;
   }
 }
 </style>
