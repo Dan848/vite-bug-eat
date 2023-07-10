@@ -44,8 +44,19 @@
           <!-- Rstaurant List -->
           <div v-for="restaurant in store.restaurants"
             class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
-            <RestaurantCard :key="restaurant.id" :restaurant="restaurant" :imgStartUrl="store.imgStartUrl"
-              :isSelected="false" />
+            <router-link
+              :to="{
+                name: 'single-restaurant',
+                params: { slug: restaurant.slug },
+              }"
+            >
+              <RestaurantCard
+                :key="restaurant.id"
+                :restaurant="restaurant"
+                :imgStartUrl="store.imgStartUrl"
+                :isSelected="false"
+              />
+            </router-link>
           </div>
         </div>
       </div>
