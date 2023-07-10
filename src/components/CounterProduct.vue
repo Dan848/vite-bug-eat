@@ -1,8 +1,15 @@
 <template>
   <div class="counter rounded-pill d-flex">
-    <button @click="$emit('onMinus')" class="px-2 rounded-start-pill"> - </button> 
-    <input class="text-center" :value="quantity" min="0" max="50" type="number" readonly/>
-    <button @click="$emit('onPlus')" class="px-2 rounded-end-pill"> + </button>
+    <button @click="$emit('onMinus')" class="px-2 rounded-start-pill">-</button>
+    <input
+      class="text-center"
+      :value="quantity"
+      min="0"
+      max="50"
+      type="number"
+      readonly
+    />
+    <button @click="$emit('onPlus')" class="px-2 rounded-end-pill">+</button>
   </div>
 </template>
 
@@ -12,9 +19,8 @@ export default {
     quantity: Number,
   },
   data() {
-    return {
-    }
-  }
+    return {};
+  },
 };
 </script>
 
@@ -34,7 +40,7 @@ input::-webkit-inner-spin-button {
   input {
     width: 100%;
     border: none;
-    &:focus{
+    &:focus {
       border: none;
       border-left: none;
       outline: 0;
@@ -51,5 +57,4 @@ input::-webkit-inner-spin-button {
     }
   }
 }
-
 </style>
