@@ -192,11 +192,4 @@ form {
 .form-input:focus {
   box-shadow: $primary;
 }
-
-
-@media screen and (min-width: 845px) {
-  ul {
-    justify-content: end;
-  }
-}
 </style>
