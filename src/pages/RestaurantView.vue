@@ -4,22 +4,46 @@
     <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"/>
     <div class="row justify-content-center">
       <!-- Aside -->
-      <div class="col-2 sidebar">
-        <SidebarComponent :checkboxTypes="store.checkboxTypes" @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl" />
+      <div class="col">
+        <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl" />
       </div>
       <!-- Main -->
-      <div class="col-10">
-        <div class="row mt-5">
-          <!-- Page navigation -->
-          <div class="row justify-content-between search">
-            <form action="" method="GET" class="col-12 col-md-6">
+      <div class="col-12 col-md-8 col-lg-9 col-xl-10">
+        <div class="container-fluid mt-5">
+          <!-- Search Bar -->
+          <div class="row justify-content-center">
+            <form action="" method="GET" class="col-12">
               <div class="form">
                 <i class="fa fa-search"></i>
                 <input type="text" class="form-control form-input" placeholder="Cerca un ristorante">
               </div>
             </form>
-            <!-- PAGINATION -->
-            <ul class="pagination d-flex my-md-auto col-12 col-md-6 mt-3">
+          </div>
+          <!-- Restaurant List -->
+          <div class="row">
+            <div v-for="restaurant in store.restaurants"
+              class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
+              <router-link
+                :to="{
+                  name: 'single-restaurant',
+                  params: { slug: restaurant.slug },
+                }"
+              >
+                <RestaurantCard
+                  :key="restaurant.id"
+                  :restaurant="restaurant"
+                  :imgStartUrl="store.imgStartUrl"
+                  :isSelected="false"
+                />
+              </router-link>
+            </div>
+          </div>
+          
+          
+          
+          <!-- PAGINATION -->
+          <div class="row">
+            <ul class="pagination col-12 mt-3 mb-5">
               <li class="page-item">
                 <button :class="{ 'page-link': true, disabled: store.currentPage === 1 }"
                   @click="getRestaurant(store.currentPage - 1)">
@@ -40,23 +64,6 @@
                 </button>
               </li>
             </ul>
-          </div>
-          <!-- Rstaurant List -->
-          <div v-for="restaurant in store.restaurants"
-            class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
-            <router-link
-              :to="{
-                name: 'single-restaurant',
-                params: { slug: restaurant.slug },
-              }"
-            >
-              <RestaurantCard
-                :key="restaurant.id"
-                :restaurant="restaurant"
-                :imgStartUrl="store.imgStartUrl"
-                :isSelected="false"
-              />
-            </router-link>
           </div>
         </div>
       </div>
@@ -165,22 +172,6 @@ form {
   box-shadow: $primary;
 }
 
-@media screen and (max-width: 844px) {
-  .sidebar {
-    display: none;
-  }
-
-  ul {
-    justify-content: center;
-  }
-
-  // .search{
-  //   flex-direction: column;
-  //   align-items: center !important;
-  //   justify-content: center !important;
-  //   margin-top: 1.5rem;
-  // }
-}
 
 @media screen and (min-width: 845px) {
   ul {

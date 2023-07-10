@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex flex-column flex-shrink-0 mt-5">
-    <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto">
+  <div class="d-none d-md-block">
+    <div class="d-flex align-items-center mb-3 mt-5">
       <div class="fs-4">Filtri</div>
     </div>
     <hr>
@@ -9,10 +9,20 @@
         <label class="d-flex justify-content-between align-items-center">
           <input type="checkbox" class="" name="checkTypes[]" :id="'checkTypes[]' + item.id" v-model="store.checkboxTypes" :value="item.id" @change="$emit('onChange', 1, store.checkboxTypes)">
           {{ item.name }}
-          <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2 d-none d-xl-block position-relative">
+          <img :src="imgStartUrl + item.image" :alt="item.name" class="me-2">
         </label>
       </li>
     </ul>
+  </div>
+  <!-- <div>
+      <button @click="openSidebar">Filtri</button>
+      <div class="sidebar" :class="{ 'sidebar-open': isOpen }">
+      </div>
+      <div class="main-content">
+      </div>
+    </div> -->
+  <div class="sticky-filters d-md-none">
+    <i class="fa-solid fa-filter"></i> <span class="fw-bold">Filtri</span>
   </div>
 </template>
 
@@ -26,11 +36,14 @@ export default {
   },
   data() {
     return{
-      store
+      store,
+      isOpen : false
     }
   },
   methods: {
-
+    openSidebar() {
+      this.isOpen = true; // Apre la sidebar
+    },
   }
 }
 </script>
@@ -68,5 +81,34 @@ li{
       border: 2px solid $primary;
     }
   }
+}
+.sidebar {
+  width: 200px;
+  height: 100%;
+  background-color: #f0f0f0;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+}
+
+.sidebar-open {
+  transform: translateX(0);
+}
+
+.sticky-filters{
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0;
+  // width: fit-content;
+  // padding: 0 5px;
+  // border-top-right-radius: 10px;
+  // border-bottom-right-radius: 10px;
+  // z-index: 1000;
+  // background: $primary;
+  // transition: .3s;
+  // &:hover{
+  //   cursor: pointer;
+  //   background-color: #8cad6c;
+  //   // transform: scale(1.05);
+  // }
 }
 </style>
