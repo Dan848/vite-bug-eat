@@ -2,7 +2,7 @@
   <div class="container">
     <div class="position-relative">
       <div class="d-flex flex-nowrap row" ref="sliderContainer">
-        <div class="my-col col-6 col-sm-4 col-md-3 gap-5" v-for="(type, index) in  types" @click="$emit('onClick', type.id)">
+        <div class="my-col col-6 col-sm-4 col-md-3 gap-5" v-for="(type, index) in  types" @click="handleClick(type)">
           <!-- card -->
           <div class="card">
             <div class="card__image">
@@ -47,6 +47,15 @@ export default {
   },
 
   methods: {
+    handleClick(type) {
+      if (this.$route.name === "home") {
+        store.checkboxTypes.push(type.id);
+        this.$router.push({ name: "restaurantView" });
+      } else {
+        // Handle the existing @click behavior
+        this.$emit("onClick", type.id);
+      }
+    },
     nextCard() {
       this.sliderContainer.scrollBy(this.sliderWidth / this.divider, 0);
 

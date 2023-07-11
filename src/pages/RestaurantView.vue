@@ -124,8 +124,12 @@ export default {
     },
   },
   mounted() {
-    this.getRestaurant(1);
     this.getTypes();
+    if (store.checkboxTypes) {
+      this.getRestaurant(1, store.checkboxTypes); // Chiama la funzione getRestaurant con il tipo specificato
+    } else {
+      this.getRestaurant(1); // Altrimenti, chiama la funzione getRestaurant senza il tipo specificato
+    }
     window.addEventListener('resize', this.handleWindowResize);
   },
   unmounted() {

@@ -1,17 +1,18 @@
 <template>
   <div class="jumbotron d-flex justify-content-center py-5">
     <div class="d-flex flex-column justify-content-center align-items-center">
-      <img src="public/img/bees.gif" class="jumbo-logo" alt="" />
+      <img src="public/img/general/logo-white.png" class="invert" alt="">
+      <img src="public/img/bees.gif" class="jumbo" alt="" />
       <div class="pt-5">
-        <h2>Qualcosa ronza in giro...</h2>
-        <p>...sono i nostri rider!</p>
+        <h1>Qualcosa ronza in giro...</h1>
+        <h4 class="py-3">...sono i nostri rider!</h4>
       </div>
     </div>
   </div>
 
   <div class="row height d-flex justify-content-center align-items-center">
     <div class="col-md-6">
-      <div class="form">
+      <div class="form d-flex align-items-center gap-3">
         <i class="fa fa-search"></i>
         <input
           type="text"
@@ -30,5 +31,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/partials/variable.scss" as *;
+  @use "../assets/partials/variable.scss" as *;
+  .jumbo
+  {
+    width: 450px;
+  }
+  .invert{
+    filter: invert(1);
+  }
+
+  h1,h4{
+    font-weight: bold;
+  }
 </style>
