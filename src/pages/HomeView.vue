@@ -6,7 +6,7 @@
   </div>
 
   <!-- Types slider -->
-  <div class="slider d-flex justify-content-center my-5">
+  <div class="container d-flex justify-content-center my-5 px-4">
     <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
   </div>
 

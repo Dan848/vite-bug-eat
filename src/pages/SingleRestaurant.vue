@@ -74,7 +74,7 @@
             ></i>
             <h3 class="text-center fw-bold mt-3 pb-0 px-3">Il tuo ordine</h3>
             <hr class="mb-2" />
-            <ul class="list-unstyled cart-products container-fluid">
+            <ul class="list-unstyled overflow-y-auto cart-products container-fluid">
               <!-- Single Product -->
               <li
                 v-for="(product, index) in cart.products"
@@ -89,30 +89,28 @@
                     :quantity="product.quantity"
                   />
                 </div>
-                <div class="col-4 text-end text-nowrap">
-                  <div class="text-end d-inline">
-                    {{ (product.price * product.quantity).toFixed(2) }}€
-                  </div>
-                  <i
-                    @click.stop="deleteItem(index, product)"
+                <div class="col-4 pe-1 text-end text-nowrap d-flex justify-content-end">
+                  <div class="">{{ (product.price * product.quantity).toFixed(2) }}€</div>
+                  <i @click.stop="deleteItem(index, product)"
                     class="fa-solid fa-trash ms-2 delete-item p-1"
                   ></i>
                 </div>
               </li>
-              <!-- Cart Total -->
-              <hr class="my-2 row" />
-              <li class="py-1 row align-items-center fw-bold">
-                <div class="col-5">Totale</div>
-                <div class="col text-end">
-                  {{ cart.totalPrice.toFixed(2) }}€
-                </div>
-              </li>
             </ul>
+            <!-- Cart Total -->
+            <hr class="my-2 px-2" />
+            <div class="py-1 px-2 d-flex justify-content-between align-items-center fw-bold mb-2">
+              <div>Totale</div>
+              <div>{{ cart.totalPrice.toFixed(2) }}€</div>
+            </div>
             <!-- Cart Pay Button -->
             <div class="d-flex justify-content-center mb-3">
               <button class="btn btn-primary rounded-5 fw-bold text-white">
                 Vai al pagamento
               </button>
+            </div>
+            <div class="d-flex justify-content-center text-decoration-underline small">
+                Svuota Carrello
             </div>
           </div>
           <!-- /Cart Card -->
@@ -155,13 +153,21 @@ export default {
     };
   },
   methods: {
+
+    // Add Item
     addCart(item) {
-      // Recupera l'array esistente dal Local Storage o inizializza un array vuoto
-      const cart = this.cart;
+      const cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
       const newItem = item;
 
-      if (cart.products.includes(newItem)) {
-        newItem.quantity++;
+      // if (cart.restaurantId == null || cart.restaurantId != newItem.restaurant_id) {
+      //   cart.products = [];
+      //   cart.restaurantId = newItem.restaurantId;
+      // }
+
+
+      if (cart.products.some(product => product.id === newItem.id)) {
+        const cartItem = cart.products.find(product => product.id === newItem.id);
+        cartItem.quantity++;
       } else {
         newItem.quantity = 1;
         cart.products.push(newItem);
@@ -169,10 +175,13 @@ export default {
       cart.totalPrice += parseFloat(newItem.price);
       // Salva l'array aggiornato nel Local Storage
       localStorage.setItem("cart", JSON.stringify(cart));
+      this.cart = cart;
     },
+
+    // Minus Item
     removeCart(item, index) {
-      const cart = this.cart;
-      const cartItem = item;
+      const cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
+      const cartItem = cart.products.find(product => product.id === item.id);
       console.log(cartItem);
       if (cartItem.quantity > 1) {
         cartItem.quantity--;
@@ -180,8 +189,23 @@ export default {
         cart.products.splice(index, 1);
       }
       cart.totalPrice -= parseFloat(cartItem.price);
-      // Salva l'array aggiornato nel Local Storage
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      this.cart = cart;
     },
+
+    // Delete
+    deleteItem(index, item) {
+      const cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
+      const cartItem = item;
+      cart.products.splice(index, 1);
+      console.log(cartItem.quantity);
+      cart.totalPrice -= parseFloat(cartItem.price * cartItem.quantity);
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      this.cart = cart;
+    },
+
     //Axios Start
     getRestaurant() {
       axios
@@ -205,21 +229,13 @@ export default {
       document.body.scrollTop = 0;
     },
 
-    deleteItem(index, item) {
-      const cart = this.cart;
-      const cartItem = item;
-      cart.products.splice(index, 1);
-      console.log(cartItem.quantity);
-      cart.totalPrice -= parseFloat(cartItem.price * cartItem.quantity);
-    },
     handleWindowResize() {
       this.cartOpen = window.innerWidth <= 768 ? false : true;
-
-      console.log();
     },
   },
 
   mounted() {
+    this.cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
     this.getRestaurant();
     this.scrollToTop();
     window.addEventListener("resize", this.handleWindowResize);
@@ -280,13 +296,14 @@ export default {
         color: white;
         border-radius: 50%;
         padding: 0.4rem 0.5rem;
+      ul {
+        max-height: calc(100vh - 245px);
       }
     }
 
     .delete-item {
-      background-color: white;
+      color: rgb(226, 0, 0);
       &:hover {
-        color: red;
         cursor: pointer;
       }
     }

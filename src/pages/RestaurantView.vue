@@ -1,30 +1,24 @@
 <template>
+  <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
+    <i class="fa-solid fa-filter"></i> <span class="fw-bold">Filtri</span>
+  </div>
   <div class="container">
     <!-- Slider -->
-    <SliderComponent
-      :types="store.types"
-      :imgStartUrl="store.imgStartUrl"
-      @onClick="handleSlider"
-    />
+    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
+      class="px-4 px-sm-2 px-lg-5" />
     <div class="row">
       <!-- Aside -->
-      <div class="col d-none d-md-block">
-        <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl" />
-      </div>
+      <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl"
+        :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" />
       <!-- Main -->
       <div class="col-12 col-md-8 col-lg-9 col-xl-10">
         <div class="container-fluid mt-5">
           <!-- Search Bar -->
           <div class="row justify-content-center">
             <form action="" method="GET" class="col-12">
-
-              <div class="form">
+              <div class="bm-form">
                 <i class="fa fa-search"></i>
-                <input
-                  type="text"
-                  class="form-control form-input"
-                  placeholder="Cerca un ristorante"
-                />
+                <input type="text" class="form-control rounded-5" placeholder="Cerca un ristorante" />
               </div>
             </form>
           </div>
@@ -32,18 +26,12 @@
           <div class="row">
             <div v-for="restaurant in store.restaurants"
               class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
-              <router-link
-                :to="{
-                  name: 'single-restaurant',
-                  params: { slug: restaurant.slug },
-                }"
-              >
-                <RestaurantCard
-                  :key="restaurant.id"
-                  :restaurant="restaurant"
-                  :imgStartUrl="store.imgStartUrl"
-                  :isSelected="false"
-                />
+              <router-link :to="{
+                name: 'single-restaurant',
+                params: { slug: restaurant.slug },
+              }">
+                <RestaurantCard :key="restaurant.id" :restaurant="restaurant" :imgStartUrl="store.imgStartUrl"
+                  :isSelected="false" />
               </router-link>
             </div>
           </div>
@@ -51,35 +39,26 @@
           <div class="row">
             <ul class="pagination col-12 mt-3 mb-5">
               <li class="page-item">
-                <button
-                  :class="{
-                    'page-link': true,
-                    disabled: store.currentPage === 1,
-                  }"
-                  @click="getRestaurant(store.currentPage - 1)"
-                >
+                <button :class="{
+                  'page-link': true,
+                  disabled: store.currentPage === 1,
+                }" @click="getRestaurant(store.currentPage - 1)">
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
               <li class="page-item" v-for="n in store.lastPage">
-                <button
-                  :class="{
-                    'page-link': true,
-                    active: store.currentPage === n,
-                  }"
-                  @click="getRestaurant(n)"
-                >
+                <button :class="{
+                  'page-link': true,
+                  active: store.currentPage === n,
+                }" @click="getRestaurant(n)">
                   {{ n }}
                 </button>
               </li>
               <li class="page-item">
-                <button
-                  :class="{
-                    'page-link': true,
-                    disabled: store.currentPage === store.lastPage,
-                  }"
-                  @click="getRestaurant(store.currentPage + 1)"
-                >
+                <button :class="{
+                  'page-link': true,
+                  disabled: store.currentPage === store.lastPage,
+                }" @click="getRestaurant(store.currentPage + 1)">
                   <i class="fa-solid fa-angle-right"></i>
                 </button>
               </li>
@@ -107,6 +86,7 @@ export default {
   data() {
     return {
       store,
+      filtersOpen: window.innerWidth <= 768 ? false : true
     };
   },
   methods: {
@@ -138,11 +118,18 @@ export default {
         store.types = res.data.results;
       });
     },
+    handleWindowResize() {
+      this.filtersOpen = window.innerWidth <= 768 ? false : true;
+    },
   },
   mounted() {
     this.getRestaurant(1);
     this.getTypes();
+    window.addEventListener('resize', this.handleWindowResize);
   },
+  unmounted() {
+    window.removeEventListener('resize', this.handleWindowResize);
+  }
 };
 </script>
 
@@ -150,53 +137,42 @@ export default {
 @use "../assets/partials/variable.scss" as *;
 
 //form search bar
+
 form {
-  input[type="text"] {
-    border-radius: 80px;
+  .bm-form{
+    position: relative;
+    .fa-search{
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #9ca3af;
+    }
+    input{
+      height: 55px!important;
+      text-indent: 33px!important;
+      &:focus {
+        box-shadow: $primary;
+      }
+    }
   }
 }
 
-.form {
-  position: relative;
-}
+.sticky-filters {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 100px;
+  left: 0;
+  width: fit-content;
+  padding: 0 5px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: 1005;
+  background: $primary;
+  transition: .3s;
 
-.form .fa-search {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  color: #9ca3af;
-}
-
-.form span {
-  position: absolute;
-  right: 17px;
-  top: 13px;
-  padding: 2px;
-  border-left: 1px solid #d1d5db;
-}
-
-.left-pan {
-  padding-left: 7px;
-}
-
-.left-pan i {
-  padding-left: 10px;
-}
-
-.form-input {
-  height: 55px;
-  text-indent: 33px;
-  border-radius: 10px;
-}
-
-.form-input:focus {
-  box-shadow: $primary;
-}
-
-
-@media screen and (min-width: 845px) {
-  ul {
-    justify-content: end;
+  &:hover {
+    cursor: pointer;
+    background-color: #8cad6c;
   }
 }
 </style>
