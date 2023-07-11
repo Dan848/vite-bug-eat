@@ -96,6 +96,8 @@ export default {
       const type = store.checkboxTypes;
       this.getRestaurant(1, type);
     },
+    //Axios Call
+    //getRestaurant
     getRestaurant(numPage, checkboxTypes) {
       let params = {
         page: numPage,
@@ -103,8 +105,7 @@ export default {
       if (checkboxTypes) {
         params.types = checkboxTypes;
       }
-      axios
-        .get(`${store.apiURL}/restaurants`, {
+      axios.get(`${store.apiURL}/restaurants`, {
           params,
         })
         .then((res) => {
@@ -113,6 +114,7 @@ export default {
           store.lastPage = res.data.results.last_page;
         });
     },
+    //getTypes
     getTypes() {
       axios.get(`${store.apiURL}/types`).then((res) => {
         store.types = res.data.results;
@@ -122,6 +124,7 @@ export default {
       this.filtersOpen = window.innerWidth <= 768 ? false : true;
     },
   },
+  //Mounted
   mounted() {
     this.getTypes();
     if (store.checkboxTypes) {
