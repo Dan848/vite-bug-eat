@@ -29,10 +29,10 @@ export default {
 
 <style lang="scss" scoped>
   @use "../assets/partials/variable.scss" as *;
-  .jumbo
-  {
-    width: 450px;
-  }
+
+  img {
+  width: 200px;
+}
   .invert{
     filter: invert(1);
   }
