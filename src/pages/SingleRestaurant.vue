@@ -64,23 +64,20 @@
           <!-- Cart Card -->
           <div
             class="cart py-2 px-3 flex-column"
-            :class="cartOpen ? 'd-flex' : 'd-none'"
-          >
+            :class="cartOpen ? 'd-flex' : 'd-none'">
             <!-- Cart Title -->
-
-            <i
-              class="fa-solid fa-xmark fs-4 fw-bolder d-md-none"
-              @click="cartOpen = false"
-            ></i>
+            <i class="fa-solid fa-xmark fs-4 fw-bolder d-md-none"
+              @click="cartOpen = false">
+            </i>
             <h3 class="text-center fw-bold mt-3 pb-0 px-3">Il tuo ordine</h3>
-            <hr class="mb-2" />
+            <h6>Presso: </h6>
+            <hr class="mb-2" :class="{'d-none' : !cart.products.length}" />
             <ul class="list-unstyled overflow-y-auto cart-products container-fluid">
               <!-- Single Product -->
               <li
                 v-for="(product, index) in cart.products"
                 :class="{ 'border-top': index != 0 }"
-                class="py-2 row align-items-center"
-              >
+                class="py-2 row align-items-center">
                 <div class="col-4">{{ product.name }}</div>
                 <div class="col-4">
                   <CounterProduct
@@ -92,8 +89,8 @@
                 <div class="col-4 pe-1 text-end text-nowrap d-flex justify-content-end">
                   <div class="">{{ (product.price * product.quantity).toFixed(2) }}€</div>
                   <i @click.stop="deleteItem(index, product)"
-                    class="fa-solid fa-trash ms-2 delete-item p-1"
-                  ></i>
+                    class="fa-solid fa-trash ms-2 delete-item p-1">
+                  </i>
                 </div>
               </li>
             </ul>
@@ -133,7 +130,7 @@
 import { store } from "../data/store";
 import ProductCard from "../components/ProductCard.vue";
 import CounterProduct from "../components/CounterProduct.vue";
-import axios, { all } from "axios";
+import axios from "axios";
 export default {
   name: "RestaurantListView",
   components: {
@@ -146,7 +143,7 @@ export default {
       cartOpen: window.innerWidth >= 768 ? true : false,
       cartItems: [],
       cart: {
-        restaurantId: null,
+        restaurant: {},
         products: [],
         totalPrice: 0,
       },
@@ -159,19 +156,22 @@ export default {
       const cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
       const newItem = item;
 
-      // if (cart.restaurantId == null || cart.restaurantId != newItem.restaurant_id) {
-      //   cart.products = [];
-      //   cart.restaurantId = newItem.restaurantId;
-      // }
-
-
-      if (cart.products.some(product => product.id === newItem.id)) {
-        const cartItem = cart.products.find(product => product.id === newItem.id);
-        cartItem.quantity++;
-      } else {
+      if (cart.restaurant == null || cart.restaurant.id != newItem.restaurant_id) {
+        cart.products = [];
+        cart.totalPrice = 0;
+        cart.restaurant = newItem.restaurant;
         newItem.quantity = 1;
         cart.products.push(newItem);
+      } else{
+        if (cart.products.some(product => product.id === newItem.id)) {
+        const cartItem = cart.products.find(product => product.id === newItem.id);
+        cartItem.quantity++;
+        } else{
+          newItem.quantity = 1;
+          cart.products.push(newItem);
+        }
       }
+      console.log(cart)
       cart.totalPrice += parseFloat(newItem.price);
       // Salva l'array aggiornato nel Local Storage
       localStorage.setItem("cart", JSON.stringify(cart));
@@ -296,6 +296,7 @@ export default {
         color: white;
         border-radius: 50%;
         padding: 0.4rem 0.5rem;
+      }
       ul {
         max-height: calc(100vh - 245px);
       }
