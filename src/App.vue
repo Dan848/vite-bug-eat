@@ -1,9 +1,9 @@
 <template>
-  <HeaderComponent />
+  <HeaderComponent v-if="!$route.meta.hideHeaderFooter"/>
   <main>
     <router-view></router-view>
   </main>
-  <FooterComponent />
+  <FooterComponent v-if="!$route.meta.hideHeaderFooter"/>
 </template>
 
 <script>

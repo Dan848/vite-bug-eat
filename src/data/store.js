@@ -9,6 +9,11 @@ export const store = reactive({
   checkboxTypes: [],
   currentPage: 1,
   lastPage: null,
+  cart: {
+    restaurant: {},
+    products: [],
+    totalPrice: 0,
+  },
   headerLinks: [
     {
       label: "Home",

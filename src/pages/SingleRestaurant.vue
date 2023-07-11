@@ -69,12 +69,12 @@
               @click="cartOpen = false">
             </i>
             <h3 class="text-center fw-bold mt-3 pb-0 px-3">Il tuo ordine</h3>
-            <div class="h6 text-center" :class="{'d-none' : !cart.restaurant.name}">Presso: <span class="fw-medium">{{ cart.restaurant.name }}</span></div>
-            <hr class="mb-2" :class="{'d-none' : !cart.products.length}" />
+            <div class="h6 text-center" :class="{'d-none' : !store.cart.restaurant.name}">Presso: <span class="fw-medium">{{ store.cart.restaurant.name }}</span></div>
+            <hr class="mb-2" :class="{'d-none' : !store.cart.products.length}" />
             <ul class="list-unstyled overflow-y-auto cart-products container-fluid">
               <!-- Single Product -->
               <li
-                v-for="(product, index) in cart.products"
+                v-for="(product, index) in store.cart.products"
                 :class="{ 'border-top': index != 0 }"
                 class="py-2 row align-items-center">
                 <div class="col-4">{{ product.name }}</div>
@@ -97,21 +97,21 @@
             <hr class="my-2 px-2" />
             <div class="py-1 px-2 d-flex justify-content-between align-items-center fw-bold mb-2">
               <div>Totale</div>
-              <div>{{ cart.totalPrice.toFixed(2) }}€</div>
+              <div>{{ store.cart.totalPrice.toFixed(2) }}€</div>
             </div>
             <!-- Cart Pay Button -->
             <div class="d-flex flex-column justify-content-center align-items-center  mb-2">
-              <button class="btn btn-primary rounded-5 fw-bold text-white mb-3">
+              <!-- <button class="btn btn-primary rounded-5 fw-bold text-white mb-3">
                 Vai al pagamento
-              </button>
-              <!-- <router-link :to="{
+              </button> -->
+              <router-link :to="{
                 name: 'checkout',
                 params: { id:1 } }" class="btn btn-primary rounded-5 fw-bold text-white mb-3">
                 Vai al pagamento
-              </router-link> -->
-              <div class="text-center text-decoration-underline small px-2" @click="clearLocalStorage">
+              </router-link>
+              <button type="button" data-bs-target="#emptyModal" data-bs-toggle="modal" class="text-center text-decoration-underline small px-2" @click="clearLocalStorage">
                 Svuota Carrello
-              </div>
+              </button>
             </div>
 
           </div>
@@ -129,36 +129,39 @@
       </div>
     </div>
   </div>
+<ModalComponent
+id="emptyCart"
+header="Attenzione"
+body="Stai per Svuotare il carrello, sei sicuro?"
+btnOne="Indietro"
+btnTwo="Svuota"
+/>
 </template>
 
 <script>
 import { store } from "../data/store";
 import ProductCard from "../components/ProductCard.vue";
 import CounterProduct from "../components/CounterProduct.vue";
+import ModalComponent from "../components/ModalComponent.vue";
 import axios from "axios";
 export default {
   name: "RestaurantListView",
   components: {
     ProductCard,
     CounterProduct,
+    ModalComponent,
 },
   data() {
     return {
       store,
       cartOpen: window.innerWidth >= 768 ? true : false,
       cartItems: [],
-      cart: {
-        restaurant: {},
-        products: [],
-        totalPrice: 0,
-      },
     };
   },
   methods: {
-
     // Add Item
     addCart(item) {
-      const cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
+      const cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
       const newItem = item;
 
       if (cart.restaurant == null || cart.restaurant.id != newItem.restaurant_id) {
@@ -178,12 +181,12 @@ export default {
       }
       cart.totalPrice += parseFloat(newItem.price);
       localStorage.setItem("cart", JSON.stringify(cart));
-      this.cart = cart;
+      store.cart = cart;
     },
 
     // Minus Item
     removeCart(item, index) {
-      const cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
+      const cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
       const cartItem = cart.products.find(product => product.id === item.id);
       if (cartItem.quantity > 1) {
         cartItem.quantity--;
@@ -195,12 +198,12 @@ export default {
         cart.restaurant = {};
       }
       localStorage.setItem("cart", JSON.stringify(cart));
-      this.cart = cart;
+      store.cart = cart;
     },
 
     // Delete
     deleteItem(index, item) {
-      const cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
+      const cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
       const cartItem = item;
       cart.products.splice(index, 1);
       cart.totalPrice -= parseFloat(cartItem.price * cartItem.quantity);
@@ -208,11 +211,14 @@ export default {
         cart.restaurant = {};
       }
       localStorage.setItem("cart", JSON.stringify(cart));
-      this.cart = cart;
+      store.cart = cart;
     },
     clearLocalStorage() {
+      const myModal = document.getElementById("emptyCart");
+      myModal.setAttribute("data-bs-target", "#emptyCart");
+      myModal.setAttribute("data-bs-toggle", "modal");
       localStorage.clear();
-      this.cart = {
+      store.cart = {
         restaurant: {},
         products: [],
         totalPrice: 0,
@@ -234,19 +240,19 @@ export default {
     },
 
     handleWindowResize() {
-      this.cartOpen = window.innerWidth <= 768 ? false : true;
+      store.cartOpen = window.innerWidth <= 768 ? false : true;
     },
   },
 
   mounted() {
-    this.cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
+    store.cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
     this.getRestaurant();
     this.scrollToTop();
     window.addEventListener("resize", this.handleWindowResize);
 
     const cartData = localStorage.getItem("cart");
     if (cartData) {
-      this.cartItems = JSON.parse(cartData);
+      store.cartItems = JSON.parse(cartData);
     }
   },
 };

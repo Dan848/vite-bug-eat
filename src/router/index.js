@@ -5,6 +5,7 @@ import RestaurantView from "../pages/RestaurantView.vue";
 import AboutUs from '../pages/AboutUs.vue';
 import WorkWithUs from '../pages/WorkWithUs.vue';
 import OurMission from '../pages/OurMission.vue';
+import CheckoutView from '../pages/CheckoutView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,11 +25,14 @@ const router = createRouter({
       name: "single-restaurant",
       component: SingleRestaurant,
     },
-    // {
-    //   path: "/orders/:id",
-    //   name: "checkout",
-    //   component: CheckoutView,
-    // },
+    {
+      path: "/orders/:id",
+      name: "checkout",
+      component: CheckoutView,
+      meta: {
+        hideHeaderFooter: true
+      }
+    },
     {
       path: "/about-us",
       name: "about-us",
