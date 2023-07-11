@@ -257,12 +257,13 @@ export default {
   background: url("https://img.freepik.com/free-photo/view-arrangement-with-delicious-burgers_23-2148308811.jpg?w=1380&t=st=1688546437~exp=1688547037~hmac=a251e4ce6bfab4f64a3f9fc6d908c08d6a953e71c43bcc2d407669927dd52fec");
   background-position: center;
   background-size: cover;
+}
   .col {
     position: relative;
     bottom: -100px;
     max-width: 550px;
   }
-}
+
 .bm-border {
   border-bottom: 1px solid $primary;
 }
@@ -273,7 +274,7 @@ export default {
   margin-top: 120px;
   margin-bottom: 4rem;
   border-bottom: #8cad6c;
-
+}
   .col {
     // OFFCANVAS CART
     .cart {

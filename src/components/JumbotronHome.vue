@@ -28,7 +28,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/partials/variable.scss" as *;
+  @use "../assets/partials/variable.scss" as *;
+  .jumbo
+  {
+    width: 450px;
+  }
+  .invert{
+    filter: invert(1);
+  }
+
+  h1,h4{
+    font-weight: bold;
+  }
 
 form {
   .bm-form{
