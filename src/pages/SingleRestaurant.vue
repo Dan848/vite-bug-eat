@@ -8,8 +8,7 @@
           <div class="col">
             <!-- Card Start -->
             <div
-              class="rounded-5 border py-2 px-3 d-flex flex-column bg-primary text-white"
-            >
+              class="rounded-5 border py-2 px-3 d-flex flex-column bg-primary text-white">
               <!-- Name -->
               <h1 class="text-center fw-medium py-2 px-3">
                 {{ store.restaurant.name }}
@@ -105,6 +104,11 @@
               <button class="btn btn-primary rounded-5 fw-bold text-white mb-3">
                 Vai al pagamento
               </button>
+              <!-- <router-link :to="{
+                name: 'checkout',
+                params: { id:1 } }" class="btn btn-primary rounded-5 fw-bold text-white mb-3">
+                Vai al pagamento
+              </router-link> -->
               <div class="text-center text-decoration-underline small px-2" @click="clearLocalStorage">
                 Svuota Carrello
               </div>
@@ -137,7 +141,7 @@ export default {
   components: {
     ProductCard,
     CounterProduct,
-  },
+},
   data() {
     return {
       store,

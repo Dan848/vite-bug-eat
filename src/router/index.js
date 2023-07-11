@@ -24,10 +24,11 @@ const router = createRouter({
       name: "single-restaurant",
       component: SingleRestaurant,
     },
-    {
-      path: "/single-restaurant",
-      name: "singleRestaurant",
-    },
+    // {
+    //   path: "/orders/:id",
+    //   name: "checkout",
+    //   component: CheckoutView,
+    // },
     {
       path: "/about-us",
       name: "about-us",
