@@ -2,13 +2,13 @@
   <div class="container">
     <div class="position-relative">
       <div class="d-flex flex-nowrap row" ref="sliderContainer">
-        <div class="my-col col-6 col-sm-4 col-md-3 gap-5" v-for="(type, index) in  types" @click="handleClick(type)">
+        <div class="my-col col-sm-4 col-md-3 gap-5" v-for="(type, index) in  types" @click="handleClick(type)">
           <!-- card -->
           <div class="card">
             <div class="card__image">
               <img class="img-fluid" :src="imgStartUrl + type.image" :alt="type.name" />
             </div>
-          
+
             <div class="card__data">
               <div class="card__info text-center">
                 <h5 class="text-nowrap">{{ type.name }}</h5>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {store} from "../data/store";
+import { store } from "../data/store";
 export default {
   name: 'SliderComponent',
   props: {
@@ -86,8 +86,12 @@ export default {
         this.divider = 4
       } else if ((windowWidth < 768) && (windowWidth >= 576)) { //col-sm-4 
         this.divider = 3
-      } else { //col-6 xs
+      }
+      else if ((windowWidth < 576) && (windowWidth >= 361)) { //col-sm-2 
         this.divider = 2
+      }
+      else { //col-6 xs
+        this.divider = 1
       }
 
       return this.divider;
@@ -112,6 +116,10 @@ export default {
 
 <style lang="scss" scoped>
 @use '../assets/partials/variable.scss' as *;
+
+.my-col {
+  width: 100%;
+}
 
 //Card config
 
@@ -157,14 +165,16 @@ hr {
 .row {
   padding: 6rem 0 1rem 0;
   overflow-x: auto;
-  -ms-overflow-style:none;
-  scrollbar-width:none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   scroll-behavior: smooth;
+
   // overflow-y: hidden;
   // Scrollbar config
   &::-webkit-scrollbar {
     display: none;
   }
+
   .card {
     position: relative;
     width: 100%;
@@ -174,14 +184,17 @@ hr {
 
     &:hover {
       cursor: pointer;
-        .card__image {
-          top: -45%;
-        }
-        .card__data {
-          transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
+
+      .card__image {
+        top: -45%;
       }
+
+      .card__data {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+    }
+
     .card__image {
       position: absolute;
       display: flex;
@@ -199,6 +212,7 @@ hr {
       -webkit-filter: drop-shadow(5px 5px 5px #222);
       filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
     }
+
     .card__data {
       border-top-right-radius: 50%;
       border-top-left-radius: 50%;
@@ -218,6 +232,12 @@ hr {
 
 //Media Query
 
+@media screen and (min-width: 361px) {
+  .my-col {
+    width: calc(100% / 2);
+  }
+}
+
 @media screen and (min-width: 992px) {
   .my-col {
     width: calc(100% / 6);
@@ -235,5 +255,4 @@ hr {
     width: calc(100% / 8);
   }
 }
-
 </style>
