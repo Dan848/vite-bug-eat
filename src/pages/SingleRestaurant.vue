@@ -172,9 +172,7 @@ export default {
           cart.products.push(newItem);
         }
       }
-      console.log(cart)
       cart.totalPrice += parseFloat(newItem.price);
-      // Salva l'array aggiornato nel Local Storage
       localStorage.setItem("cart", JSON.stringify(cart));
       this.cart = cart;
     },
@@ -183,7 +181,6 @@ export default {
     removeCart(item, index) {
       const cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
       const cartItem = cart.products.find(product => product.id === item.id);
-      console.log(cartItem);
       if (cartItem.quantity > 1) {
         cartItem.quantity--;
       } else {
@@ -202,7 +199,6 @@ export default {
       const cart = JSON.parse(localStorage.getItem("cart")) || this.cart;
       const cartItem = item;
       cart.products.splice(index, 1);
-      console.log(cartItem.quantity);
       cart.totalPrice -= parseFloat(cartItem.price * cartItem.quantity);
       if (cart.totalPrice == 0) {
         cart.restaurant = {};
@@ -224,14 +220,6 @@ export default {
         .get(`${store.apiURL}/restaurants/${this.$route.params.slug}`)
         .then((res) => {
           store.restaurant = res.data.results;
-        });
-    },
-    getProducts() {
-      axios
-        .get(`${store.apiURL}/restaurants/${this.$route.params.slug}/products`)
-        .then((res) => {
-          store.products = res.data.results;
-          console.log(res);
         });
     },
     //Axios End
@@ -269,12 +257,12 @@ export default {
   background: url("https://img.freepik.com/free-photo/view-arrangement-with-delicious-burgers_23-2148308811.jpg?w=1380&t=st=1688546437~exp=1688547037~hmac=a251e4ce6bfab4f64a3f9fc6d908c08d6a953e71c43bcc2d407669927dd52fec");
   background-position: center;
   background-size: cover;
-}
   .col {
     position: relative;
     bottom: -100px;
     max-width: 550px;
   }
+}
 
 .bm-border {
   border-bottom: 1px solid $primary;
@@ -311,7 +299,7 @@ export default {
         padding: 0.4rem 0.5rem;
       }
       ul {
-        max-height: calc(100vh - 245px);
+        max-height: calc(100vh - 286px);
         .delete-item {
           color: rgb(226, 0, 0);
           cursor: pointer;
