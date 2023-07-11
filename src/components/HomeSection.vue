@@ -29,9 +29,9 @@
         </div>
 
         <!-- Image Col -->
-        <div class="col d-flex justify-content-center sectionImg-box">
-          <div style="max-width: 400px;">
-            <img :src="section.image" :alt="section.title" class="img-fluid">
+        <div class="col d-flex justify-content-center">
+          <div class="sectionImg-box">
+            <img :src="section.image" :alt="section.title">
           </div>
         </div>
       </div>
@@ -80,7 +80,14 @@ section {
 
   // Img col style
   .sectionImg-box {
-    // max-width: 350px;
+    max-width: 350px;
+    max-height: 300px;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
   }
 }
 </style>

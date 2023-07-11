@@ -16,10 +16,9 @@
           <!-- Search Bar -->
           <div class="row justify-content-center">
             <form action="" method="GET" class="col-12">
-
-              <div class="form">
+              <div class="bm-form">
                 <i class="fa fa-search"></i>
-                <input type="text" class="form-control form-input" placeholder="Cerca un ristorante" />
+                <input type="text" class="form-control rounded-5" placeholder="Cerca un ristorante" />
               </div>
             </form>
           </div>
@@ -138,47 +137,24 @@ export default {
 @use "../assets/partials/variable.scss" as *;
 
 //form search bar
+
 form {
-  input[type="text"] {
-    border-radius: 80px;
+  .bm-form{
+    position: relative;
+    .fa-search{
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #9ca3af;
+    }
+    input{
+      height: 55px!important;
+      text-indent: 33px!important;
+      &:focus {
+        box-shadow: $primary;
+      }
+    }
   }
-}
-
-.form {
-  position: relative;
-}
-
-.form .fa-search {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  color: #9ca3af;
-}
-
-.form span {
-  position: absolute;
-  right: 17px;
-  top: 13px;
-  padding: 2px;
-  border-left: 1px solid #d1d5db;
-}
-
-.left-pan {
-  padding-left: 7px;
-}
-
-.left-pan i {
-  padding-left: 10px;
-}
-
-.form-input {
-  height: 55px;
-  text-indent: 33px;
-  border-radius: 10px;
-}
-
-.form-input:focus {
-  box-shadow: $primary;
 }
 
 .sticky-filters {
