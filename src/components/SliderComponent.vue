@@ -238,6 +238,18 @@ hr {
   }
 }
 
+@media screen and (min-width: 576px) {
+  .my-col {
+    width: calc(100% / 3);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .my-col {
+    width: calc(100% / 4);
+  }
+}
+
 @media screen and (min-width: 992px) {
   .my-col {
     width: calc(100% / 6);
