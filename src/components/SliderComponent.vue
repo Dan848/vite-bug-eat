@@ -49,6 +49,7 @@ export default {
   methods: {
     handleClick(type) {
       if (this.$route.name === "home") {
+        store.checkboxTypes = [];
         store.checkboxTypes.push(type.id);
         this.$router.push({ name: "restaurantView" });
       } else {

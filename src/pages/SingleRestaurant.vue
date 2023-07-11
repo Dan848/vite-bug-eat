@@ -70,7 +70,7 @@
               @click="cartOpen = false">
             </i>
             <h3 class="text-center fw-bold mt-3 pb-0 px-3">Il tuo ordine</h3>
-            <h6>Presso: </h6>
+            <div class="h6 text-center" :class="{'d-none' : !cart.restaurant.name}">Presso: <span class="fw-medium">{{ cart.restaurant.name }}</span></div>
             <hr class="mb-2" :class="{'d-none' : !cart.products.length}" />
             <ul class="list-unstyled overflow-y-auto cart-products container-fluid">
               <!-- Single Product -->
@@ -101,14 +101,15 @@
               <div>{{ cart.totalPrice.toFixed(2) }}€</div>
             </div>
             <!-- Cart Pay Button -->
-            <div class="d-flex justify-content-center mb-3">
-              <button class="btn btn-primary rounded-5 fw-bold text-white">
+            <div class="d-flex flex-column justify-content-center align-items-center  mb-2">
+              <button class="btn btn-primary rounded-5 fw-bold text-white mb-3">
                 Vai al pagamento
               </button>
-            </div>
-            <div class="d-flex justify-content-center text-decoration-underline small">
+              <div class="text-center text-decoration-underline small px-2" @click="clearLocalStorage">
                 Svuota Carrello
+              </div>
             </div>
+
           </div>
           <!-- /Cart Card -->
           <!-- Cart Bubble -->
@@ -159,7 +160,7 @@ export default {
       if (cart.restaurant == null || cart.restaurant.id != newItem.restaurant_id) {
         cart.products = [];
         cart.totalPrice = 0;
-        cart.restaurant = newItem.restaurant;
+        cart.restaurant = store.restaurant;
         newItem.quantity = 1;
         cart.products.push(newItem);
       } else{
@@ -189,7 +190,9 @@ export default {
         cart.products.splice(index, 1);
       }
       cart.totalPrice -= parseFloat(cartItem.price);
-
+      if (cart.totalPrice == 0) {
+        cart.restaurant = {};
+      }
       localStorage.setItem("cart", JSON.stringify(cart));
       this.cart = cart;
     },
@@ -201,11 +204,20 @@ export default {
       cart.products.splice(index, 1);
       console.log(cartItem.quantity);
       cart.totalPrice -= parseFloat(cartItem.price * cartItem.quantity);
-
+      if (cart.totalPrice == 0) {
+        cart.restaurant = {};
+      }
       localStorage.setItem("cart", JSON.stringify(cart));
       this.cart = cart;
     },
-
+    clearLocalStorage() {
+      localStorage.clear();
+      this.cart = {
+        restaurant: {},
+        products: [],
+        totalPrice: 0,
+      };
+    },
     //Axios Start
     getRestaurant() {
       axios
@@ -274,7 +286,7 @@ export default {
   margin-top: 120px;
   margin-bottom: 4rem;
   border-bottom: #8cad6c;
-}
+
   .col {
     // OFFCANVAS CART
     .cart {
@@ -300,15 +312,16 @@ export default {
       }
       ul {
         max-height: calc(100vh - 245px);
+        .delete-item {
+          color: rgb(226, 0, 0);
+          cursor: pointer;
+        }
       }
+      .small {
+        cursor: pointer;
+      };
     }
 
-    .delete-item {
-      color: rgb(226, 0, 0);
-      &:hover {
-        cursor: pointer;
-      }
-    }
     .sticky-bubble {
       position: fixed;
       width: 50px;
