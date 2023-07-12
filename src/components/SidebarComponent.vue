@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <div class="d-flex align-items-center justify-content-between mb-3 mt-5">
-      <div class="fs-4">Filtri</div>
+      <div class="fs-4">Filtri <span><i class="fa-solid fa-filter fs-5"></i></span></div>
       <button class="btn text-decoration-underline d-md-none" @click="$emit('onClick')">Esci</button>
     </div>
     <hr>
@@ -34,8 +34,6 @@ export default {
       store,
     }
   },
-  methods: {
-  }
 }
 </script>
 
@@ -83,7 +81,6 @@ export default {
     }
   }
 }
-
 
 @media screen and (min-width: 768px) {
   .sidebar {

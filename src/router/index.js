@@ -49,6 +49,10 @@ const router = createRouter({
       component: OurMission,
     },
   ],
+  //Scroll when it Changes Routes
+  scrollBehavior (to, from, savedPosition){
+    return { top: 0}
+  },
 });
 
 export default router;

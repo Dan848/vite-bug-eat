@@ -1,19 +1,26 @@
 import { reactive } from "vue";
 
 export const store = reactive({
+  //General Api Url
   imgStartUrl: "http://localhost:8000",
   apiURL: "http://127.0.0.1:8000/api",
+  //Data
   restaurants: [],
   restaurant: null,
   types: [],
   checkboxTypes: [],
-  currentPage: 1,
-  lastPage: null,
+  //Cart
   cart: {
+    user_email: "",
+    shipment_address: "",
     restaurant: {},
     products: [],
     totalPrice: 0,
   },
+  //Pagination
+  currentPage: 1,
+  lastPage: null,  
+  //Header Data
   headerLinks: [
     {
       label: "Home",
@@ -37,6 +44,7 @@ export const store = reactive({
       routeName: "workWithUs",
     },
   ],
+  //Home Section Data
   sections: [
     {
       title: "Ci impegniamo a salvaguardare l’ambiente...",
@@ -71,6 +79,7 @@ export const store = reactive({
       routerLink: {}
     }
   ],
+  //Team Page Data
   teams: [
     {
       name: "De Palma Vito",
@@ -110,4 +119,40 @@ export const store = reactive({
       profile_img: "/img/team/g-lumia.jpg",
     },
   ],
+  //METHODS
+  //Scroll to Top
+  scrollToTop() {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  },
+  //Scroll to Element like href
+  scrollToElement(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  },
+  addCart(item) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
+    const newItem = item;
+
+    if (cart.restaurant == null || cart.restaurant.id != newItem.restaurant_id) {
+    cart.products = [];
+    cart.totalPrice = 0;
+    cart.restaurant = store.restaurant;
+    newItem.quantity = 1;
+    cart.products.push(newItem);
+    } else{
+    if (cart.products.some(product => product.id === newItem.id)) {
+    const cartItem = cart.products.find(product => product.id === newItem.id);
+    cartItem.quantity++;
+    } else{
+        newItem.quantity = 1;
+        cart.products.push(newItem);
+    }
+    }
+    cart.totalPrice += parseFloat(newItem.price);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    store.cart = cart;
+},
 });

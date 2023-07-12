@@ -1,16 +1,17 @@
 <template>
+  <!-- Aside Sticky Bar -->
   <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
-    <i class="fa-solid fa-filter"></i> <span class="fw-bold">Filtri</span>
+    <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>
   </div>
   <div class="container">
     <!-- Slider -->
     <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
       class="px-4 px-sm-2 px-lg-5" />
-    <div class="row">
+    <div class="row" >
       <!-- Aside -->
-      <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl"
+      <SidebarComponent @onChange="getRestaurants" :items="store.types" :imgStartUrl="store.imgStartUrl"
         :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" />
-      <!-- Main -->
+      <!-- Main (under Slider) -->
       <div class="col-12 col-md-8 col-lg-9 col-xl-10">
         <div class="container-fluid mt-5">
           <!-- Search Bar -->
@@ -23,7 +24,7 @@
             </form>
           </div>
           <!-- Restaurant List -->
-          <div class="row">
+          <div class="row" id="restaurantRow">
             <div v-for="restaurant in store.restaurants"
               class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
               <router-link :to="{
@@ -35,14 +36,14 @@
               </router-link>
             </div>
           </div>
-          <!-- PAGINATION -->
+          <!-- Pagination -->
           <div class="row">
             <ul class="pagination col-12 mt-3 mb-5">
               <li class="page-item">
                 <button :class="{
                   'page-link': true,
                   disabled: store.currentPage === 1,
-                }" @click="getRestaurant(store.currentPage - 1)">
+                }" @click="getRestaurants(store.currentPage - 1)">
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
@@ -50,7 +51,7 @@
                 <button :class="{
                   'page-link': true,
                   active: store.currentPage === n,
-                }" @click="getRestaurant(n)">
+                }" @click="getRestaurants(n)">
                   {{ n }}
                 </button>
               </li>
@@ -58,7 +59,7 @@
                 <button :class="{
                   'page-link': true,
                   disabled: store.currentPage === store.lastPage,
-                }" @click="getRestaurant(store.currentPage + 1)">
+                }" @click="getRestaurants(store.currentPage + 1)">
                   <i class="fa-solid fa-angle-right"></i>
                 </button>
               </li>
@@ -83,24 +84,27 @@ export default {
     SliderComponent,
     SidebarComponent,
   },
+  //Data
   data() {
     return {
       store,
       filtersOpen: window.innerWidth <= 768 ? false : true
     };
   },
+  //Methods
   methods: {
     handleSlider(id) {
       store.checkboxTypes = [];
       store.checkboxTypes.push(id);
       const type = store.checkboxTypes;
-      this.getRestaurant(1, type);
+      this.getRestaurants(1, type);
     },
-    getRestaurant(numPage, checkboxTypes) {
+    getRestaurants(numPage, checkboxTypes) {
       let params = {
         page: numPage,
       };
       if (checkboxTypes) {
+        store.scrollToElement("restaurantRow")
         params.types = checkboxTypes;
       }
       axios
@@ -122,15 +126,17 @@ export default {
       this.filtersOpen = window.innerWidth <= 768 ? false : true;
     },
   },
+  //Mounted
   mounted() {
     this.getTypes();
     if (store.checkboxTypes) {
-      this.getRestaurant(1, store.checkboxTypes); // Chiama la funzione getRestaurant con il tipo specificato
+      this.getRestaurants(1, store.checkboxTypes); // Chiama la funzione getRestaurants con il tipo specificato
     } else {
-      this.getRestaurant(1); // Altrimenti, chiama la funzione getRestaurant senza il tipo specificato
+      this.getRestaurants(1); // Altrimenti, chiama la funzione getRestaurants senza il tipo specificato
     }
     window.addEventListener('resize', this.handleWindowResize);
   },
+  //Unmounted
   unmounted() {
     window.removeEventListener('resize', this.handleWindowResize);
   }
@@ -140,8 +146,7 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
 
-//form search bar
-
+//From search bar
 form {
   .bm-form{
     position: relative;
@@ -160,7 +165,7 @@ form {
     }
   }
 }
-
+//Filter Sticky Bar
 .sticky-filters {
   position: -webkit-sticky !important;
   position: sticky !important;

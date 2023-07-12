@@ -45,8 +45,6 @@ export default {
   methods: {
     getActive(index) {
       this.currentIndex = index
-
-      console.log(this.currentIndex);
     }
   }
 };
