@@ -46,13 +46,13 @@
             </div>
           </div>
           <!-- Pagination -->
-          <div class="row">
+          <div class="row" v-if="totalRestaurants > 0">
             <ul class="pagination col-12 mt-3 mb-5">
               <li class="page-item">
                 <button :class="{
                   'page-link': true,
                   disabled: currentPage === 1,
-                }" @click="getRestaurants(currentPage - 1)">
+                }" @click="getRestaurants(currentPage - 1, store.checkboxTypes)">
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
@@ -60,7 +60,7 @@
                 <button :class="{
                   'page-link': true,
                   active: currentPage === n,
-                }" @click="getRestaurants(n)">
+                }" @click="getRestaurants(n, store.checkboxTypes)">
                   {{ n }}
                 </button>
               </li>
@@ -68,7 +68,7 @@
                 <button :class="{
                   'page-link': true,
                   disabled: currentPage === lastPage,
-                }" @click="getRestaurants(currentPage + 1)">
+                }" @click="getRestaurants(currentPage + 1, store.checkboxTypes)">
                   <i class="fa-solid fa-angle-right"></i>
                 </button>
               </li>
