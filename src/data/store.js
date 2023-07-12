@@ -19,7 +19,7 @@ export const store = reactive({
   },
   //Pagination
   currentPage: 1,
-  lastPage: null,  
+  lastPage: null,
   //Header Data
   headerLinks: [
     {
@@ -32,7 +32,7 @@ export const store = reactive({
     },
 
     {
-      label: "About Us",
+      label: "Chi siamo",
       routeName: "about-us",
     },
     {
@@ -135,14 +135,14 @@ export const store = reactive({
   addCart(item) {
     const cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
     const newItem = item;
-    
+
     // if no/new restaurant, reset cart, set restaurant, set quantity 1, push newitem
     if (cart.restaurant == null || cart.restaurant.id != newItem.restaurant_id) {
-    cart.products = [];
-    cart.totalPrice = 0;
-    cart.restaurant = store.restaurant;
-    newItem.quantity = 1;
-    cart.products.push(newItem);
+      cart.products = [];
+      cart.totalPrice = 0;
+      cart.restaurant = store.restaurant;
+      newItem.quantity = 1;
+      cart.products.push(newItem);
     }
     // if restaurant set
     else {

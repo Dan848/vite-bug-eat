@@ -65,7 +65,7 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
 
 .outer {
   &:hover {
