@@ -17,7 +17,7 @@
       <div
         class="item-types d-flex flex-column justify-content-center align-items-center pt-4"
       >
-        <span class="type" v-for="type in restaurant.types">{{
+        <span class="type" v-for="(type) in restaurant.types">{{
           type.name
         }}</span>
       </div>
