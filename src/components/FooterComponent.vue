@@ -1,14 +1,14 @@
 <template>
   <div class="bm-footer">
     <!-- Footer -->
-    <footer class="text-center text-lg-start text-muted">
+    <footer class="text-center text-lg-start text-muted pt-4">
+
+
       <!-- Section: Social media -->
-      <section
-        class="d-flex justify-content-center justify-content-lg-between p-4"
-      >
-        <div class="div"></div>
-        <!-- Right -->
-        <div>
+      <!-- <section class="d-flex justify-content-center justify-content-lg-between p-4">
+        <div class="div"></div> -->
+      <!-- Right -->
+      <!-- <div>
           <a href="" class="me-4 link-secondary">
             <i class="fab fa-facebook-f"></i>
           </a>
@@ -27,9 +27,11 @@
           <a href="" class="me-4 link-secondary">
             <i class="fab fa-github"></i>
           </a>
-        </div>
-        <!-- Right -->
-      </section>
+        </div> -->
+      <!-- Right -->
+      <!-- </section> -->
+
+
       <!-- Section: Social media -->
 
       <!-- Section: Links  -->
@@ -54,39 +56,20 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 link-container">
-              <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Prodotti più ordinati</h6>
-              <p>
-                <a href="/">Pizza</a>
-              </p>
-              <p>
-                <a href="/">Hamburger</a>
-              </p>
-              <p>
-                <a href="/">Sushi</a>
-              </p>
-              <p>
-                <a href="/">Pokè</a>
-              </p>
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 link-container">
               <!-- Links -->
               <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
               <p>
-                <a href="#!">Pricing</a>
+                <a href="http://localhost:5174/restaurantview">i nostri ristoranti</a>
               </p>
               <p>
-                <a href="#!">Settings</a>
+                <a href="http://localhost:5174/about-us">Chi siamo</a>
               </p>
               <p>
-                <a href="#!">Orders</a>
+                <a href="http://localhost:5174/ourMission">La nostra mission</a>
               </p>
               <p>
-                <a href="#!">Help</a>
+                <a href="http://localhost:5174/workWithUs">Lavora con noi</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -118,10 +101,9 @@
       <div class="text-center p-4 text-white">
         <ul class="copyright d-flex justify-content-center">
           <li class="admin">
-            © 2021 Copyright:
-            <a class="fw-bold text-white" href="#">B-Maker.com</a
-            ><span> | </span>
-            <a class="" href="http://localhost:8000">Area Riservata</a>
+            © 2023 Copyright:
+            <a class="fw-bold text-white" href="#">B-Maker.com</a><span> | </span>
+            <a class="" href="http://localhost:8000/admin">Area Riservata</a>
           </li>
         </ul>
       </div>
