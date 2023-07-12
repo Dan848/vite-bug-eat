@@ -17,7 +17,7 @@
         <span>{{ restaurant.address }}</span>
       </div>
       <div class="item-types d-flex flex-column justify-content-center align-items-center pt-4">
-          <template v-if="restaurant.types.length <=1">
+          <template v-if="restaurant.types.length <=2">
             <div v-for="(type, index) in restaurant.types" :key="index">
                {{ type.name }}
             </div>
