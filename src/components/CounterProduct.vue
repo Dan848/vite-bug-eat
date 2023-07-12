@@ -9,7 +9,7 @@
       type="number"
       readonly
     />
-    <button type="button" @click="$emit('onPlus')" class="px-2 rounded-end-pill">+</button>
+    <button type="button" @click="$emit('onPlus')" class="px-2 rounded-end-pill" :disabled="quantity >= 50">+</button>
   </div>
 </template>
 

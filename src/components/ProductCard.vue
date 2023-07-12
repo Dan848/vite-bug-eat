@@ -10,11 +10,9 @@
 </template>
 
 <script>
-import CounterProduct from "../components/CounterProduct.vue";
 export default {
   props: { product: Object },
   components: {
-    CounterProduct,
   },
 };
 </script>
