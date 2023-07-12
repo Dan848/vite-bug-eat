@@ -111,7 +111,10 @@ export default {
       const type = store.checkboxTypes;
       this.getRestaurants(1, type);
     },
-    getRestaurants(numPage, checkboxTypes) {
+    
+    //Axios Call
+    //getRestaurant
+    getRestaurant(numPage, checkboxTypes) {
       let params = {
         page: numPage,
       };
@@ -119,8 +122,7 @@ export default {
         store.scrollToElement("restaurantRow")
         params.types = checkboxTypes;
       }
-      axios
-        .get(`${store.apiURL}/restaurants`, {
+      axios.get(`${store.apiURL}/restaurants`, {
           params,
         })
         .then((res) => {
@@ -130,6 +132,7 @@ export default {
           this.totalRestaurants = res.data.results.total
         });
     },
+    //getTypes
     getTypes() {
       axios.get(`${store.apiURL}/types`).then((res) => {
         store.types = res.data.results;

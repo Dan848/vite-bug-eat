@@ -17,10 +17,10 @@
           id="navbarNavDropdown" :class="{ show: show }">
           <ul class="navbar-nav mb-2 mb-lg-0">
             <!-- {{ --Simple Anchor Link-- }} -->
-            <li class="px-3 text-uppercase pb-2 pb-lg-0" v-for="(item, index) in store.headerLinks"
-              @click="getActive(index)">
+            <li class="px-3 text-uppercase pb-2 pb-lg-0" v-for="(item, index) in store.headerLinks">
 
-              <router-link :to="{ name: item.routeName }" :class="index === currentIndex ? 'active' : ''">
+              <router-link :to="{ name: item.routeName }" @click="getActive(index)"
+                :class="index === currentIndex ? 'active' : ''">
                 {{ item.label }}
               </router-link>
             </li>
