@@ -82,7 +82,7 @@
 
         <!-- Delete Cart Modal -->
         <ModalComponent @onClick="clearLocalStorage" btnOne="Annulla" btnTwo="Svuota" :class="{ 'show d-block': modalOpen }"
-            @closeModal="modalOpen = false" :body="modalBody" />
+            @closeModal="modalOpen = false" :body="modalBody" header="Svuota Carrello" />
 
     </div>
 </template>
