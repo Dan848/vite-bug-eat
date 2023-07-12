@@ -1,12 +1,11 @@
 <template>
     <div>
         <!-- Cart Card -->
-        <form action="" class="cart py-2 px-3 flex-column" :class="isOpen ? 'd-flex' : 'd-none'">
+        <form @submit.prevent="sendForm()" class="cart py-2 px-3 flex-column" :class="isOpen ? 'd-flex' : 'd-none'">
             <!-- Cart Title -->
             <i class="fa-solid fa-xmark fs-4 fw-bolder d-md-none"
                 @click="isOpen = false">
             </i>
-            <!-- FORM -->
             <h3 class="text-center fw-bold mt-3 pb-0 px-3">I tuoi dati</h3>
             <hr>
             <!-- Input text -->
@@ -87,7 +86,7 @@
 </template>
 
 <script>
-
+import axios from "axios";
 import { store } from "../data/store";
 import CounterProduct from "./CounterProduct.vue";
 export default {
@@ -150,13 +149,48 @@ export default {
             document.body.style.overflow = '';
             }
         },
+        //Add Email and Address to Cart
         dataToCart(data){
             const item = data;
             const cart = store.cart;
             localStorage.setItem("cart", JSON.stringify(cart));
 
             console.log(item);
-        }
+        },
+        //Format data
+        formatDateTime(dateTime) {
+            const year = dateTime.getFullYear();
+            const month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
+            const day = dateTime.getDate().toString().padStart(2, '0');
+            const hours = dateTime.getHours().toString().padStart(2, '0');
+            const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+            const seconds = dateTime.getSeconds().toString().padStart(2, '0');
+
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        },
+        //Send form data
+        sendForm(){
+            const pivotArray = [];
+            store.cart.products.forEach(product => {
+                const productId = product.id;
+                const quantity = product.quantity;
+                const pivotRow = {[productId]: { "quantity": quantity}};
+
+                pivotArray.push(pivotRow)
+            });
+
+            const data = {
+                user_email: store.cart.user_email,
+                shipment_address: store.cart.shipment_address,
+                total_price: store.cart.totalPrice,
+                date_time: this.formatDateTime(new Date()),
+                products: pivotArray,
+            };
+            axios.post(`${store.apiURL}/orders`, data).then((res) => {
+                console.log(res.data)
+            })
+        },
+
     },
     mounted(){
         //Initialize cart

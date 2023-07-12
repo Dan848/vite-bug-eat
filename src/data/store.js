@@ -154,5 +154,6 @@ export const store = reactive({
     cart.totalPrice += parseFloat(newItem.price);
     localStorage.setItem("cart", JSON.stringify(cart));
     store.cart = cart;
+    console.log(store.cart.products)
 },
 });
