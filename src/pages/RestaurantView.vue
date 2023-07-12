@@ -7,7 +7,7 @@
     <!-- Slider -->
     <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
       class="px-4 px-sm-2 px-lg-5" />
-    <div class="row" >
+    <div class="row">
       <!-- Aside -->
       <SidebarComponent @onChange="getRestaurants" :items="store.types" :imgStartUrl="store.imgStartUrl"
         :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" />
@@ -146,25 +146,30 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
 
+
 //From search bar
 form {
-  .bm-form{
+  .bm-form {
     position: relative;
-    .fa-search{
+
+    .fa-search {
       position: absolute;
       top: 20px;
       left: 20px;
       color: #9ca3af;
     }
-    input{
-      height: 55px!important;
-      text-indent: 33px!important;
+
+    input {
+      height: 55px !important;
+      text-indent: 33px !important;
+
       &:focus {
         box-shadow: $primary;
       }
     }
   }
 }
+
 //Filter Sticky Bar
 .sticky-filters {
   position: -webkit-sticky !important;
