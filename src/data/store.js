@@ -19,7 +19,7 @@ export const store = reactive({
   },
   //Pagination
   currentPage: 1,
-  lastPage: null,  
+  lastPage: null,
   //Header Data
   headerLinks: [
     {
@@ -32,7 +32,7 @@ export const store = reactive({
     },
 
     {
-      label: "About Us",
+      label: "Chi siamo",
       routeName: "about-us",
     },
     {
@@ -136,24 +136,36 @@ export const store = reactive({
     const cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
     const newItem = item;
 
+    // if no/new restaurant, reset cart, set restaurant, set quantity 1, push newitem
     if (cart.restaurant == null || cart.restaurant.id != newItem.restaurant_id) {
-    cart.products = [];
-    cart.totalPrice = 0;
-    cart.restaurant = store.restaurant;
-    newItem.quantity = 1;
-    cart.products.push(newItem);
-    } else{
-    if (cart.products.some(product => product.id === newItem.id)) {
-    const cartItem = cart.products.find(product => product.id === newItem.id);
-    cartItem.quantity++;
-    } else{
+      cart.products = [];
+      cart.totalPrice = 0;
+      cart.restaurant = store.restaurant;
+      newItem.quantity = 1;
+      cart.products.push(newItem);
+    }
+    // if restaurant set
+    else {
+      // if product already pushed 
+      if (cart.products.some(product => product.id === newItem.id)) {
+        const cartItem = cart.products.find(product => product.id === newItem.id);
+        // increase quantity
+        if (cartItem.quantity < 50) {
+          cartItem.quantity++;
+        }
+        // or return error message
+        else {
+          return
+        }
+      }
+      // if new product 
+      else {
         newItem.quantity = 1;
         cart.products.push(newItem);
-    }
+      }
     }
     cart.totalPrice += parseFloat(newItem.price);
     localStorage.setItem("cart", JSON.stringify(cart));
     store.cart = cart;
-    console.log(store.cart.products)
-},
+  },
 });

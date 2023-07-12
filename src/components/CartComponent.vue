@@ -54,6 +54,7 @@
                         </div>
                     </li>
                 </ul>
+                <span class="max-quantity-span" v-if="store.cart.products.length > 0">Max 50 unità per prodotto</span>
                 <hr class="my-2 px-2" />
                 <!-- Cart Total -->
                 <div class="py-1 px-2 d-flex justify-content-between align-items-center fw-bold mb-2">
@@ -260,6 +261,10 @@ export default {
         background-color: #8cad6c;
       }
     }
+    .max-quantity-span{
+      font-size: .7rem;
+      text-align: end;
+    }
     //Card
     @media screen and (min-width: 768px) {
     .cart {
@@ -271,5 +276,6 @@ export default {
         margin-top: 1rem;
         border-radius: 2rem;
       }
+      
     }
 </style>
