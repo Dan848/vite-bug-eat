@@ -25,6 +25,15 @@
           </div>
           <!-- Restaurant List -->
           <div class="row" id="restaurantRow">
+            <h4 v-if="store.checkboxTypes.length > 0">
+              Stai filtrando per: 
+              <span v-for="(type, index) in store.checkboxTypes" :key="index">
+                {{ getTypeName(type) }}
+                <span v-if="index !== store.checkboxTypes.length - 1">, </span>
+              </span>
+              
+            </h4>
+            <h3 class="pt-3">Risultati: {{ totalRestaurants }}</h3>
             <div v-for="restaurant in store.restaurants"
               class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
               <router-link :to="{
@@ -42,15 +51,15 @@
               <li class="page-item">
                 <button :class="{
                   'page-link': true,
-                  disabled: store.currentPage === 1,
-                }" @click="getRestaurants(store.currentPage - 1)">
+                  disabled: currentPage === 1,
+                }" @click="getRestaurants(currentPage - 1)">
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
-              <li class="page-item" v-for="n in store.lastPage">
+              <li class="page-item" v-for="n in lastPage">
                 <button :class="{
                   'page-link': true,
-                  active: store.currentPage === n,
+                  active: currentPage === n,
                 }" @click="getRestaurants(n)">
                   {{ n }}
                 </button>
@@ -58,8 +67,8 @@
               <li class="page-item">
                 <button :class="{
                   'page-link': true,
-                  disabled: store.currentPage === store.lastPage,
-                }" @click="getRestaurants(store.currentPage + 1)">
+                  disabled: currentPage === lastPage,
+                }" @click="getRestaurants(currentPage + 1)">
                   <i class="fa-solid fa-angle-right"></i>
                 </button>
               </li>
@@ -88,7 +97,10 @@ export default {
   data() {
     return {
       store,
-      filtersOpen: window.innerWidth <= 768 ? false : true
+      filtersOpen: window.innerWidth <= 768 ? false : true,
+      currentPage: null,
+      lastPage: null,
+      totalRestaurants: null
     };
   },
   //Methods
@@ -113,8 +125,9 @@ export default {
         })
         .then((res) => {
           store.restaurants = res.data.results.data;
-          store.currentPage = res.data.results.current_page;
-          store.lastPage = res.data.results.last_page;
+          this.currentPage = res.data.results.current_page;
+          this.lastPage = res.data.results.last_page;
+          this.totalRestaurants = res.data.results.total
         });
     },
     getTypes() {
@@ -125,6 +138,10 @@ export default {
     handleWindowResize() {
       this.filtersOpen = window.innerWidth <= 768 ? false : true;
     },
+    getTypeName(typeId) {
+      const type = store.types.find(type => type.id === typeId);
+      return type ? type.name : '';
+    }
   },
   //Mounted
   mounted() {
