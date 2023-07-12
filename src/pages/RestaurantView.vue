@@ -114,7 +114,7 @@ export default {
     
     //Axios Call
     //getRestaurant
-    getRestaurant(numPage, checkboxTypes) {
+    getRestaurants(numPage, checkboxTypes) {
       let params = {
         page: numPage,
       };
