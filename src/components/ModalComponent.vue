@@ -12,7 +12,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ btnOne }}</button>
-                    <button type="button" class="btn btn-danger delete-modal-button">{{ btnTwo }}</button>
+                    <button @click="$emit('onClick')" type="button" class="btn btn-danger delete-modal-button">{{ btnTwo }}</button>
                 </div>
             </div>
         </div>
@@ -28,6 +28,7 @@
             btnOne: String,
             btnTwo: String
         }
+
     }
 </script>
 
@@ -35,7 +36,7 @@
 body{
     overflow: hidden;
     .fade {
-    background-color: rgba(black, $alpha: 0.5);
+    background-color: rgba(black, $alpha: 0.7);
  }
 }
 

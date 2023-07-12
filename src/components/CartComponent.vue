@@ -9,73 +9,73 @@
             <h3 class="text-center fw-bold mt-3 pb-0 px-3">I tuoi dati</h3>
             <hr>
             <!-- Input text -->
-                <div class="form-floating mb-3">  
-                    <input @input="dataToCart(store.cart.user_email)" v-model="store.cart.user_email" id="user_email" name="user_email" type="email"
-                        class="form-control" maxlength="255" placeholder="luigiverdi@mail.com" required>
-                    <label for="name">E-mail *</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input @input="dataToCart(store.cart.shipment_address)" v-model="store.cart.shipment_address"  id="shipment_address" name="shipment_address" type="text"
-                        class="form-control" maxlength="255" placeholder="Via Alberobello 18" required>
-                    <label for="name">Indirizzo *</label>
-                </div>
+            <div class="form-floating mb-3">  
+                <input @input="dataToCart(store.cart.user_email)" v-model="store.cart.user_email" id="user_email" name="user_email" type="email"
+                    class="form-control" maxlength="255" placeholder="luigiverdi@mail.com" required>
+                <label for="name">E-mail *</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input @input="dataToCart(store.cart.shipment_address)" v-model="store.cart.shipment_address"  id="shipment_address" name="shipment_address" type="text"
+                    class="form-control" maxlength="255" placeholder="Via Alberobello 18" required>
+                <label for="name">Indirizzo *</label>
+            </div>
 
-                <hr class="mb-4">
-                <!-- /Input text -->
-                <h3 class="text-center fw-bold mt-3 pb-0 px-3">Il tuo ordine</h3>
-                <!-- Restaurant Name -->
-                <div class="h6 text-center" :class="{'d-none' : !store.cart.restaurant.name}">
-                    Presso: <span class="fw-medium">{{ store.cart.restaurant.name }}</span>
-                </div>
-                <hr class="mb-2" :class="{'d-none' : !store.cart.products.length}" />
-                <!-- Product List -->
-                <ul class="list-unstyled overflow-y-auto cart-products container-fluid">
-                    <!-- Single Product -->
-                    <li
-                    v-for="(product, index) in store.cart.products"
-                    :class="{ 'border-top': index != 0 }"
-                    class="py-2 row align-items-center">
-                        <!-- Prod Name -->
-                        <div class="col-4">{{ product.name }}</div>
-                        <!-- Prod Counter -->
-                        <div class="col-4">
-                            <CounterProduct
-                            @onMinus="removeCart(product, index)"
-                            @onPlus="store.addCart(product)"
-                            :quantity="product.quantity"
-                            />
-                        </div>
-                        <!-- Prod Price -->
-                        <div class="col-4 pe-1 text-end text-nowrap d-flex justify-content-end">
-                            <div>{{ (product.price * product.quantity).toFixed(2) }}€</div>
-                            <i @click.stop="deleteItem(index, product)"
-                            class="fa-solid fa-trash ms-2 delete-item p-1">
-                            </i>
-                        </div>
-                    </li>
-                </ul>
-                <div class="max-quantity" v-if="store.cart.products.length > 0">Max 50 unità per prodotto</div>
-                <hr class="my-2 px-2" />
-                <!-- Cart Total -->
-                <div class="py-1 px-2 d-flex justify-content-between align-items-center fw-bold mb-2">
-                    <div>Totale</div>
-                    <div>{{ store.cart.totalPrice.toFixed(2) }}€</div>
-                </div>
-                <!-- Cart Footer Button -->
-                <div class="d-flex flex-column justify-content-center align-items-center  mb-2">
-                    <button :disabled="store.cart.products.length < 1"
-                    type="submit" class="btn btn-primary rounded-5 fw-bold text-white mb-3">
-                    Vai al pagamento
-                    </button>
-                    <!-- <router-link :to="{
-                    name: 'checkout',
-                    params: { id:1 } }" class="btn btn-primary rounded-5 fw-bold text-white mb-3">
-                    Vai al pagamento
-                    </router-link> -->
-                    <div class="text-center text-decoration-underline small px-2" @click="clearLocalStorage">
-                    Svuota Carrello
-                </div>
-                </div>
+            <hr class="mb-4">
+            <!-- /Input text -->
+            <h3 class="text-center fw-bold mt-3 pb-0 px-3">Il tuo ordine</h3>
+            <!-- Restaurant Name -->
+            <div class="h6 text-center" :class="{'d-none' : !store.cart.restaurant.name}">
+                Presso: <span class="fw-medium">{{ store.cart.restaurant.name }}</span>
+            </div>
+            <hr class="mb-2" :class="{'d-none' : !store.cart.products.length}" />
+            <!-- Product List -->
+            <ul class="list-unstyled overflow-y-auto cart-products container-fluid">
+                <!-- Single Product -->
+                <li
+                v-for="(product, index) in store.cart.products"
+                :class="{ 'border-top': index != 0 }"
+                class="py-2 row align-items-center">
+                    <!-- Prod Name -->
+                    <div class="col-4">{{ product.name }}</div>
+                    <!-- Prod Counter -->
+                    <div class="col-4">
+                        <CounterProduct
+                        @onMinus="removeCart(product, index)"
+                        @onPlus="store.addCart(product)"
+                        :quantity="product.quantity"
+                        />
+                    </div>
+                    <!-- Prod Price -->
+                    <div class="col-4 pe-1 text-end text-nowrap d-flex justify-content-end">
+                        <div>{{ (product.price * product.quantity).toFixed(2) }}€</div>
+                        <i @click.stop="deleteItem(index, product)"
+                        class="fa-solid fa-trash ms-2 delete-item p-1">
+                        </i>
+                    </div>
+                </li>
+            </ul>
+            <div class="max-quantity" v-if="store.cart.products.length > 0">Max 50 unità per prodotto</div>
+            <hr class="my-2 px-2" />
+            <!-- Cart Total -->
+            <div class="py-1 px-2 d-flex justify-content-between align-items-center fw-bold mb-2">
+                <div>Totale</div>
+                <div>{{ store.cart.totalPrice.toFixed(2) }}€</div>
+            </div>
+            <!-- Cart Footer Button -->
+            <div class="d-flex flex-column justify-content-center align-items-center  mb-2">
+                <button :disabled="store.cart.products.length < 1"
+                type="submit" class="btn btn-primary rounded-5 fw-bold text-white mb-3">
+                Vai al pagamento
+                </button>
+                <!-- <router-link :to="{
+                name: 'checkout',
+                params: { id:1 } }" class="btn btn-primary rounded-5 fw-bold text-white mb-3">
+                Vai al pagamento
+                </router-link> -->
+                <div class="text-center text-decoration-underline small px-2" @click="clearLocalStorage">
+                Svuota Carrello
+            </div>
+            </div>
         </form>
         <!-- /Cart Card -->
         <!-- Cart Bubble -->
@@ -91,10 +91,12 @@
 import axios from "axios";
 import { store } from "../data/store";
 import CounterProduct from "./CounterProduct.vue";
+import ModalComponent from "./ModalComponent.vue";
 export default {
     name: "CartComponent",
     components: {
-        CounterProduct
+        CounterProduct,
+        ModalComponent
     },
     data() {
         return {
@@ -137,7 +139,6 @@ export default {
             store.cart.products = [];
             store.cart.totalPrice = 0;
             localStorage.setItem("cart", JSON.stringify(store.cart));
-
         },
         //Handle Resize
         handleWindowResize() {
