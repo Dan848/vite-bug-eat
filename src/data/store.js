@@ -132,12 +132,13 @@ export const store = reactive({
       element.scrollIntoView({ behavior: 'smooth' });
     }
   },
+  // Add product to cart
   addCart(item) {
     const cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
     const newItem = item;
 
     // if no/new restaurant, reset cart, set restaurant, set quantity 1, push newitem
-    if (cart.restaurant == null || cart.restaurant.id != newItem.restaurant_id) {
+    if (Object.keys(cart.restaurant).length == 0 || cart.restaurant.id != newItem.restaurant_id) {
       cart.products = [];
       cart.totalPrice = 0;
       cart.restaurant = store.restaurant;
