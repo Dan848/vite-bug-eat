@@ -171,23 +171,14 @@ export default {
         },
         //Send form data
         sendForm(){
-            const pivotArray = [];
-            store.cart.products.forEach(product => {
-                const productId = product.id;
-                const quantity = product.quantity;
-                const pivotRow = {[productId]: { "quantity": quantity}};
-
-                pivotArray.push(pivotRow)
-            });
-
             const data = {
                 user_email: store.cart.user_email,
                 shipment_address: store.cart.shipment_address,
                 total_price: store.cart.totalPrice,
                 date_time: this.formatDateTime(new Date()),
-                products: pivotArray,
+                products: store.cart.products,
             };
-            axios.post(`${store.apiURL}/orders`, data).then((res) => {
+            axios.post(`${store.apiURL}/orders/store`, data).then((res) => {
                 console.log(res.data)
             })
         },
