@@ -54,7 +54,7 @@
                         </div>
                     </li>
                 </ul>
-                <span class="max-quantity-span" v-if="store.cart.products.length > 0">Max 50 unità per prodotto</span>
+                <div class="max-quantity" v-if="store.cart.products.length > 0">Max 50 unità per prodotto</div>
                 <hr class="my-2 px-2" />
                 <!-- Cart Total -->
                 <div class="py-1 px-2 d-flex justify-content-between align-items-center fw-bold mb-2">
@@ -63,7 +63,8 @@
                 </div>
                 <!-- Cart Footer Button -->
                 <div class="d-flex flex-column justify-content-center align-items-center  mb-2">
-                    <button type="submit" class="btn btn-primary rounded-5 fw-bold text-white mb-3">
+                    <button :disabled="store.cart.products.length < 1"
+                    type="submit" class="btn btn-primary rounded-5 fw-bold text-white mb-3">
                     Vai al pagamento
                     </button>
                     <!-- <router-link :to="{
@@ -171,16 +172,20 @@ export default {
         },
         //Send form data
         sendForm(){
-            const data = {
-                user_email: store.cart.user_email,
-                shipment_address: store.cart.shipment_address,
-                total_price: store.cart.totalPrice,
-                date_time: this.formatDateTime(new Date()),
-                products: store.cart.products,
-            };
-            axios.post(`${store.apiURL}/orders/store`, data).then((res) => {
-                console.log(res.data)
-            })
+            if (store.cart.products.length >= 1){
+                const data = {
+                    user_email: store.cart.user_email,
+                    shipment_address: store.cart.shipment_address,
+                    total_price: store.cart.totalPrice,
+                    date_time: this.formatDateTime(new Date()),
+                    products: store.cart.products,
+                };
+                axios.post(`${store.apiURL}/orders/store`, data).then((res) => {
+                    console.log(res.data)
+                })
+            } else {
+                //Qualcuno stampa il messaggio
+            }
         },
 
     },
@@ -237,7 +242,13 @@ export default {
             border-radius: 80px;
         }
       }
+        .max-quantity{
+            font-size: .7rem;
+            text-align: end;
+        }
     }
+
+
     //Bubble
     .sticky-bubble {
       position: fixed;
@@ -247,15 +258,12 @@ export default {
       right: 5px;
       background-color: $primary;
       color: white;
+      cursor: pointer;
       &:hover {
-        cursor: pointer;
         background-color: #8cad6c;
       }
     }
-    .max-quantity-span{
-      font-size: .7rem;
-      text-align: end;
-    }
+
     //Card
     @media screen and (min-width: 768px) {
     .cart {
