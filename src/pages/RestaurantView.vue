@@ -1,6 +1,7 @@
 <template>
+  <!-- Aside Sticky Bar -->
   <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
-    <i class="fa-solid fa-filter"></i> <span class="fw-bold">Filtri</span>
+    <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>
   </div>
   <div class="container">
     <!-- Slider -->
@@ -8,9 +9,9 @@
       class="px-4 px-sm-2 px-lg-5" />
     <div class="row">
       <!-- Aside -->
-      <SidebarComponent @onChange="getRestaurant" :items="store.types" :imgStartUrl="store.imgStartUrl"
+      <SidebarComponent @onChange="getRestaurants" :items="store.types" :imgStartUrl="store.imgStartUrl"
         :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" />
-      <!-- Main -->
+      <!-- Main (under Slider) -->
       <div class="col-12 col-md-8 col-lg-9 col-xl-10">
         <div class="container-fluid mt-5">
           <!-- Search Bar -->
@@ -23,7 +24,16 @@
             </form>
           </div>
           <!-- Restaurant List -->
-          <div class="row">
+          <div class="row" id="restaurantRow">
+            <h4 v-if="store.checkboxTypes.length > 0">
+              Stai filtrando per: 
+              <span v-for="(type, index) in store.checkboxTypes" :key="index">
+                {{ getTypeName(type) }}
+                <span v-if="index !== store.checkboxTypes.length - 1">, </span>
+              </span>
+              
+            </h4>
+            <h3 class="pt-3">Risultati: {{ totalRestaurants }}</h3>
             <div v-for="restaurant in store.restaurants"
               class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
               <router-link :to="{
@@ -35,30 +45,30 @@
               </router-link>
             </div>
           </div>
-          <!-- PAGINATION -->
+          <!-- Pagination -->
           <div class="row">
             <ul class="pagination col-12 mt-3 mb-5">
               <li class="page-item">
                 <button :class="{
                   'page-link': true,
-                  disabled: store.currentPage === 1,
-                }" @click="getRestaurant(store.currentPage - 1)">
+                  disabled: currentPage === 1,
+                }" @click="getRestaurants(currentPage - 1)">
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
-              <li class="page-item" v-for="n in store.lastPage">
+              <li class="page-item" v-for="n in lastPage">
                 <button :class="{
                   'page-link': true,
-                  active: store.currentPage === n,
-                }" @click="getRestaurant(n)">
+                  active: currentPage === n,
+                }" @click="getRestaurants(n)">
                   {{ n }}
                 </button>
               </li>
               <li class="page-item">
                 <button :class="{
                   'page-link': true,
-                  disabled: store.currentPage === store.lastPage,
-                }" @click="getRestaurant(store.currentPage + 1)">
+                  disabled: currentPage === lastPage,
+                }" @click="getRestaurants(currentPage + 1)">
                   <i class="fa-solid fa-angle-right"></i>
                 </button>
               </li>
@@ -83,19 +93,25 @@ export default {
     SliderComponent,
     SidebarComponent,
   },
+  //Data
   data() {
     return {
       store,
-      filtersOpen: window.innerWidth <= 768 ? false : true
+      filtersOpen: window.innerWidth <= 768 ? false : true,
+      currentPage: null,
+      lastPage: null,
+      totalRestaurants: null
     };
   },
+  //Methods
   methods: {
     handleSlider(id) {
       store.checkboxTypes = [];
       store.checkboxTypes.push(id);
       const type = store.checkboxTypes;
-      this.getRestaurant(1, type);
+      this.getRestaurants(1, type);
     },
+    
     //Axios Call
     //getRestaurant
     getRestaurant(numPage, checkboxTypes) {
@@ -103,6 +119,7 @@ export default {
         page: numPage,
       };
       if (checkboxTypes) {
+        store.scrollToElement("restaurantRow")
         params.types = checkboxTypes;
       }
       axios.get(`${store.apiURL}/restaurants`, {
@@ -110,8 +127,9 @@ export default {
         })
         .then((res) => {
           store.restaurants = res.data.results.data;
-          store.currentPage = res.data.results.current_page;
-          store.lastPage = res.data.results.last_page;
+          this.currentPage = res.data.results.current_page;
+          this.lastPage = res.data.results.last_page;
+          this.totalRestaurants = res.data.results.total
         });
     },
     //getTypes
@@ -123,17 +141,22 @@ export default {
     handleWindowResize() {
       this.filtersOpen = window.innerWidth <= 768 ? false : true;
     },
+    getTypeName(typeId) {
+      const type = store.types.find(type => type.id === typeId);
+      return type ? type.name : '';
+    }
   },
   //Mounted
   mounted() {
     this.getTypes();
     if (store.checkboxTypes) {
-      this.getRestaurant(1, store.checkboxTypes); // Chiama la funzione getRestaurant con il tipo specificato
+      this.getRestaurants(1, store.checkboxTypes); // Chiama la funzione getRestaurants con il tipo specificato
     } else {
-      this.getRestaurant(1); // Altrimenti, chiama la funzione getRestaurant senza il tipo specificato
+      this.getRestaurants(1); // Altrimenti, chiama la funzione getRestaurants senza il tipo specificato
     }
     window.addEventListener('resize', this.handleWindowResize);
   },
+  //Unmounted
   unmounted() {
     window.removeEventListener('resize', this.handleWindowResize);
   }
@@ -143,20 +166,23 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
 
-//form search bar
 
+//From search bar
 form {
-  .bm-form{
+  .bm-form {
     position: relative;
-    .fa-search{
+
+    .fa-search {
       position: absolute;
       top: 20px;
       left: 20px;
       color: #9ca3af;
     }
-    input{
-      height: 55px!important;
-      text-indent: 33px!important;
+
+    input {
+      height: 55px !important;
+      text-indent: 33px !important;
+
       &:focus {
         box-shadow: $primary;
       }
@@ -164,6 +190,7 @@ form {
   }
 }
 
+//Filter Sticky Bar
 .sticky-filters {
   position: -webkit-sticky !important;
   position: sticky !important;

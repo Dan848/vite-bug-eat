@@ -5,6 +5,7 @@ import RestaurantView from "../pages/RestaurantView.vue";
 import AboutUs from '../pages/AboutUs.vue';
 import WorkWithUs from '../pages/WorkWithUs.vue';
 import OurMission from '../pages/OurMission.vue';
+import CheckoutView from '../pages/CheckoutView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,8 +26,12 @@ const router = createRouter({
       component: SingleRestaurant,
     },
     {
-      path: "/single-restaurant",
-      name: "singleRestaurant",
+      path: "/orders/:id",
+      name: "checkout",
+      component: CheckoutView,
+      meta: {
+        hideHeaderFooter: true
+      }
     },
     {
       path: "/about-us",
@@ -44,6 +49,10 @@ const router = createRouter({
       component: OurMission,
     },
   ],
+  //Scroll when it Changes Routes
+  scrollBehavior (to, from, savedPosition){
+    return { top: 0}
+  },
 });
 
 export default router;

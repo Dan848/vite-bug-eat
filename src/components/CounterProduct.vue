@@ -1,6 +1,6 @@
 <template>
   <div class="counter rounded-pill d-flex">
-    <button @click="$emit('onMinus')" class="px-2 rounded-start-pill">-</button>
+    <button type="button" @click="$emit('onMinus')" class="px-2 rounded-start-pill">-</button>
     <input
       class="text-center"
       :value="quantity"
@@ -9,7 +9,7 @@
       type="number"
       readonly
     />
-    <button @click="$emit('onPlus')" class="px-2 rounded-end-pill">+</button>
+    <button type="button" @click="$emit('onPlus')" class="px-2 rounded-end-pill" :disabled="quantity >= 50">+</button>
   </div>
 </template>
 

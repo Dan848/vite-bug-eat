@@ -1,7 +1,7 @@
 <template>
   <div class="jumbotron d-flex justify-content-center py-5">
     <div class="d-flex flex-column justify-content-center align-items-center">
-      <img src="public/img/bees.gif" class="jumbo-logo" alt="" />
+      <img src="/img/bees.gif" class="jumbo-logo" alt="" />
       <div class="pt-5 text-center">
         <h2>Qualcosa ronza in giro...</h2>
         <p class="fw-medium">...sono i nostri rider!</p>
