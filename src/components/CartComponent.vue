@@ -11,12 +11,12 @@
             <hr>
             <!-- Input text -->
                 <div class="form-floating mb-3">  
-                    <input v-model="store.cart.user_email" id="user_email" name="user_email" type="email"
+                    <input @input="dataToCart(store.cart.user_email)" v-model="store.cart.user_email" id="user_email" name="user_email" type="email"
                         class="form-control" maxlength="255" placeholder="luigiverdi@mail.com" required>
                     <label for="name">E-mail *</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input v-model="store.cart.shipment_address"  id="shipment_address" name="shipment_address" type="text"
+                    <input @input="dataToCart(store.cart.shipment_address)" v-model="store.cart.shipment_address"  id="shipment_address" name="shipment_address" type="text"
                         class="form-control" maxlength="255" placeholder="Via Alberobello 18" required>
                     <label for="name">Indirizzo *</label>
                 </div>
@@ -132,12 +132,11 @@ export default {
         },
         // Clear Local Storage
         clearLocalStorage() {
-            localStorage.clear();
-            store.cart = {
-            restaurant: {},
-            products: [],
-            totalPrice: 0,
-            };
+            store.cart.restaurant = {};
+            store.cart.products = [];
+            store.cart.totalPrice = 0;
+            localStorage.setItem("cart", JSON.stringify(store.cart));
+
         },
         //Handle Resize
         handleWindowResize() {
@@ -151,6 +150,13 @@ export default {
             document.body.style.overflow = '';
             }
         },
+        dataToCart(data){
+            const item = data;
+            const cart = store.cart;
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            console.log(item);
+        }
     },
     mounted(){
         //Initialize cart
@@ -190,7 +196,7 @@ export default {
         padding: 0.4rem 0.5rem;
       }
       ul {
-        max-height: calc(100vh - 500px);
+        max-height: calc(100vh - 563px);
         .delete-item {
           color: rgb(226, 0, 0);
           cursor: pointer;
