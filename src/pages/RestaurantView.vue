@@ -25,15 +25,15 @@
           </div>
           <!-- Restaurant List -->
           <div class="row" id="restaurantRow">
-            <h4 v-if="store.checkboxTypes.length > 0">
-              Stai filtrando per: 
+            <h3 v-if="store.checkboxTypes.length > 0" class="pt-3">
+              Stai filtrando per:
               <span v-for="(type, index) in store.checkboxTypes" :key="index">
                 {{ getTypeName(type) }}
                 <span v-if="index !== store.checkboxTypes.length - 1">, </span>
               </span>
-              
-            </h4>
-            <h3 class="pt-3">Risultati: {{ totalRestaurants }}</h3>
+
+            </h3>
+            <h4 class="pt-3">Risultati: {{ totalRestaurants }}</h4>
             <div v-for="restaurant in store.restaurants"
               class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
               <router-link :to="{
@@ -111,7 +111,7 @@ export default {
       const type = store.checkboxTypes;
       this.getRestaurants(1, type);
     },
-    
+
     //Axios Call
     //getRestaurant
     getRestaurants(numPage, checkboxTypes) {
@@ -123,8 +123,8 @@ export default {
         params.types = checkboxTypes;
       }
       axios.get(`${store.apiURL}/restaurants`, {
-          params,
-        })
+        params,
+      })
         .then((res) => {
           store.restaurants = res.data.results.data;
           this.currentPage = res.data.results.current_page;
