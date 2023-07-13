@@ -9,6 +9,12 @@
             <hr>
             <!-- Input text -->
             <div class="form-floating mb-3">
+                <input @input="dataToCart(store.cart.user_name)" v-model="store.cart.user_name" id="user_name"
+                    name="user_name" type="text" class="form-control" maxlength="100" placeholder="Aniello Rossi"
+                    required>
+                <label for="name">Nome e Cognome *</label>
+            </div>
+            <div class="form-floating mb-3">
                 <input @input="dataToCart(store.cart.user_email)" v-model="store.cart.user_email" id="user_email"
                     name="user_email" type="email" class="form-control" maxlength="255" placeholder="luigiverdi@mail.com"
                     required>

@@ -1,6 +1,7 @@
 <template>
     <div class="container my-5">
         <div class="row justify-content-between">
+            <CartComponent class="col-6" />
             <div class="col-6">
                 <form>
                     <div class="form-group">
@@ -28,20 +29,13 @@
                     <button type="submit" class="btn btn-primary rounded-5 w-100 mt-3" @click.prevent="payWithCreditCard">Submit</button>
                 </form>
             </div>
-            <div class="col-6">
-                <div id="dropin-wrapper">
-                    <div id="checkout-message"></div>
-                    <div id="dropin-container"></div>
-                    <button id="submit-button">Submit payment</button>
-                </div>
-            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { onMounted } from "vue";
 import { store } from "../data/store";
+import CartComponent from "../components/CartComponent.vue";
 import axios from "axios";
 import braintree from 'braintree-web';
 import dropin from 'braintree-web-drop-in';
@@ -49,7 +43,7 @@ import dropin from 'braintree-web-drop-in';
 export default {
   name: "CheckoutView",
   components: {
-
+    CartComponent,
   },
   data() {
     return {
@@ -79,7 +73,7 @@ export default {
   mounted() {
         //Personalized
         braintree.client.create({
-            authorization: "sandbox_ndqhp77s_p9wgxwybzjzsmg23",
+            authorization: "sandbox_ndqhp77s_p9wgxwybzjzsmg23==",
             locale: 'it_IT',
        })
        .then(clientInstance => {
@@ -87,7 +81,7 @@ export default {
                client: clientInstance,
                styles: {
                    input: {
-                       'font-size': '14px',
+                       'font-size': '16px',
                    }
                },
                fields: {
@@ -114,19 +108,6 @@ export default {
        .catch(err => {
        });
        console.log(this.hostedFieldInstance)
-       //Drop In
-        dropin.create({
-            authorization: "sandbox_ndqhp77s_p9wgxwybzjzsmg23",
-            container: '#dropin-container',
-            locale: 'it_IT',
-            // ...plus remaining configuration
-        }, (error, dropinInstance) => {
-            // Use `dropinInstance` here
-            // Methods documented at https://braintree.github.io/braintree-web-drop-in/docs/current/Dropin.html
-            if (error) {
-                console.log(error.message);
-            }
-            });
    }
 }; 
 </script>

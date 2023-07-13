@@ -11,6 +11,7 @@ export const store = reactive({
   checkboxTypes: [],
   //Cart
   cart: {
+    user_name: "",
     user_email: "",
     shipment_address: "",
     restaurant: {},
