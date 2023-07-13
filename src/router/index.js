@@ -29,9 +29,6 @@ const router = createRouter({
       path: "/orders/:id",
       name: "checkout",
       component: CheckoutView,
-      meta: {
-        hideHeaderFooter: true
-      }
     },
     {
       path: "/about-us",
@@ -41,12 +38,12 @@ const router = createRouter({
     {
       path: "/workWithUs",
       name: "workWithUs",
-      component: WorkWithUs,
+      component: CheckoutView,
     },
     {
       path: "/ourMission",
       name: "ourMission",
-      component: OurMission,
+      component: CheckoutView,
     },
   ],
   //Scroll when it Changes Routes
