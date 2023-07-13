@@ -24,16 +24,20 @@
             </form>
           </div>
           <!-- Restaurant List -->
-          <div class="row" id="restaurantRow">
-            <h3 v-if="store.checkboxTypes.length > 0" class="pt-3">
-              Stai filtrando per:
-              <span v-for="(type, index) in store.checkboxTypes" :key="index">
-                {{ getTypeName(type) }}
-                <span v-if="index !== store.checkboxTypes.length - 1">, </span>
-              </span>
 
-            </h3>
-            <h4 class="pt-3">Risultati: {{ totalRestaurants }}</h4>
+          <div class="row pt-3" id="restaurantRow">
+            <div class="col-12 d-flex flex-wrap" v-if="store.checkboxTypes.length > 0">
+              <span class="pe-1">Stai filtrando per:</span>
+              <div class="d-flex fw-bold" v-for="(type, index) in store.checkboxTypes" :key="index">
+                {{ getTypeName(type) }}
+                <div class="pe-1" v-if="index !== store.checkboxTypes.length - 1">,</div>
+              </div>
+            </div>
+            <div class="col-12 pt-3">
+              <span>Ci sono:</span>
+              <span class="fw-bold px-2">{{ totalRestaurants }}</span>
+              <span>Ristoranti vicino a te</span>
+            </div>
             <div v-for="restaurant in store.restaurants"
               class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
               <router-link :to="{
