@@ -4,8 +4,8 @@
       <div class="inner">
         <div class="box-img w-100 h-100 d-flex justify-content-center">
           <img
-            src="https://img.freepik.com/free-photo/view-arrangement-with-delicious-burgers_23-2148308811.jpg?w=1380&t=st=1688546437~exp=1688547037~hmac=a251e4ce6bfab4f64a3f9fc6d908c08d6a953e71c43bcc2d407669927dd52fec"
-            alt="{{ restaurant.name }}" class="w-100" />
+            :src="restaurant.image"
+            :alt="restaurant.name" class="w-100" />
         </div>
       </div>
     </div>

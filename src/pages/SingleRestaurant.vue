@@ -1,7 +1,7 @@
 <template>
   <div v-if="store.restaurant">
     <!-- Restaurant Background and Info -->
-    <div class="background">
+    <div class="background" :style="{ backgroundImage: 'url(' + store.restaurant.image + ')' }">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col">
@@ -126,8 +126,7 @@ export default {
 //   Light Green #8cad6c;
 //Top Page
 .background {
-  padding-top: 3rem;
-  background: url("https://img.freepik.com/free-photo/view-arrangement-with-delicious-burgers_23-2148308811.jpg?w=1380&t=st=1688546437~exp=1688547037~hmac=a251e4ce6bfab4f64a3f9fc6d908c08d6a953e71c43bcc2d407669927dd52fec");
+  padding-top: 10rem;
   background-position: center;
   background-size: cover;
 
