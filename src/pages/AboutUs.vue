@@ -1,27 +1,35 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="store.teams">
     <h2 class="text-center my-5 pixel-text text-secondary">Conosci meglio il nostro Team!</h2>
     <div class="row align-items-stretch">
       <AboutUsCard v-for="team in store.teams" :key="team.id" :team="team" />
 
     </div>
   </div>
+
+  <div v-else>
+    <LoaderComponent />
+  </div>
 </template>
 
 <script>
 import { store } from "../data/store";
 import AboutUsCard from "../components/AboutUsCard.vue";
-
+import LoaderComponent from "../components/LoaderComponent.vue";
 export default {
   name: "AboutUs",
   components: {
     AboutUsCard,
+    LoaderComponent
   },
   data() {
     return {
       store,
     };
   },
+  mounted() {
+
+  }
 };
 </script>
 

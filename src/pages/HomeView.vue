@@ -1,17 +1,23 @@
 <template>
-  <div class="container-fluid">
-    <div class="container">
-      <JumbotronHome />
+  <div v-if="store.types != null">
+    <div class="container-fluid">
+      <div class="container">
+        <JumbotronHome />
+      </div>
+    </div>
+
+    <!-- Types slider -->
+    <div class="container d-flex justify-content-center my-5 px-4 px-lg-5">
+      <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
+    </div>
+
+    <div v-for="section in store.sections">
+      <HomeSection :section="section" />
     </div>
   </div>
 
-  <!-- Types slider -->
-  <div class="container d-flex justify-content-center my-5 px-4 px-lg-5">
-    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" />
-  </div>
-
-  <div v-for="section in store.sections">
-    <HomeSection :section="section" />
+  <div v-else>
+    <LoaderComponent />
   </div>
 </template>
 
@@ -19,6 +25,7 @@
 import HomeSection from "../components/HomeSection.vue";
 import SliderComponent from "../components/SliderComponent.vue";
 import JumbotronHome from "../components/JumbotronHome.vue";
+import LoaderComponent from "../components/LoaderComponent.vue";
 import axios from "axios";
 import { store } from "../data/store";
 export default {
@@ -26,7 +33,8 @@ export default {
   components: {
     HomeSection,
     JumbotronHome,
-    SliderComponent
+    SliderComponent,
+    LoaderComponent
   },
   data() {
     return {
@@ -41,7 +49,9 @@ export default {
     }
   },
   mounted() {
+    store.types = null;
     this.getTypes();
+    console.log(store.restaurants);
   }
 };
 </script>

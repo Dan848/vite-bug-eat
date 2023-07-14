@@ -1,5 +1,9 @@
 <template>
   <div v-if="store.restaurant">
+    <ModalComponent @onClick="addCartModal(modalItem)" btnOne="Annulla" btnTwo="Conferma"
+      :class="{ 'show d-block': openModal }" @closeModal="openModal = false"
+      :body="`Stai già ordinando da ${store.cart.restaurant.name}, sei sicuro di voler svuotare e ordinare da un altro ristorante?`"
+      header="Conferma" />
     <!-- Restaurant Background and Info -->
     <div class="background" :style="{ backgroundImage: 'url(' + store.restaurant.image + ')' }">
       <div class="container">
@@ -54,10 +58,10 @@
       </div>
     </div>
   </div>
-  <ModalComponent @onClick="addCartModal(modalItem)" btnOne="Annulla" btnTwo="Conferma"
-    :class="{ 'show d-block': openModal }" @closeModal="openModal = false"
-    :body="`Stai già ordinando da ${store.cart.restaurant.name}, sei sicuro di voler svuotare e ordinare da un altro ristorante?`"
-    header="Conferma" />
+
+  <div v-else>
+    <LoaderComponent />
+  </div>
 </template>
 
 <script>
@@ -65,6 +69,7 @@ import { store } from "../data/store";
 import ProductCard from "../components/ProductCard.vue";
 import CartComponent from "../components/CartComponent.vue";
 import ModalComponent from "../components/ModalComponent.vue";
+import LoaderComponent from "../components/LoaderComponent.vue";
 import axios from "axios";
 export default {
   name: "RestaurantListView",
@@ -72,6 +77,7 @@ export default {
     ProductCard,
     CartComponent,
     ModalComponent,
+    LoaderComponent
   },
   data() {
     return {
@@ -110,12 +116,14 @@ export default {
   },
 
   mounted() {
+    store.restaurant = null;
     //Get Restaurant 
     this.getRestaurant();
     // const cartData = localStorage.getItem("cart");
     // if (cartData) {
     //   store.cartItems = JSON.parse(cartData);
     // }
+    console.log(store.restaurants);
   },
 };
 </script>

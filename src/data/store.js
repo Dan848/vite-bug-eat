@@ -5,9 +5,9 @@ export const store = reactive({
   imgStartUrl: "http://localhost:8000",
   apiURL: "http://127.0.0.1:8000/api",
   //Data
-  restaurants: [],
+  restaurants: null,
   restaurant: null,
-  types: [],
+  types: null,
   checkboxTypes: [],
   //Cart
   cart: {
