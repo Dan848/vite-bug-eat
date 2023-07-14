@@ -78,7 +78,6 @@ export default {
                 token: this.nonce,
                 amount: store.cart.totalPrice,
             }
-            console.log(data);
             axios.post(`${store.apiURL}/orders/make-payment`, data).then((res) => {
                 console.log(res.data)
             })
