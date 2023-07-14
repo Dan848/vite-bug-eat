@@ -8,14 +8,20 @@
             <h3 class="text-center fw-bold mt-3 pb-0 px-3">I tuoi dati</h3>
             <hr>
             <!-- Input text -->
+            <div class="form-floating  mb-3">
+                <input @input="dataToCart(store.cart.user_name)" @focus="handleBlur('user_name')" @blur="handleBlur('user_name')" v-model="store.cart.user_name" id="user_name"
+                    name="user_name" type="text" class="form-control" maxlength="100" placeholder="Aniello Rossi"
+                    required>
+                <label for="name">Nome e Cognome *</label>
+            </div>
             <div class="form-floating mb-3">
-                <input @input="dataToCart(store.cart.user_email)" v-model="store.cart.user_email" id="user_email"
+                <input @input="dataToCart(store.cart.user_email)" @focus="handleBlur('user_email')" @blur="handleBlur('user_email')" v-model="store.cart.user_email" id="user_email"
                     name="user_email" type="email" class="form-control" maxlength="255" placeholder="luigiverdi@mail.com"
                     required>
                 <label for="name">E-mail *</label>
             </div>
             <div class="form-floating mb-3">
-                <input @input="dataToCart(store.cart.shipment_address)" v-model="store.cart.shipment_address"
+                <input @input="dataToCart(store.cart.shipment_address)" @focus="handleBlur('shipment_address')" @blur="handleBlur('shipment_address')" v-model="store.cart.shipment_address"
                     id="shipment_address" name="shipment_address" type="text" class="form-control" maxlength="255"
                     placeholder="Via Alberobello 18" required>
                 <label for="name">Indirizzo *</label>
@@ -192,7 +198,17 @@ export default {
                 //Qualcuno stampa il messaggio
             }
         },
-
+        //Change Input when Filled
+        handleBlur(id){
+            console.log("avvio")
+            const element = document.getElementById(id);
+            const parentElement = element.parentElement;
+            if (element.value != "" && !element.matches(':focus')){
+                parentElement.classList.add("form-empty");
+            } else {
+                parentElement.classList.remove("form-empty");
+            }
+        }
     },
     mounted() {
         //Initialize cart
@@ -250,11 +266,27 @@ export default {
     ;
 
     .form-floating {
+
         input {
             border-radius: 80px;
         }
+
     }
 
+    .form-empty{
+        padding: 0;
+        margin: .5rem 0!important;
+        input{
+            border: none;
+            padding: 0;
+            margin: 0;
+            height: 15px;
+            min-height: 10px!important;
+        }
+        label{
+                display: none;
+            }
+    }
     .max-quantity {
         font-size: .7rem;
         text-align: end;
