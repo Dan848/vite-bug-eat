@@ -9,22 +9,38 @@
     </div>
   </div>
 
+  <!-- SEARCHBAR -->
+
   <div class="row height d-flex justify-content-center align-items-center">
     <div class="col-md-6">
-      <form action="" method="GET" class="col-12">
+      <div>
         <div class="bm-form">
-          <i class="fa fa-search"></i>
-          <input type="text" class="form-control rounded-5" placeholder="Cerca un ristorante" />
+          <i class="fa fa-search" @click="navigateToRestaurantView"></i>
+          <input type="text" v-model="store.searchName" class="form-control rounded-5" placeholder="Cerca un ristorante" @keyup.enter="navigateToRestaurantView"/>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import {store} from '../data/store';
 export default {
   name: "JumbotronHome",
+
+  data(){
+    return {
+      store
+    }
+  },
+  methods: {
+    navigateToRestaurantView() {
+      if(store.searchName)
+        this.$router.push({ name: 'restaurantView' });
+    }
+  }
 };
+
 </script>
 
 <style lang="scss" scoped>
@@ -41,7 +57,7 @@ export default {
     font-weight: bold;
   }
 
-form {
+div {
   .bm-form{
     position: relative;
     .fa-search{
@@ -49,6 +65,7 @@ form {
       top: 20px;
       left: 20px;
       color: #9ca3af;
+      cursor: pointer;
     }
     input{
       height: 55px!important;

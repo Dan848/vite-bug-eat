@@ -9,6 +9,7 @@ export const store = reactive({
   restaurant: null,
   types: [],
   checkboxTypes: [],
+  searchName: "",
   //Cart
   cart: {
     user_email: "",

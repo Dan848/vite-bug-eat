@@ -41,6 +41,7 @@ export default {
     }
   },
   mounted() {
+    store.searchName = "";
     this.getTypes();
   }
 };
