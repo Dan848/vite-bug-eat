@@ -24,16 +24,20 @@
             </div>
           </div>
           <!-- Restaurant List -->
-          <div class="row" id="restaurantRow">
-            <h4 v-if="store.checkboxTypes.length > 0">
-              Stai filtrando per: 
-              <span v-for="(type, index) in store.checkboxTypes" :key="index">
+
+          <div class="row pt-3" id="restaurantRow">
+            <div class="col-12 d-flex flex-wrap" v-if="store.checkboxTypes.length > 0">
+              <span class="pe-1">Stai filtrando per:</span>
+              <div class="d-flex fw-bold" v-for="(type, index) in store.checkboxTypes" :key="index">
                 {{ getTypeName(type) }}
-                <span v-if="index !== store.checkboxTypes.length - 1">, </span>
-              </span>
-              
-            </h4>
-            <h3 class="pt-3">Risultati: {{ totalRestaurants }}</h3>
+                <div class="pe-1" v-if="index !== store.checkboxTypes.length - 1">,</div>
+              </div>
+            </div>
+            <div class="col-12 pt-3">
+              <span>Ci sono:</span>
+              <span class="fw-bold px-2">{{ totalRestaurants }}</span>
+              <span>Ristoranti vicino a te</span>
+            </div>
             <div v-for="restaurant in store.restaurants"
               class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
               <router-link :to="{
@@ -46,13 +50,13 @@
             </div>
           </div>
           <!-- Pagination -->
-          <div class="row">
+          <div class="row" v-if="totalRestaurants > 0">
             <ul class="pagination col-12 mt-3 mb-5">
               <li class="page-item">
                 <button :class="{
                   'page-link': true,
                   disabled: currentPage === 1,
-                }" @click="getRestaurants(currentPage - 1)">
+                }" @click="getRestaurants(currentPage - 1, store.checkboxTypes)">
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
               </li>
@@ -60,7 +64,7 @@
                 <button :class="{
                   'page-link': true,
                   active: currentPage === n,
-                }" @click="getRestaurants(n)">
+                }" @click="getRestaurants(n, store.checkboxTypes)">
                   {{ n }}
                 </button>
               </li>
@@ -68,7 +72,7 @@
                 <button :class="{
                   'page-link': true,
                   disabled: currentPage === lastPage,
-                }" @click="getRestaurants(currentPage + 1)">
+                }" @click="getRestaurants(currentPage + 1, store.checkboxTypes)">
                   <i class="fa-solid fa-angle-right"></i>
                 </button>
               </li>
@@ -111,9 +115,10 @@ export default {
       const type = store.checkboxTypes;
       this.getRestaurants(1, type);
     },
-    
+
     //Axios Call
     //getRestaurant
+
     getRestaurants(numPage) {
       let params = {
         page: numPage,
@@ -129,8 +134,8 @@ export default {
         console.log(params.search)
       }
       axios.get(`${store.apiURL}/restaurants`, {
-          params,
-        })
+        params,
+      })
         .then((res) => {
           store.restaurants = res.data.results.data;
           this.currentPage = res.data.results.current_page;
