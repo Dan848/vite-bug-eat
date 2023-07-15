@@ -174,6 +174,7 @@ export default {
     },
     resetFilters() {
       store.checkboxTypes = [];
+      store.searchName = '';
       this.getRestaurants(1);
     }
   },
