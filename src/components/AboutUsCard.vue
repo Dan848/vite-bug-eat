@@ -13,20 +13,15 @@
           <p>Ruolo: {{ team.role }}</p>
           <hr />
           <p class="bm-desc">{{ team.description }}</p>
-          <hr />
-        </div>
-        <div class="contacts">
-          <a href=""><i class="fa fa-plus"></i></a>
-          <a href=""><i class="fa-brands fa fa-whatsapp"></i></a>
-          <a href=""><i class="fa fa-envelope"></i></a>
-          <div class="clear"></div>
+
         </div>
 
+
         <div class="footer-card">
-          <a href=""><i class="fa-brands fa-facebook"></i></a>
-          <a href=""><i class="fa-brands fa-linkedin"></i></a>
-          <a href=""><i class="fa-brands fa-twitter"></i></a>
-          <a href=""><i class="fa-brands fa-instagram"></i></a>
+          <a :href="'mailto:' + team.contacts[0].email"><i class="fa-solid fa-envelope"></i></a>
+          <a :href="team.contacts[0].linkedin"><i class="fa-brands fa-linkedin"></i></a>
+          <a :href="team.contacts[0].github"><i class="fab fa-github"></i></a>
+          <a :href="team.contacts[0].instagram"><i class="fa-brands fa-instagram"></i></a>
         </div>
       </div>
     </div>
@@ -73,6 +68,7 @@ body {
 
 .card {
   float: left;
+  ;
 }
 
 .card-one {
