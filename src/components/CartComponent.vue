@@ -91,7 +91,7 @@
         <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle"
             @click="isOpen = true">
             <i class="fa-solid fa-cart-shopping fs-3"></i>
-            <span class="rounded-circle item-counter" v-if="store.cart.products.length > 0">{{ store.cart.products.length }}</span>
+            <span class="rounded-circle item-counter" v-if="store.cart.products.length > 0">{{ cartProducts() }}</span>
         </div>
         <!-- /Cart Bubble -->
 
@@ -216,11 +216,14 @@ export default {
             if(element.value != ""){
                 parentElement.classList.add("form-empty");
             }
-        }
-    },
-    computed: {
-        cartProducts(){
-            return count(store.cart.products);
+        },
+        cartProducts() {
+            let counter = 0;
+            for (let i = 0; i < store.cart.products.length; i++){
+                counter = counter + store.cart.products[i].quantity;
+            }
+            console.log(counter);
+            return counter
         }
     },
     mounted() {
