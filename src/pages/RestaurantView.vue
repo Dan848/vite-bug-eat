@@ -8,7 +8,7 @@
       <!-- Slider -->
       <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
         class="px-4 px-sm-2 px-lg-5" />
-      <div class="row">
+      <div class="row" id="restaurantRow">
         <!-- Aside -->
         <SidebarComponent @onChange="getRestaurants" :items="store.types" :imgStartUrl="store.imgStartUrl"
           :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" @resetFilters="resetFilters" />
@@ -26,7 +26,7 @@
               </div>
 
               <!-- Restaurant List -->
-              <div class="row pt-3" id="restaurantRow">
+              <div class="row pt-3">
                 <div class="col-12 d-flex flex-wrap" v-if="store.checkboxTypes.length > 0">
                   <span class="pe-1">Stai filtrando per:</span>
                   <div class="d-flex fw-bold" v-for="(type, index) in store.checkboxTypes" :key="index">
