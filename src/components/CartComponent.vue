@@ -222,7 +222,6 @@ export default {
             for (let i = 0; i < store.cart.products.length; i++){
                 counter = counter + store.cart.products[i].quantity;
             }
-            console.log(counter);
             return counter
         }
     },
