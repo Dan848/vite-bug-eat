@@ -74,10 +74,11 @@
   </div>
 </template>
 <script>
+import { store } from "../data/store";
 export default {
 data(){
   return {
-    
+    store
   }
   },
   mounted() {
