@@ -86,10 +86,12 @@
             </div>
         </div>
         <!-- /Cart Card -->
+
         <!-- Cart Bubble -->
         <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle"
             @click="isOpen = true">
             <i class="fa-solid fa-cart-shopping fs-3"></i>
+            <span class="rounded-circle item-counter" v-if="store.cart.products.length > 0">{{ store.cart.products.length }}</span>
         </div>
         <!-- /Cart Bubble -->
 
@@ -214,6 +216,11 @@ export default {
             if(element.value != ""){
                 parentElement.classList.add("form-empty");
             }
+        }
+    },
+    computed: {
+        cartProducts(){
+            return count(store.cart.products);
         }
     },
     mounted() {
@@ -374,9 +381,18 @@ export default {
     background-color: $primary;
     color: white;
     cursor: pointer;
-
     &:hover {
         background-color: #8cad6c;
+    }
+    .item-counter{
+        background-color: #bc2d3b;
+        color: white;
+        font-size: .7rem;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border-radius: 50%;
+        padding: 0 6px;
     }
 }
 
