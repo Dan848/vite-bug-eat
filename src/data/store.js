@@ -91,12 +91,28 @@ export const store = reactive({
       role: "Junior Full stack developper",
       description: "Che ve posso dire, al massimo vi posso cantare una canzone",
       profile_img: "/img/team/dp-vito.jpeg",
+      contacts: [
+        {
+          email: '',
+          linkedin: '',
+          github: '',
+          instagram: '',
+        }
+      ]
     },
     {
       name: "Lucà Giuseppe",
       role: "Mental Coach",
       description: "Forza Messina",
       profile_img: "/img/team/g-luca.jpg",
+      contacts: [
+        {
+          email: '',
+          linkedin: '',
+          github: '',
+          instagram: '',
+        }
+      ]
     },
     {
       name: "Rossi Aniello",
@@ -104,24 +120,56 @@ export const store = reactive({
       description:
         "Sono un ragazzo a cui piace programmare, risolvendo problemi, ma soprattutto creandone di nuovi",
       profile_img: "/img/team/n-rossi.jpg",
+      contacts: [
+        {
+          email: '',
+          linkedin: '',
+          github: '',
+          instagram: '',
+        }
+      ]
     },
     {
       name: "Ceravolo Daniele",
       role: "Project manager",
       description: "ORGANIZZATORE DI MENTI, E SONNAMBULO",
       profile_img: "/img/team/d-ceravolo.jpeg",
+      contacts: [
+        {
+          email: '',
+          linkedin: '',
+          github: '',
+          instagram: '',
+        }
+      ]
     },
     {
       name: "Libralato Michele ",
       role: "Junior RE web Developer",
       description: " Junior solo nell'anima. So de LATINA.",
       profile_img: "/img/team/m-librato.png",
+      contacts: [
+        {
+          email: 'michele.libralato.ml@gmail.com',
+          linkedin: 'https://www.linkedin.com/in/michele-libralato-7ab470115/',
+          github: 'https://github.com/MLibralato91',
+          instagram: 'https://www.instagram.com/mic.libralato/',
+        }
+      ]
     },
     {
       name: "Lumia Giorgio ",
       role: "Full Stack Celiaco",
       description: "Mi definisco un uomo pieno di inventiva e di problemi.",
       profile_img: "/img/team/g-lumia.jpg",
+      contacts: [
+        {
+          email: '',
+          linkedin: '',
+          github: '',
+          instagram: '',
+        }
+      ]
     },
   ],
   //METHODS
