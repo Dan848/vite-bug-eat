@@ -1,11 +1,10 @@
 <template>
-  <div
-    class="d-flex flex-column justify-content-center align-items-center py-5"
-  >
- 
-   
-    <div class="container"> 
+  <div class="d-flex flex-column justify-content-center align-items-center py-5">
+    <div class="mission-image">
+        <img src="/img/ourMission/ant.jpg" alt="ant">
         <h2  class="fs-4 fw-bold">"BUG-EAT Eco-Sostenibile: Ordina, Gusta e Cambia il Mondo!"</h2>
+    </div>
+    <div class="container text-center">
       <p class="py-5 lh-lg fs-6 small ">
         Benvenuti nel sito di <span class="text-primary fw-semibold">BUG-EAT </span>, il food-delivery più eco-sostenibile del mercato!
         Siamo fieri di abbracciare la causa della deforestazione e di fare la
@@ -21,7 +20,12 @@
         provenienti da  <span class="text-primary text-capitalize fw-semibold">agricoltura biologica e sostenibile</span> , riducendo così
         l'impatto della produzione alimentare sull'ambiente. Ma la nostra
         dedizione all'ambiente non si ferma qui !! . <br> <span  class=" fs-6 ">Vogliamo fare ancora di più per
-        creare un impatto positivo sulla società.</span>  <br> <span class="fs-5 text-capitalize fw-bold">Per ogni ordine effettuato
+        creare un impatto positivo sulla società.</span>  <br>
+        <div class="mission-image">
+          <img src="/img/ourMission/earth.jpg" alt="earth">
+          <h2  class="fs-4 fw-bold">"BUG-EAT Eco-Sostenibile: Ordina, Gusta e Cambia il Mondo!"</h2>
+        </div> 
+        <span class="fs-5 text-capitalize fw-bold">Per ogni ordine effettuato
         tramite il nostro sito, destiniamo una percentuale del ricavato a
         progetti socialmente utili.</span> <br> Questi progetti possono includere iniziative
         per la <span class="fw-semibold fs-5 text-primary text-capitalize">riforestazione</span> , la <span class="fw-semibold fs-5 text-primary text-capitalize">protezione degli habitat naturali </span> e la
@@ -32,9 +36,15 @@
         ordinato sia un passo verso la sostenibilità ambientale e il benessere
         della comunità. Inoltre, ci impegniamo a monitorare costantemente le
         nostre pratiche e ad adottare nuove soluzioni sostenibili man mano che
-        diventano disponibili. <span class="fs-5 text-capitalize fw-semibold"> <br><br>Ordina il tuo pasto oggi e fai la differenza
+        diventano disponibili. <span class="fs-5 text-capitalize fw-semibold"> <br><br>
+        <div class="mission-image">
+            <img src="/img/ourMission/tree.jpg" alt="earth">
+            <h2  class="fs-4 fw-bold">"BUG-EAT Eco-Sostenibile: Ordina, Gusta e Cambia il Mondo!"</h2>
+        </div> 
+          Ordina il tuo pasto oggi e fai la differenza
         con ogni boccone!</span> 
       </p>
+      <router-link class="bg-success text-light rounded p-2" to="/restaurantview"> Ordina ora </router-link>
       <hr class="p-2">
       <h3>
         ECCO ALCUNE DELLE ORGANIZZAZIONI NO-PROFIT CHE COLLABORANO CON NOI!
@@ -87,14 +97,25 @@ data(){
 };
 </script>
 <style lang="scss" scoped>
-img {
-  width: 100px;
-}
+
 ul{
     list-style: none;
     li{
     padding: 1.3rem;
 }
+}
+
+.mission-image{
+  img{
+    width:70%;
+  }
+  h2{
+    text-align: center;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>
