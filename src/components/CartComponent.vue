@@ -45,7 +45,7 @@
             </div>
             <hr class="mb-3 mt-0" :class="{ 'd-none': !store.cart.products.length }" />
             <!-- Product List -->
-            <ul class="list-unstyled overflow-y-auto cart-products container-fluid">
+            <ul :class="{'d-none' : store.cart.products.length < 1}" class="list-unstyled overflow-y-auto cart-products container-fluid">
                 <!-- Single Product -->
                 <li v-for="(product, index) in store.cart.products" :class="{ 'border-top': index != 0 }"
                     class="py-2 row align-items-center">
@@ -77,10 +77,10 @@
                     class="btn btn-primary rounded-5 fw-bold text-white mb-3">
                     Vai al pagamento
                 </button> -->
-                <router-link :to="{
-                name: 'checkout',}" :class="{'d-none' : $route.name === 'checkout'}"  class="btn btn-primary rounded-5 fw-bold text-white mb-3">
-                Vai al pagamento
-                </router-link>
+                <button @click="this.$router.push('/checkout')" :class="{'d-none' : $route.name === 'checkout'}" class="btn btn-primary rounded-5 fw-bold text-white mb-3" :disabled="store.cart.products. length < 1">
+                    Vai al pagamento
+                </button>
+
                 <div :class="{'d-none' : $route.name === 'checkout'}" class="text-center text-decoration-underline small px-2" @click="modalOpen = true">
                     Svuota Carrello
                 </div>
