@@ -168,7 +168,7 @@ export default {
   //Mounted
   mounted() {
     store.restaurants = null;
-
+    store.show = false;
     this.getTypes();
     if (store.checkboxTypes) {
       this.getRestaurants(1, store.checkboxTypes); // Chiama la funzione getRestaurants con il tipo specificato

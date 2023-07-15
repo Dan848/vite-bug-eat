@@ -74,7 +74,16 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+data(){
+  return {
+    
+  }
+  },
+  mounted() {
+    store.show = false;
+  }
+};
 </script>
 <style lang="scss" scoped>
 img {

@@ -9,12 +9,12 @@
 
         <!-- {{ --Burger Menù-- }} -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" @click="show = !show">
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" @click="store.show = !store.show">
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- {{ --Navbar Start-- }} -->
         <div class="drop-menu collapse navbar-collapse justify-content-between bg-primary rounded-bottom-5"
-          id="navbarNavDropdown" :class="{ show: show }">
+          id="navbarNavDropdown" :class="{ show: store.show }">
           <ul class="navbar-nav mb-2 mb-lg-0">
             <!-- {{ --Simple Anchor Link-- }} -->
             <li class="px-3 text-uppercase pb-2 pb-lg-0" v-for="(item, index) in store.headerLinks">
@@ -38,7 +38,6 @@ export default {
   data() {
     return {
       store,
-      show: false,
       currentIndex: 0
     };
   },

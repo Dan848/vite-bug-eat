@@ -155,6 +155,7 @@ export default {
   },
   mounted() {
     this.getToken();
+    store.show = false;
   },
 };
 </script>

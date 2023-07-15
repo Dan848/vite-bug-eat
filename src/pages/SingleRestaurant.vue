@@ -117,6 +117,7 @@ export default {
 
   mounted() {
     store.restaurant = null;
+    store.show = false;
     //Get Restaurant 
     this.getRestaurant();
     // const cartData = localStorage.getItem("cart");

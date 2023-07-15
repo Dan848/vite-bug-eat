@@ -4,6 +4,8 @@ export const store = reactive({
   //General Api Url
   imgStartUrl: "http://localhost:8000",
   apiURL: "http://127.0.0.1:8000/api",
+  //Hamburger menu show
+  show: false,
   //Data
   restaurants: null,
   restaurant: null,
