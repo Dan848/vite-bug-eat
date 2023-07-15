@@ -1,7 +1,7 @@
 <template>
     <div class="loader-wrapper">
         <div class="image">
-            <img src="/img/general/loader-image.png" alt="loaderImage">
+            <img src="/img/general/pizza-loader.png" alt="loaderImage">
         </div>
     </div>
 </template>
@@ -42,7 +42,6 @@ export default {
 .image {
     border-radius: 150px;
     animation: loaderSize 2s linear infinite;
-
     img {
         height: 250px;
         width: 250px;
