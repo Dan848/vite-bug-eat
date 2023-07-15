@@ -173,9 +173,7 @@ export const store = reactive({
   },
   ],
   //Chekout Page
-  hostedFieldInstance: false,
   token: "",
-
   //METHODS
   //Scroll to Top
   scrollToTop() {

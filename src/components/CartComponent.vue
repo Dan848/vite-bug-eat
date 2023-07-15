@@ -5,38 +5,40 @@
             <!-- Cart Title -->
             <i class="fa-solid fa-xmark fs-4 fw-bolder d-md-none" @click="isOpen = false">
             </i>
-            <h3 class="text-center fw-bold mt-3 pb-0 px-3">I tuoi dati</h3>
-            <hr class="mt-0">
-            <!-- USER DATA -->
-            <!-- Name and Surname -->
-            <div :class="{'form-empty' : store.cart.user_name.length > 0}" class="form-floating  mb-2">
-                <input  @input="dataToCart(store.cart.user_name)" @focus="handleFocus('user_name')" @blur="handleBlur('user_name')" v-model="store.cart.user_name" id="user_name"
-                    name="user_name" type="text" class="form-control" maxlength="100" placeholder="Aniello Rossi"
-                    required>
-                <label for="name">Nome e Cognome *</label>
-                <div><i class="fa-solid fa-user"></i></div>
+            <div :class="{'d-none' : !($route.name == 'checkout')}">
+                <h3 class="text-center fw-bold mt-3 pb-0 px-3">I tuoi dati</h3>
+                <hr class="mt-0">
+                <!-- USER DATA -->
+                <!-- Name and Surname -->
+                <div :class="{'form-empty' : store.cart.user_name.length > 0}" class="form-floating  mb-2">
+                    <input  @input="dataToCart(store.cart.user_name)" @focus="handleFocus('user_name')" @blur="handleBlur('user_name')" v-model="store.cart.user_name" id="user_name"
+                        name="user_name" type="text" class="form-control" maxlength="100" placeholder="Aniello Rossi"
+                        required>
+                    <label for="name">Nome e Cognome *</label>
+                    <div><i class="fa-solid fa-user"></i></div>
+                </div>
+                <!-- /Name and Surname -->
+                <!-- E-Mail -->
+                <div :class="{'form-empty' : store.cart.user_email}" class="form-floating mb-2">
+                    <input  @input="dataToCart(store.cart.user_email)" @focus="handleFocus('user_email')" @blur="handleBlur('user_email')" v-model="store.cart.user_email" id="user_email"
+                        name="user_email" type="email" class="form-control" maxlength="255" placeholder="luigiverdi@mail.com"
+                        required>
+                    <label for="name">E-mail *</label>
+                    <div><i class="fa-solid fa-envelope"></i></div>
+                </div>
+                <!-- /E-Mail -->
+                <!-- Address -->
+                <div :class="{'form-empty' : store.cart.shipment_address}" class="form-floating mb-2">
+                    <input  @input="dataToCart(store.cart.shipment_address)" @focus="handleFocus('shipment_address')" @blur="handleBlur('shipment_address')" v-model="store.cart.shipment_address"
+                        id="shipment_address" name="shipment_address" type="text" class="form-control" maxlength="255"
+                        placeholder="Via Alberobello 18" required>
+                    <label for="name">Indirizzo *</label>
+                    <div><i class="fa-solid fa-location-dot"></i></div>
+                </div>
+                <!-- /Address -->
+                <!-- /USER DATA -->
+                <hr class=" mt-0 mb-3">
             </div>
-            <!-- /Name and Surname -->
-            <!-- E-Mail -->
-            <div :class="{'form-empty' : store.cart.user_email}" class="form-floating mb-2">
-                <input  @input="dataToCart(store.cart.user_email)" @focus="handleFocus('user_email')" @blur="handleBlur('user_email')" v-model="store.cart.user_email" id="user_email"
-                    name="user_email" type="email" class="form-control" maxlength="255" placeholder="luigiverdi@mail.com"
-                    required>
-                <label for="name">E-mail *</label>
-                <div><i class="fa-solid fa-envelope"></i></div>
-            </div>
-            <!-- /E-Mail -->
-            <!-- Address -->
-            <div :class="{'form-empty' : store.cart.shipment_address}" class="form-floating mb-2">
-                <input  @input="dataToCart(store.cart.shipment_address)" @focus="handleFocus('shipment_address')" @blur="handleBlur('shipment_address')" v-model="store.cart.shipment_address"
-                    id="shipment_address" name="shipment_address" type="text" class="form-control" maxlength="255"
-                    placeholder="Via Alberobello 18" required>
-                <label for="name">Indirizzo *</label>
-                <div><i class="fa-solid fa-location-dot"></i></div>
-            </div>
-            <!-- /Address -->
-            <!-- /USER DATA -->
-            <hr class=" mt-0 mb-3">
             <!-- ORDERS -->
             <h3 class="text-center fw-bold pb-0 px-3">Il tuo ordine</h3>
             <!-- Restaurant Name -->
@@ -185,22 +187,6 @@ export default {
             const seconds = dateTime.getSeconds().toString().padStart(2, '0');
 
             return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-        },
-        //Send form data
-        sendForm() {
-            if (store.cart.products.length >= 1) {
-                const data = {
-                    user_email: store.cart.user_email,
-                    shipment_address: store.cart.shipment_address,
-                    total_price: store.cart.totalPrice,
-                    date_time: this.formatDateTime(new Date()),
-                    products: store.cart.products,
-                };
-                axios.post(`${store.apiURL}/orders/store`, data).then((res) => {
-                })
-            } else {
-                //Qualcuno stampa il messaggio
-            }
         },
         //Change Input when Filled
         handleFocus(id){

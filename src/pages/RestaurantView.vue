@@ -4,7 +4,7 @@
     <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
       <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>
     </div>
-    <div class="container">
+    <div class="container" id="pippo">
       <!-- Slider -->
       <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
         class="px-4 px-sm-2 px-lg-5" />

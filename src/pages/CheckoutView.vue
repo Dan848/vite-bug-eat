@@ -1,10 +1,10 @@
 <template>
-  <div class="container my-5">
+  <form id="pablo" class="container my-5">
     <div class="row justify-content-between">
       <CartComponent class="col-6" />
       <div class="col-6">
         <div>Che succede se scrivo qui</div>
-        <form>
+        <div>
           <div class="form-group">
             <label>Nome Intestatario</label>
             <div id="intestatario" class="form-control"></div>
@@ -15,7 +15,7 @@
           </div>
           <div class="form-group">
             <div class="row">
-              <div class="col-6">
+              <div class="col-6">1
                 <label>Expire Date</label>
                 <div id="scadi" class="form-control"></div>
               </div>
@@ -28,14 +28,13 @@
           <button
             type="submit"
             class="btn btn-primary rounded-5 w-100 mt-3"
-            @click.prevent="payWithCreditCard"
-          >
+            @click="payWithCreditCard" :disabled="!this.hostedFieldInstance || !store.cart.user_email || !store.cart.user_name || !store.cart.shipment_address">
             Submit
           </button>
-        </form>
+        </div>
       </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -43,7 +42,6 @@ import { store } from "../data/store";
 import CartComponent from "../components/CartComponent.vue";
 import axios from "axios";
 import braintree from "braintree-web";
-import dropin from "braintree-web-drop-in";
 
 export default {
   name: "CheckoutView",
@@ -53,17 +51,38 @@ export default {
   data() {
     return {
       store,
+      hostedFieldInstance: false,
       nonce: "",
       error: "",
     };
   },
   methods: {
+    //Send form data
+    sendForm() {
+      if (store.cart.products.length >= 1) {
+        const data = {
+          user_email: store.cart.user_email,
+          shipment_address: store.cart.shipment_address,
+          total_price: store.cart.totalPrice,
+          date_time: this.formatDateTime(new Date()),
+          products: store.cart.products,
+        };
+        axios.post(`${store.apiURL}/orders/store`, data).then((res) => {
+          
+        })
+      } else {
+          //Qualcuno stampa il messaggio
+      }
+    },
     // Al submit...
-    payWithCreditCard() {
-      //...se ho ricevuto il token da braintree...
-      if (store.hostedFieldInstance) {
-        //...genera un altro token da inviare per pagare
-        store.hostedFieldInstance
+    payWithCreditCard(e) {
+      const form = document.getElementById("pablo")
+      if (form.checkValidity()){
+        e.preventDefault()
+        //...se ho ricevuto il token da braintree...
+        if (this.hostedFieldInstance) {
+          //...genera un altro token da inviare per pagare
+          this.hostedFieldInstance
           .tokenize()
           .then((payload) => {
             //token
@@ -75,6 +94,7 @@ export default {
             this.error = err.message;
             console.log(err.message);
           });
+        }
       }
     },
     //API make-payment
@@ -90,7 +110,6 @@ export default {
     },
     //Genera Campi Editabili da Braintree
     getHostedFields(token) {
-      console.log(token)
       braintree.client
         .create({
           authorization: token,
@@ -138,7 +157,7 @@ export default {
         })
         .then((hostedFieldInstance) => {
           // Use hostedFieldInstance to send data to Braintree
-          store.hostedFieldInstance = hostedFieldInstance;
+          this.hostedFieldInstance = hostedFieldInstance;
         })
         .catch((err) => {
           console.log(err);
@@ -151,6 +170,7 @@ export default {
       axios.get(`${store.apiURL}/orders/generate`).then((res) => {
         //...chiama hosted fields
         store.token = res.data.token;
+          this.getHostedFields(store.token)
       });
 
     },
@@ -158,8 +178,10 @@ export default {
   mounted() {
     store.show = false;
     this.getToken();
-    this.getHostedFields(store.token);
   },
+  unmounted(){
+    this.hostedFieldInstance.teardown();
+  }
 };
 </script>
 
