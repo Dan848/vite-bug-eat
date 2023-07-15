@@ -9,6 +9,29 @@ $fa-font-path: "./webfonts" !default;
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 //Bootstrap
 @import "bootstrap/scss/bootstrap";
+// SCROLL BAR CUSTOM
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+ 
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:  #979ca5; 
+  border-radius: 50px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7b7a7a; 
+}
+::-webkit-scrollbar-track-piece{
+  background: trasparent;
+}
 
 body {
   font-family: 'Quicksand', sans-serif;

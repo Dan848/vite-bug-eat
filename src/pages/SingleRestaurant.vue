@@ -54,10 +54,10 @@
       </div>
     </div>
   </div>
-  <ModalComponent @onClick="addCartModal(modalItem)" btnOne="Annulla" btnTwo="Aggiungi"
+  <ModalComponent @onClick="addCartModal(modalItem)" btnOne="Annulla" btnTwo="Conferma"
     :class="{ 'show d-block': openModal }" @closeModal="openModal = false"
     :body="`Stai già ordinando da ${store.cart.restaurant.name}, sei sicuro di voler svuotare e ordinare da un altro ristorante?`"
-    header="Aggiungi prodotto" />
+    header="Conferma" />
 </template>
 
 <script>
