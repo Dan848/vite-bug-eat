@@ -71,8 +71,8 @@ export default {
       color: white;
 
       &:hover {
-        padding-bottom: 10px;
-        border-bottom: 2px solid $secondary;
+        padding-bottom: 17px;
+        border-bottom: 3px solid $secondary;
         color: $secondary;
       }
     }
@@ -80,7 +80,7 @@ export default {
 }
 
 .active {
-  padding-bottom: 10px;
+  padding-bottom: 18px;
   border-bottom: 2px solid $secondary;
   color: $secondary !important;
 }
