@@ -1,5 +1,8 @@
 <template>
   <div class="container" v-if="store.teams">
+    <div>
+      <CartComponent v-if="store.cart.products.length > 0"/>
+    </div>
     <h2 class="text-center my-5 pixel-text text-secondary">Conosci meglio il nostro Team!</h2>
     <div class="row align-items-stretch">
       <AboutUsCard v-for="team in store.teams" :key="team.id" :team="team" />
@@ -16,12 +19,14 @@
 import { store } from "../data/store";
 import AboutUsCard from "../components/AboutUsCard.vue";
 import LoaderComponent from "../components/LoaderComponent.vue";
+import CartComponent from "../components/CartComponent.vue";
 export default {
   name: "AboutUs",
   components: {
     AboutUsCard,
-    LoaderComponent
-  },
+    LoaderComponent,
+    CartComponent
+},
   data() {
     return {
       store,

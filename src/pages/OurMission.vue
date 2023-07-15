@@ -1,5 +1,8 @@
 <template>
   <div class="d-flex flex-column justify-content-center align-items-center py-5">
+    <div>
+      <CartComponent/>
+    </div>
     <div class="mission-image">
         <img src="/img/ourMission/ant.jpg" alt="ant">
         <h2  class="fs-4 fw-bold">"BUG-EAT Eco-Sostenibile: Ordina, Gusta e Cambia il Mondo!"</h2>
@@ -85,15 +88,17 @@
 </template>
 <script>
 import { store } from "../data/store";
+import CartComponent from "../components/CartComponent.vue";
 export default {
-data(){
-  return {
-    store
-  }
-  },
-  mounted() {
-    store.show = false;
-  }
+    data() {
+        return {
+            store
+        };
+    },
+    mounted() {
+        store.show = false;
+    },
+    components: { CartComponent }
 };
 </script>
 <style lang="scss" scoped>
@@ -108,6 +113,8 @@ ul{
 .mission-image{
   img{
     width:70%;
+    border-radius: 80px;
+    margin-bottom: 2rem;
   }
   h2{
     text-align: center;

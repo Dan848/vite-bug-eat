@@ -88,7 +88,7 @@
         <!-- /Cart Card -->
 
         <!-- Cart Bubble -->
-        <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle"
+        <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle" :class="{'top-70' : $route.path !== '/restaurants/:slug'}"
             @click="isOpen = true">
             <i class="fa-solid fa-cart-shopping fs-3"></i>
             <span class="rounded-circle item-counter" v-if="store.cart.products.length > 0">{{ cartProducts() }}</span>
@@ -382,6 +382,7 @@ export default {
     right: 5px;
     background-color: $primary;
     color: white;
+    z-index: 1005;
     cursor: pointer;
     &:hover {
         background-color: #8cad6c;
@@ -396,6 +397,11 @@ export default {
         border-radius: 50%;
         padding: 0 6px;
     }
+}
+
+//Generic styles
+.top-70{
+  top: 70px !important;
 }
 
 //Card
@@ -413,6 +419,5 @@ export default {
             min-height: 100px;
         }
     }
-
 }
 </style>
