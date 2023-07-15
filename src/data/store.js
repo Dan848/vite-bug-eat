@@ -9,6 +9,7 @@ export const store = reactive({
   restaurant: null,
   types: null,
   checkboxTypes: [],
+  searchName: "",
   //Cart
   cart: {
     user_name: "",
@@ -49,36 +50,41 @@ export const store = reactive({
   sections: [
     {
       title: "Ci impegniamo a salvaguardare l’ambiente...",
-      content: "...adottando pratiche virtuose lungo tutta la catena “dal campo al vassoio”, partendo dalla scelta dei fornitori e arrivando fino alla gestione dei rifiuti, passando per una politica di risparmio energetico e per l’adozione di packaging a impatto zero.",
+      content:
+        "...adottando pratiche virtuose lungo tutta la catena “dal campo al vassoio”, partendo dalla scelta dei fornitori e arrivando fino alla gestione dei rifiuti, passando per una politica di risparmio energetico e per l’adozione di packaging a impatto zero.",
       subtitle: "",
       image: "/img/eco-images/firstEco.png",
       inverted: false,
-      routerLink: {}
+      routerLink: {},
     },
     {
-      title: "Bug-Eat si impegna per un modello di crescita socialmente responsabile ed ecologico.",
-      content: "Per noi, il cambiamento viene dall'interno: la nostra cultura interna determina l'impatto del core business. Siamo un fattore abilitante per la crescita delle piccole imprese e un'opportunità per i corrieri di generare entrate in modo rapido e accessibile. Sebbene la nostra tecnologia sia gratuita per cause senza scopo di lucro, ne facciamo buon uso anche per ridurre la nostra impronta di carbonio.",
+      title:
+        "Bug-Eat si impegna per un modello di crescita socialmente responsabile ed ecologico.",
+      content:
+        "Per noi, il cambiamento viene dall'interno: la nostra cultura interna determina l'impatto del core business. Siamo un fattore abilitante per la crescita delle piccole imprese e un'opportunità per i corrieri di generare entrate in modo rapido e accessibile. Sebbene la nostra tecnologia sia gratuita per cause senza scopo di lucro, ne facciamo buon uso anche per ridurre la nostra impronta di carbonio.",
       subtitle: "",
       image: "/img/eco-images/secondEco.png",
       inverted: true,
-      routerLink: {}
+      routerLink: {},
     },
     {
       title: "La sostenibilità è una delle anime di Bug-Eat, da sempre.",
-      content: "È il criterio di riferimento costante nella creazione dei prodotti, nella progettazione dei punti vendita ed è ispirazione per le campagne di mobilitazione dove i Soci sono parte propositiva e attiva.",
+      content:
+        "È il criterio di riferimento costante nella creazione dei prodotti, nella progettazione dei punti vendita ed è ispirazione per le campagne di mobilitazione dove i Soci sono parte propositiva e attiva.",
       subtitle: "",
       image: "/img/eco-images/thirdEco.png",
       inverted: false,
-      routerLink: {}
+      routerLink: {},
     },
     {
       title: "Aiutamo le nostre amiche a sei zampe!",
-      content: "Ciascun ordine effettuato su Bug-Eat contribuirà alla ricerca e allo sviluppo di nuovi metodi volti a preservare la sicurezza e il benessere della popolazione di api in Italia. Sostenendo Bug-Eat, stai supportando attivamente gli sforzi per proteggere questi preziosi insetti e preservare l'importante ruolo che svolgono nel nostro ecosistema. ",
+      content:
+        "Ciascun ordine effettuato su Bug-Eat contribuirà alla ricerca e allo sviluppo di nuovi metodi volti a preservare la sicurezza e il benessere della popolazione di api in Italia. Sostenendo Bug-Eat, stai supportando attivamente gli sforzi per proteggere questi preziosi insetti e preservare l'importante ruolo che svolgono nel nostro ecosistema. ",
       subtitle: "",
       image: "/img/eco-images/fourthEco.png",
       inverted: true,
-      routerLink: {}
-    }
+      routerLink: {},
+    },
   ],
   //Team Page Data
   teams: [
@@ -104,7 +110,7 @@ export const store = reactive({
     {
       name: "Ceravolo Daniele",
       role: "Project manager",
-      description: "IL PAZZO CHE HA DECISO DI FARLO FUNZIONANTE IL GIOCO",
+      description: "ORGANIZZATORE DI MENTI, E SONNAMBULO",
       profile_img: "/img/team/d-ceravolo.jpeg",
     },
     {
@@ -130,7 +136,7 @@ export const store = reactive({
   scrollToElement(elementId) {
     const element = document.getElementById(elementId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   },
   // Add product to cart
@@ -139,7 +145,10 @@ export const store = reactive({
     const newItem = item;
 
     // if no/new restaurant, reset cart, set restaurant, set quantity 1, push newitem
-    if (Object.keys(cart.restaurant).length == 0 || cart.restaurant.id != newItem.restaurant_id) {
+    if (
+      Object.keys(cart.restaurant).length == 0 ||
+      cart.restaurant.id != newItem.restaurant_id
+    ) {
       cart.products = [];
       cart.totalPrice = 0;
       cart.restaurant = store.restaurant;
@@ -148,19 +157,21 @@ export const store = reactive({
     }
     // if restaurant set
     else {
-      // if product already pushed 
-      if (cart.products.some(product => product.id === newItem.id)) {
-        const cartItem = cart.products.find(product => product.id === newItem.id);
+      // if product already pushed
+      if (cart.products.some((product) => product.id === newItem.id)) {
+        const cartItem = cart.products.find(
+          (product) => product.id === newItem.id
+        );
         // increase quantity
         if (cartItem.quantity < 50) {
           cartItem.quantity++;
         }
         // or return error message
         else {
-          return
+          return;
         }
       }
-      // if new product 
+      // if new product
       else {
         newItem.quantity = 1;
         cart.products.push(newItem);

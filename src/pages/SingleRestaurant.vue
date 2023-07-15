@@ -5,7 +5,7 @@
       :body="`Stai già ordinando da ${store.cart.restaurant.name}, sei sicuro di voler svuotare e ordinare da un altro ristorante?`"
       header="Conferma" />
     <!-- Restaurant Background and Info -->
-    <div class="background" :style="{ backgroundImage: 'url(' + store.restaurant.image + ')' }">
+    <div class="background" :style="{ backgroundImage: 'url(' + store.imgStartUrl + store.restaurant.image + ')' }">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col">

@@ -4,7 +4,7 @@
       <div class="inner">
         <div class="box-img w-100 h-100 d-flex justify-content-center">
           <img
-            :src="restaurant.image"
+            :src="'http://localhost:8000' + restaurant.image"
             :alt="restaurant.name" class="w-100" />
         </div>
       </div>
@@ -97,7 +97,6 @@ export default {
   .inner {
     width: 325px;
     height: 100%;
-    //    background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80') no-repeat center center/cover;
     object-fit: cover;
     border: 1px solid #f0f0f0;
     border-bottom-right-radius: 80px;

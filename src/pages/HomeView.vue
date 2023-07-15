@@ -49,6 +49,7 @@ export default {
     }
   },
   mounted() {
+
     store.types = null;
     this.getTypes();
     console.log(store.restaurants);

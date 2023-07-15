@@ -1,40 +1,49 @@
 <template>
     <div>
         <!-- Cart Card -->
-        <form @submit.prevent="sendForm()" class="cart py-2 px-3 flex-column" :class="isOpen ? 'd-flex' : 'd-none'">
+        <div class="cart py-2 px-3 flex-column" :class="isOpen ? 'd-flex' : 'd-none'">
             <!-- Cart Title -->
             <i class="fa-solid fa-xmark fs-4 fw-bolder d-md-none" @click="isOpen = false">
             </i>
             <h3 class="text-center fw-bold mt-3 pb-0 px-3">I tuoi dati</h3>
-            <hr>
-            <!-- Input text -->
-            <div class="form-floating  mb-3">
-                <input @input="dataToCart(store.cart.user_name)" @focus="handleBlur('user_name')" @blur="handleBlur('user_name')" v-model="store.cart.user_name" id="user_name"
+            <hr class="mt-0">
+            <!-- USER DATA -->
+            <!-- Name and Surname -->
+            <div :class="{'form-empty' : store.cart.user_name.length > 0}" class="form-floating  mb-2">
+                <input  @input="dataToCart(store.cart.user_name)" @focus="handleFocus('user_name')" @blur="handleBlur('user_name')" v-model="store.cart.user_name" id="user_name"
                     name="user_name" type="text" class="form-control" maxlength="100" placeholder="Aniello Rossi"
                     required>
                 <label for="name">Nome e Cognome *</label>
+                <div><i class="fa-solid fa-user"></i></div>
             </div>
-            <div class="form-floating mb-3">
-                <input @input="dataToCart(store.cart.user_email)" @focus="handleBlur('user_email')" @blur="handleBlur('user_email')" v-model="store.cart.user_email" id="user_email"
+            <!-- /Name and Surname -->
+            <!-- E-Mail -->
+            <div :class="{'form-empty' : store.cart.user_email}" class="form-floating mb-2">
+                <input  @input="dataToCart(store.cart.user_email)" @focus="handleFocus('user_email')" @blur="handleBlur('user_email')" v-model="store.cart.user_email" id="user_email"
                     name="user_email" type="email" class="form-control" maxlength="255" placeholder="luigiverdi@mail.com"
                     required>
                 <label for="name">E-mail *</label>
+                <div><i class="fa-solid fa-envelope"></i></div>
             </div>
-            <div class="form-floating mb-3">
-                <input @input="dataToCart(store.cart.shipment_address)" @focus="handleBlur('shipment_address')" @blur="handleBlur('shipment_address')" v-model="store.cart.shipment_address"
+            <!-- /E-Mail -->
+            <!-- Address -->
+            <div :class="{'form-empty' : store.cart.shipment_address}" class="form-floating mb-2">
+                <input  @input="dataToCart(store.cart.shipment_address)" @focus="handleFocus('shipment_address')" @blur="handleBlur('shipment_address')" v-model="store.cart.shipment_address"
                     id="shipment_address" name="shipment_address" type="text" class="form-control" maxlength="255"
                     placeholder="Via Alberobello 18" required>
                 <label for="name">Indirizzo *</label>
+                <div><i class="fa-solid fa-location-dot"></i></div>
             </div>
-
-            <hr class="mb-4">
-            <!-- /Input text -->
-            <h3 class="text-center fw-bold mt-3 pb-0 px-3">Il tuo ordine</h3>
+            <!-- /Address -->
+            <!-- /USER DATA -->
+            <hr class=" mt-0 mb-3">
+            <!-- ORDERS -->
+            <h3 class="text-center fw-bold pb-0 px-3">Il tuo ordine</h3>
             <!-- Restaurant Name -->
             <div class="h6 text-center" :class="{ 'd-none': !store.cart.restaurant.name }">
                 Presso: <span class="fw-medium">{{ store.cart.restaurant.name }}</span>
             </div>
-            <hr class="mb-2" :class="{ 'd-none': !store.cart.products.length }" />
+            <hr class="mb-3 mt-0" :class="{ 'd-none': !store.cart.products.length }" />
             <!-- Product List -->
             <ul class="list-unstyled overflow-y-auto cart-products container-fluid">
                 <!-- Single Product -->
@@ -64,20 +73,22 @@
             </div>
             <!-- Cart Footer Button -->
             <div class="d-flex flex-column justify-content-center align-items-center  mb-2">
-                <button :disabled="store.cart.products.length < 1" type="submit"
+                <!-- <button :disabled="store.cart.products.length < 1" type="submit"
                     class="btn btn-primary rounded-5 fw-bold text-white mb-3">
                     Vai al pagamento
-                </button>
-                <!-- <router-link :to="{
-                name: 'checkout',
-                params: { id:1 } }" class="btn btn-primary rounded-5 fw-bold text-white mb-3">
+                </button> -->
+                <router-link :to="{
+                name: 'checkout',}" :class="{'d-none' : $route.name === 'checkout'}"  class="btn btn-primary rounded-5 fw-bold text-white mb-3">
                 Vai al pagamento
-                </router-link> -->
-                <div class="text-center text-decoration-underline small px-2" @click="modalOpen = true">
+                </router-link>
+                <div :class="{'d-none' : $route.name === 'checkout'}" class="text-center text-decoration-underline small px-2" @click="modalOpen = true">
                     Svuota Carrello
                 </div>
+                <router-link :to="{ name: 'single-restaurant', params: { slug: store.cart.restaurant.slug } }" :class="{'d-none' : !($route.name === 'checkout')}" class="text-center text-black text-decoration-underline small px-2">
+                    Torna al ristorante
+                </router-link>
             </div>
-        </form>
+        </div>
         <!-- /Cart Card -->
         <!-- Cart Bubble -->
         <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle"
@@ -199,14 +210,16 @@ export default {
             }
         },
         //Change Input when Filled
-        handleBlur(id){
-            console.log("avvio")
+        handleFocus(id){
             const element = document.getElementById(id);
             const parentElement = element.parentElement;
-            if (element.value != "" && !element.matches(':focus')){
+            parentElement.classList.remove("form-empty");
+        },
+        handleBlur(id){
+            const element = document.getElementById(id);
+            const parentElement = element.parentElement;
+            if(element.value != ""){
                 parentElement.classList.add("form-empty");
-            } else {
-                parentElement.classList.remove("form-empty");
             }
         }
     },
@@ -218,7 +231,6 @@ export default {
     },
     //Computed
     computed: {
-
     }
 }
 </script>
@@ -238,7 +250,8 @@ export default {
     z-index: 1010;
     border: 1px solid $primary;
     margin-top: none !important;
-
+    max-height: 100vh;
+    overflow-y: auto;
     .fa-xmark {
         position: absolute;
         top: 18px;
@@ -251,8 +264,9 @@ export default {
     }
 
     ul {
-        max-height: calc(100vh - 563px);
-
+        font-weight: 500;
+        max-height: 100vh;
+        min-height: 100px;
         .delete-item {
             color: rgb(226, 0, 0);
             cursor: pointer;
@@ -261,31 +275,97 @@ export default {
 
     .small {
         cursor: pointer;
-    }
-
-    ;
+    };
 
     .form-floating {
-
         input {
             border-radius: 80px;
+            transition: all 0.5s;
+            padding-left: 2rem;
+            font-weight: 500;
         }
-
+        label{
+            opacity: 1;
+            transition: all 1s;
+            background: transparent!important;
+        }
+        div{
+            width: 20px;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            opacity: 0;
+            transition: all 0.2s;
+            color: white;
+        }
     }
 
     .form-empty{
-        padding: 0;
-        margin: .5rem 0!important;
+        margin-bottom: 0.5rem!important;
+
         input{
             border: none;
-            padding: 0;
-            margin: 0;
-            height: 15px;
-            min-height: 10px!important;
+            padding-top: 14px;
+            padding-bottom: 14px;
+            margin-top: 0;
+            margin-bottom: 0;
+            height: 18px;
+            min-height: 10px;
+            transition: all 0.5s;
+            background-color: #ececec;
+            color: black;
+            font-weight: 500;
+            // background-color: #ececec;
         }
         label{
-                display: none;
+            opacity: 0;
+            transition: all 0.3s;
+            background: transparent!important;
+        }
+        div{
+            width: 20px;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            opacity: 1;
+            transition: all 2s;
+            color: black;
+        }
+        //if u are still writing
+        &:has(input:focus){
+            input:focus {
+            height: calc(3.5rem + calc(var(--bs-border-width) * 2));
+            min-height: calc(3.5rem + calc(var(--bs-border-width) * 2));
+            padding-top: 1.625rem;
+            padding-bottom: 0.625rem;
+            border-radius: 80px;
+            transition: all 0.5s;
+            padding-left: 2rem;
+            background-color: white;
+            color: black;
+            border: 1px solid #ececec;
             }
+        label{
+            opacity: 1;
+            transition: all 1s;
+            background: transparent!important;
+        }
+        div{
+            width: 20px;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            opacity: 0;
+            transition: all 0.2s;
+            color: white;
+        }
+        }
     }
     .max-quantity {
         font-size: .7rem;
@@ -320,6 +400,10 @@ export default {
         border: 1px solid $primary;
         margin-top: 1rem;
         border-radius: 2rem;
+        ul{
+            max-height: 100vh;
+            min-height: 100px;
+        }
     }
 
 }

@@ -1,31 +1,31 @@
 <template>
   <div v-if="store.restaurants != null">
-    <!-- Aside Sticky Bar -->
-    <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
-      <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>
-    </div>
-    <div class="container">
-      <!-- Slider -->
-      <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
-        class="px-4 px-sm-2 px-lg-5" />
-      <div class="row">
-        <!-- Aside -->
-        <SidebarComponent @onChange="getRestaurants" :items="store.types" :imgStartUrl="store.imgStartUrl"
-          :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" />
-        <!-- Main (under Slider) -->
-        <div class="col-12 col-md-8 col-lg-9 col-xl-10">
-          <div class="container-fluid mt-5">
-            <!-- Search Bar -->
-            <div class="row justify-content-center">
-              <form action="" method="GET" class="col-12">
-                <div class="bm-form">
-                  <i class="fa fa-search"></i>
-                  <input type="text" class="form-control rounded-5" placeholder="Cerca un ristorante" />
-                </div>
-              </form>
+  <!-- Aside Sticky Bar -->
+  <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
+    <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>
+  </div>
+  <div class="container">
+    <!-- Slider -->
+    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
+      class="px-4 px-sm-2 px-lg-5" />
+    <div class="row">
+      <!-- Aside -->
+      <SidebarComponent @onChange="getRestaurants" :items="store.types" :imgStartUrl="store.imgStartUrl"
+        :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" />
+      <!-- Main (under Slider) -->
+      <div class="col-12 col-md-8 col-lg-9 col-xl-10">
+        <div class="container-fluid mt-5">
+          <!-- Search Bar -->
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="bm-form">
+                <i class="fa fa-search"></i>
+                <input type="text" v-model="store.searchName" class="form-control rounded-5" placeholder="Cerca un ristorante"  @input="getRestaurants()"/>
+              </div>
             </div>
-            <!-- Restaurant List -->
-
+          </div>
+          
+          <!-- Restaurant List -->
             <div class="row pt-3" id="restaurantRow">
               <div class="col-12 d-flex flex-wrap" v-if="store.checkboxTypes.length > 0">
                 <span class="pe-1">Stai filtrando per:</span>
@@ -112,7 +112,7 @@ export default {
       filtersOpen: window.innerWidth <= 768 ? false : true,
       currentPage: null,
       lastPage: null,
-      totalRestaurants: null
+      totalRestaurants: null,
     };
   },
   //Methods
@@ -126,13 +126,20 @@ export default {
 
     //Axios Call
     //getRestaurant
-    getRestaurants(numPage, checkboxTypes) {
+
+    getRestaurants(numPage) {
       let params = {
         page: numPage,
       };
-      if (checkboxTypes) {
+      if (store.checkboxTypes) {
         store.scrollToElement("restaurantRow")
-        params.types = checkboxTypes;
+        params.types = store.checkboxTypes;
+        console.log(params.types)
+      }
+      if (store.searchName) {
+        store.scrollToElement("restaurantRow")
+        params.search = store.searchName;
+        console.log(params.search)
       }
       axios.get(`${store.apiURL}/restaurants`, {
         params,
@@ -173,7 +180,7 @@ export default {
   //Unmounted
   unmounted() {
     window.removeEventListener('resize', this.handleWindowResize);
-  }
+  },  
 };
 </script>
 
@@ -182,7 +189,7 @@ export default {
 
 
 //From search bar
-form {
+div {
   .bm-form {
     position: relative;
 
