@@ -18,10 +18,10 @@
 
 
         <div class="footer-card">
-          <a href=""><i class="fa-solid fa-envelope"></i></a>
-          <a href="team.contacts.linkedin"><i class="fa-brands fa-linkedin"></i></a>
-          <a href=""><i class="fab fa-github"></i></a>
-          <a href=""><i class="fa-brands fa-instagram"></i></a>
+          <a :href="'mailto:' + team.contacts[0].email"><i class="fa-solid fa-envelope"></i></a>
+          <a :href="team.contacts[0].linkedin"><i class="fa-brands fa-linkedin"></i></a>
+          <a :href="team.contacts[0].github"><i class="fab fa-github"></i></a>
+          <a :href="team.contacts[0].instagram"><i class="fa-brands fa-instagram"></i></a>
         </div>
       </div>
     </div>

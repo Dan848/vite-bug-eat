@@ -2,10 +2,10 @@
   <div class="container">
     <div class="position-relative">
       <div class="d-flex flex-nowrap row" ref="sliderContainer">
-        <div class="my-col col-sm-4 col-md-3 gap-5" v-for="(type, index) in  types" @click="handleClick(type)">
+        <div class="my-col col-sm-4 col-md-3 gap-5" v-for="(type, index) in  types">
           <!-- card -->
-          <div class="card">
-            <div class="card__image">
+          <div class="card" @click="handleClick(type)" :class="{ 'filterActive': store.checkboxTypes.includes(type.id) }">
+            <div class=" card__image">
               <img class="img-fluid" :src="imgStartUrl + type.image" :alt="type.name" />
             </div>
 
@@ -48,6 +48,7 @@ export default {
 
   methods: {
     handleClick(type) {
+
       if (this.$route.name === "home") {
         store.checkboxTypes = [];
         store.checkboxTypes.push(type.id);
@@ -100,7 +101,7 @@ export default {
       this.handleWindowSize();
       this.sliderWidth = this.sliderContainer.offsetWidth;
       this.sliderContainer.scrollLeft = 0;
-    },
+    }
   },
   mounted() {
     this.sliderContainer = this.$refs.sliderContainer;
@@ -116,6 +117,15 @@ export default {
 
 <style lang="scss" scoped>
 @use '../assets/partials/variable.scss' as *;
+
+// Filtered Slider
+.filterActive {
+  color: white;
+
+  .card__data {
+    background-color: $primary !important;
+  }
+}
 
 .my-col {
   width: 100%;
