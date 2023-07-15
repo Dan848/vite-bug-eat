@@ -14,9 +14,10 @@
   <div class="row height d-flex justify-content-center align-items-center">
     <div class="col-md-6">
       <div>
-        <div class="bm-form">
+        <div class="bm-form position-relative">
           <i class="fa fa-search" @click="navigateToRestaurantView"></i>
           <input type="text" v-model="store.searchName" class="form-control rounded-5" placeholder="Cerca un ristorante" @keyup.enter="navigateToRestaurantView"/>
+          <button class="btn btn-primary rounded-5 position-absolute px-3 text-white fw-medium" @click="navigateToRestaurantView">Cerca</button>
         </div>
       </div>
     </div>
@@ -70,6 +71,11 @@ div {
     input{
       height: 55px!important;
       text-indent: 33px!important;
+    }
+    button{
+      top:50%;
+      right: 13px;
+      transform: translate(0, -50%);
     }
   }
 }
