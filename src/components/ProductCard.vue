@@ -1,10 +1,13 @@
 <template>
-  <li class="py-3 my-3 px-4 rounded-5 d-flex justify-content-between align-items-center" :id="'product-' + product.id">
+  <li
+    class="py-3 my-3 px-4 rounded-5 d-flex justify-content-between align-items-center"
+    :id="'product-' + product.id"
+  >
     <div>
       <h3 class="fw-bold">{{ product.name }}</h3>
       <p class="text-" v-if="product.description">{{ product.description }}</p>
       <div class="d-flex justify-content-between align-items-center">
-        <div>{{ product.price }}€</div>
+        <div class="badge rounded-pill text-bg-light">{{ product.price }}€</div>
         <!-- <CounterProduct/> -->
       </div>
     </div>
@@ -15,8 +18,7 @@
 <script>
 export default {
   props: { product: Object },
-  components: {
-  },
+  components: {},
 };
 </script>
 
@@ -40,7 +42,10 @@ li {
 
   .fa-plus {
     color: #979ca5;
-
+  }
+  .badge {
+    background-color: #ff1818;
+    color: black;
   }
 }
 </style>
