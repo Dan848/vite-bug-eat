@@ -93,10 +93,10 @@ export const store = reactive({
       profile_img: "/img/team/dp-vito.jpeg",
       contacts: [
         {
-          email: '',
-          linkedin: '',
-          github: '',
-          instagram: '',
+          email: 'vitodepalma16@gmail.com',
+          linkedin: 'https://www.linkedin.com/in/vito-de-palma/',
+          github: 'https://github.com/vitodepi16',
+          instagram: 'https://www.instagram.com/vito_depi/',
         }
       ]
     },
@@ -107,10 +107,10 @@ export const store = reactive({
       profile_img: "/img/team/g-luca.jpg",
       contacts: [
         {
-          email: '',
-          linkedin: '',
-          github: '',
-          instagram: '',
+          email: 'gluca0260@gmail.com',
+          linkedin: 'https://www.linkedin.com/in/giuseppe-luc%C3%A0-181132227/',
+          github: 'https://github.com/Plvmmu10',
+          instagram: 'https://www.instagram.com/peppe_luc10/',
         }
       ]
     },
@@ -122,10 +122,10 @@ export const store = reactive({
       profile_img: "/img/team/n-rossi.jpg",
       contacts: [
         {
-          email: '',
-          linkedin: '',
-          github: '',
-          instagram: '',
+          email: 'rossianiello97@gmail.com',
+          linkedin: 'https://www.linkedin.com/in/aniello-rossi/',
+          github: 'https://github.com/NelloRossi97',
+          instagram: 'https://www.instagram.com/nello_ross/',
         }
       ]
     },
@@ -136,10 +136,10 @@ export const store = reactive({
       profile_img: "/img/team/d-ceravolo.jpeg",
       contacts: [
         {
-          email: '',
-          linkedin: '',
-          github: '',
-          instagram: '',
+          email: 'daniele.ceravolo15@gmail.com',
+          linkedin: 'https://www.linkedin.com/in/daniele-ceravolo/',
+          github: 'https://github.com/Dan848',
+          instagram: 'https://www.instagram.com/daniele_dna/',
         }
       ]
     },
@@ -164,10 +164,10 @@ export const store = reactive({
       profile_img: "/img/team/g-lumia.jpg",
       contacts: [
         {
-          email: '',
-          linkedin: '',
-          github: '',
-          instagram: '',
+          email: 'giorgiolumia@gmail.com',
+          linkedin: 'https://www.linkedin.com/in/giorgio-lumia/',
+          github: 'https://github.com/G-Lumia',
+          instagram: 'https://www.instagram.com/giorgio_lumia/',
         }
       ]
     },
