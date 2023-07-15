@@ -115,6 +115,7 @@ export default {
                 maxCardLength: 16,
                 maskInput: { character: "*", showLastFour: true },
                 attribute: "aria-required",
+                supportedCardBrands: { "card-brand-id": true },
               },
               cvv: {
                 selector: "#civ",
@@ -126,6 +127,7 @@ export default {
               expirationDate: {
                 selector: "#scadi",
                 placeholder: "00 / 0000",
+                expirationDate: "MM/YY",
               },
               cardholderName: {
                 selector: "#intestatario",
@@ -140,7 +142,7 @@ export default {
           this.hostedFieldInstance = hostedFieldInstance;
         })
         .catch((err) => {
-          console.log(err.message);
+          console.log(err);
           this.error = err.message;
         });
     },
@@ -168,15 +170,20 @@ export default {
   background-color: #ececec;
   width: 100%;
   height: 50px;
-  border: 2px solid $primary;
+  border: 2px solid grey !important;
+  transition: all 1s;
 }
-.braintree-input-class {
+
+.braintree-hosted-fields-input {
   color: black;
+  border: 2px solid grey !important;
 }
-.braintree-valid-class {
+.braintree-hosted-fields-valid {
   color: green;
+  border: 2px solid $primary !important;
 }
-.braintree-invalid-class {
+.braintree-hosted-fields-invalid {
   color: red;
+  border: 2px solid red !important;
 }
 </style>

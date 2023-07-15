@@ -1,11 +1,12 @@
 <template>
   <div class="sidebar">
-    <div class="d-flex align-items-center justify-content-between mb-3 mt-5">
+    <div class="d-flex align-items-end justify-content-between mb-3 mt-5">
       <div class="fs-4">Filtri <span><i class="fa-solid fa-filter fs-5"></i></span></div>
 
-      <div>
+      <div class="d-flex align-items-center">
         <!-- Reset Filters button -->
-        <i class="fa-regular fa-trash-can fs-5" role="button" @click="$emit('resetFilters')"></i>
+        <div class="text-center text-decoration-underline px-2" role="button" @click="$emit('resetFilters')">Azzera
+        </div>
 
         <!-- Exit button in mobile resolution -->
         <button class="btn text-decoration-underline d-md-none" @click="$emit('onClick')">Esci</button>
