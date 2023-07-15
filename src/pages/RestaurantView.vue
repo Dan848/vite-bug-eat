@@ -134,12 +134,10 @@ export default {
       if (store.checkboxTypes) {
         store.scrollToElement("restaurantRow")
         params.types = store.checkboxTypes;
-        console.log(params.types)
       }
       if (store.searchName) {
         store.scrollToElement("restaurantRow")
         params.search = store.searchName;
-        console.log(params.search)
       }
       axios.get(`${store.apiURL}/restaurants`, {
         params,
