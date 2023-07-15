@@ -46,10 +46,14 @@
                   <router-link :to="{
                     name: 'single-restaurant',
                     params: { slug: restaurant.slug },
-                  }">
+                  }" v-if="restaurant.products.length > 0">
                     <RestaurantCard :key="restaurant.id" :restaurant="restaurant" :imgStartUrl="store.imgStartUrl"
                       :isSelected="false" />
                   </router-link>
+                  <div v-else>
+                    <RestaurantCard :key="restaurant.id" :restaurant="restaurant" :imgStartUrl="store.imgStartUrl"
+                        :isSelected="false" />
+                  </div>
                 </div>
               </div>
               <!-- Pagination -->

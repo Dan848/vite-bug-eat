@@ -1,5 +1,5 @@
 <template>
-  <div class="outer" :class="{ 'position-relative z-1': isOpen }" @mouseleave="isOpen = false">
+  <div class="outer rounded-5" :class="{ 'position-relative z-1': isOpen, 'filter-unactive' : restaurant.products.length < 1}" @mouseleave="isOpen = false">
     <div class="midder">
       <div class="inner">
         <div class="box-img w-100 h-100 d-flex justify-content-center">
@@ -38,6 +38,9 @@
         </template>
       </div>
     </div>
+    <div class="not-available" v-if="restaurant.products.length < 1">
+      <span class="fw-bold fs-4">Presto disponibile</span> 
+    </div>
   </div>
 </template>
 
@@ -59,6 +62,9 @@ export default {
       e.preventDefault();
       this.isOpen = !this.isOpen;
     }
+  },
+  mounted() {
+    console.log(this.restaurant.products.length);
   }
 };
 </script>
@@ -66,6 +72,33 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
 
+.filter-unactive{
+  img{
+    filter: grayscale(100%);
+  }
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 3.4px 2.7px rgba(0, 0, 0, 0.022),
+  0 8.7px 6.9px rgba(0, 0, 0, 0.031),
+  0 17.7px 14.2px rgba(0, 0, 0, 0.039),
+  0 36.5px 29.2px rgba(0, 0, 0, 0.048),
+  0 100px 80px rgba(0, 0, 0, 0.07) !important;
+  &:hover{
+    transform: none !important;
+    cursor: not-allowed !important;
+  }
+  .not-available{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 120%;
+    text-align: center;
+    transform: rotate(35deg);
+    background-color: #bc2d3b;
+    color: white;
+  }
+}
 
 .outer {
   &:hover {
