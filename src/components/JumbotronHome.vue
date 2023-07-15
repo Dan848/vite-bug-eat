@@ -1,7 +1,7 @@
 <template>
-  <div class="jumbotron d-flex justify-content-center py-5">
+  <div class="jumbotron d-flex justify-content-center pt-5 pb-3">
     <div class="d-flex flex-column justify-content-center align-items-center">
-      <img src="/img/bees.gif" class="jumbo-logo" alt="" />
+      <img src="/img/bees.gif" class="img-fluid" alt="bees" />
       <div class="pt-5 text-center">
         <h2>Qualcosa ronza in giro...</h2>
         <p class="fw-medium">...sono i nostri rider!</p>
@@ -79,12 +79,4 @@ div {
     }
   }
 }
-
-
-// <form action="" method="GET" class="col-12">
-// <div class="bm-form">
-// <i class="fa fa-search"></i>
-// <input type="text" class="form-control form-input" placeholder="Cerca un ristorante" />
-// </div>
-// </form>
 </style>
