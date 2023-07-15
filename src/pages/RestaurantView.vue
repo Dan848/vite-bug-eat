@@ -1,123 +1,95 @@
 <template>
   <div v-if="!isLoading">
-  <!-- Aside Sticky Bar -->
-  <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
-    <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>
-  </div>
-  <div class="container">
-    <!-- Slider -->
-    <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
-      class="px-4 px-sm-2 px-lg-5" />
-    <div class="row">
-      <!-- Aside -->
-      <SidebarComponent @onChange="getRestaurants" :items="store.types" :imgStartUrl="store.imgStartUrl"
-        :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" />
-      <!-- Main (under Slider) -->
-      <div class="col-12 col-md-8 col-lg-9 col-xl-10">
-        <div class="container-fluid mt-5">
-          <!-- Search Bar -->
-          <div class="row justify-content-center">
-            <div class="col-12">
-              <div class="bm-form">
-                <i class="fa fa-search"></i>
-                <input type="text" v-model="store.searchName" class="form-control rounded-5" placeholder="Cerca un ristorante"  @input="getRestaurants()"/>
-              </div>
-            </div>
-
-            <!-- Restaurant List -->
-            <div class="row pt-3" id="restaurantRow">
-              <div
-                class="col-12 d-flex flex-wrap"
-                v-if="store.checkboxTypes.length > 0"
-              >
-                <span class="pe-1">Stai filtrando per:</span>
-                <div
-                  class="d-flex fw-bold"
-                  v-for="(type, index) in store.checkboxTypes"
-                  :key="index"
-                >
-                  {{ getTypeName(type) }}
-                  <div
-                    class="pe-1"
-                    v-if="index !== store.checkboxTypes.length - 1"
-                  >
-                    ,
-                  </div>
+    <!-- Aside Sticky Bar -->
+    <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
+      <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>
+    </div>
+    <div class="container">
+      <!-- Slider -->
+      <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
+        class="px-4 px-sm-2 px-lg-5" />
+      <div class="row">
+        <!-- Aside -->
+        <SidebarComponent @onChange="getRestaurants" :items="store.types" :imgStartUrl="store.imgStartUrl"
+          :class="filtersOpen ? 'd-block col' : 'd-none'" @onClick="filtersOpen = false" @resetFilters="resetFilters" />
+        <!-- Main (under Slider) -->
+        <div class="col-12 col-md-8 col-lg-9 col-xl-10">
+          <div class="container-fluid mt-5">
+            <!-- Search Bar -->
+            <div class="row justify-content-center">
+              <div class="col-12">
+                <div class="bm-form">
+                  <i class="fa fa-search"></i>
+                  <input type="text" v-model="store.searchName" class="form-control rounded-5"
+                    placeholder="Cerca un ristorante" @input="getRestaurants()" />
                 </div>
               </div>
-              <div class="col-12 pt-3">
-                <span>Ci sono:</span>
-                <span class="fw-bold px-2">{{ totalRestaurants }}</span>
-                <span>Ristoranti vicino a te</span>
-              </div>
-              <div
-                v-for="restaurant in store.restaurants"
-                class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4"
-              >
-                <router-link
-                  :to="{
+
+              <!-- Restaurant List -->
+              <div class="row pt-3" id="restaurantRow">
+                <div class="col-12 d-flex flex-wrap" v-if="store.checkboxTypes.length > 0">
+                  <span class="pe-1">Stai filtrando per:</span>
+                  <div class="d-flex fw-bold" v-for="(type, index) in store.checkboxTypes" :key="index">
+                    {{ getTypeName(type) }}
+                    <div class="pe-1" v-if="index !== store.checkboxTypes.length - 1">
+                      ,
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 pt-3">
+                  <span>Ci sono:</span>
+                  <span class="fw-bold px-2">{{ totalRestaurants }}</span>
+                  <span>Ristoranti vicino a te</span>
+                </div>
+                <div v-for="restaurant in store.restaurants"
+                  class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
+                  <router-link :to="{
                     name: 'single-restaurant',
                     params: { slug: restaurant.slug },
-                  }"
-                >
-                  <RestaurantCard
-                    :key="restaurant.id"
-                    :restaurant="restaurant"
-                    :imgStartUrl="store.imgStartUrl"
-                    :isSelected="false"
-                  />
-                </router-link>
+                  }">
+                    <RestaurantCard :key="restaurant.id" :restaurant="restaurant" :imgStartUrl="store.imgStartUrl"
+                      :isSelected="false" />
+                  </router-link>
+                </div>
               </div>
-            </div>
-            <!-- Pagination -->
-            <div class="row" v-if="totalRestaurants > 0">
-              <ul class="pagination col-12 mt-3 mb-5">
-                <li class="page-item">
-                  <button
-                    :class="{
+              <!-- Pagination -->
+              <div class="row" v-if="totalRestaurants > 0">
+                <ul class="pagination col-12 mt-3 mb-5">
+                  <li class="page-item">
+                    <button :class="{
                       'page-link': true,
                       disabled: currentPage === 1,
-                    }"
-                    class="btn-icon"
-                    @click="
-                      getRestaurants(currentPage - 1, store.checkboxTypes)
-                    "
-                  >
-                    <i class="fa-solid fa-angle-left"></i>
-                  </button>
-                </li>
-                <li class="page-item" v-for="n in lastPage">
-                  <button
-                    :class="{
+                    }" class="btn-icon" @click="
+  getRestaurants(currentPage - 1, store.checkboxTypes)
+  ">
+                      <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                  </li>
+                  <li class="page-item" v-for="n in lastPage">
+                    <button :class="{
                       'page-link-current page-link': true,
                       active: currentPage === n,
-                    }"
-                    class="btn-icon"
-                    @click="getRestaurants(n, store.checkboxTypes)"
-                  >
-                    {{ n }}
-                  </button>
-                </li>
-                <li class="page-item">
-                  <button
-                    :class="{
+                    }" class="btn-icon" @click="getRestaurants(n, store.checkboxTypes)">
+                      {{ n }}
+                    </button>
+                  </li>
+                  <li class="page-item">
+                    <button :class="{
                       'page-link-current page-link': true,
                       disabled: currentPage === lastPage,
-                    }"
-                    @click="
-                      getRestaurants(currentPage + 1, store.checkboxTypes)
-                    "
-                  >
-                    <i class="fa-solid fa-angle-right"></i>
-                  </button>
-                </li>
-              </ul>
+                    }" @click="
+  getRestaurants(currentPage + 1, store.checkboxTypes)
+  ">
+                      <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 
   <div v-else>
@@ -200,6 +172,10 @@ export default {
       const type = store.types.find((type) => type.id === typeId);
       return type ? type.name : "";
     },
+    resetFilters() {
+      store.checkboxTypes = [];
+      this.getRestaurants(1);
+    }
   },
   //Mounted
   mounted() {
@@ -222,10 +198,12 @@ export default {
 // PAGINATION
 .pagination {
   gap: 12px;
+
   .btn-icon {
     width: 10px;
     height: 10px;
   }
+
   .page-link {
     height: 38px;
     width: 38px;
@@ -234,6 +212,7 @@ export default {
 
     cursor: pointer;
   }
+
   .page-link:visited {
     text-decoration: none;
     color: $primary;
@@ -242,13 +221,16 @@ export default {
     width: 36px;
     border-radius: 50%;
   }
+
   .page-link:link {
     text-decoration: none;
   }
+
   .page-link:hover {
     background-color: #679c36;
     color: white;
   }
+
   .page-link:hover,
   .page-link:active,
   .page-link.page-link--current {
@@ -256,6 +238,7 @@ export default {
     color: #fff;
   }
 }
+
 //From search bar
 div {
   .bm-form {
