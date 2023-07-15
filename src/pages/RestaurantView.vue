@@ -4,7 +4,10 @@
     <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
       <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>
     </div>
-    <div class="container" id="pippo">
+    <div class="container">
+      <div>
+        <CartComponent v-if="store.cart.products.length > 0"/>
+      </div>
       <!-- Slider -->
       <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
         class="px-4 px-sm-2 px-lg-5" />
@@ -107,6 +110,7 @@ import RestaurantCard from "../components/RestaurantCard.vue";
 import SliderComponent from "../components/SliderComponent.vue";
 import SidebarComponent from "../components/SidebarComponent.vue";
 import LoaderComponent from "../components/LoaderComponent.vue";
+import CartComponent from "../components/CartComponent.vue";
 import axios from "axios";
 export default {
   name: "RestaurantView",
@@ -115,7 +119,8 @@ export default {
     SliderComponent,
     SidebarComponent,
     LoaderComponent,
-  },
+    CartComponent
+},
   //Data
   data() {
     return {

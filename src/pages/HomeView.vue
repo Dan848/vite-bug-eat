@@ -16,7 +16,7 @@
     </div>
 
     <div>
-      <CartComponent />
+      <CartComponent v-if="store.cart.products.length > 0"/>
     </div>
   </div>
 
@@ -44,7 +44,8 @@ export default {
   },
   data() {
     return {
-      store
+      store,
+      isOpen: false
     }
   },
   methods: {
@@ -52,6 +53,13 @@ export default {
       axios.get(`${store.apiURL}/types`).then((res) => {
         store.types = res.data.results
       })
+    },
+    cartProducts() {
+      let counter = 0;
+      for (let i = 0; i < store.cart.products.length; i++) {
+        counter = counter + store.cart.products[i].quantity;
+      }
+      return counter
     }
   },
   mounted() {
@@ -122,4 +130,5 @@ p {
   font-size: 1.4rem;
   text-align: right;
 }
+
 </style>
