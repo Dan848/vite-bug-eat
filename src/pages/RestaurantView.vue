@@ -16,12 +16,12 @@
         <div class="container-fluid mt-5">
           <!-- Search Bar -->
           <div class="row justify-content-center">
-            <form action="" method="GET" class="col-12">
+            <div class="col-12">
               <div class="bm-form">
                 <i class="fa fa-search"></i>
-                <input type="text" class="form-control rounded-5" placeholder="Cerca un ristorante" />
+                <input type="text" v-model="store.searchName" class="form-control rounded-5" placeholder="Cerca un ristorante"  @input="getRestaurants()"/>
               </div>
-            </form>
+            </div>
           </div>
           <!-- Restaurant List -->
 
@@ -104,7 +104,7 @@ export default {
       filtersOpen: window.innerWidth <= 768 ? false : true,
       currentPage: null,
       lastPage: null,
-      totalRestaurants: null
+      totalRestaurants: null,
     };
   },
   //Methods
@@ -118,13 +118,20 @@ export default {
 
     //Axios Call
     //getRestaurant
-    getRestaurants(numPage, checkboxTypes) {
+
+    getRestaurants(numPage) {
       let params = {
         page: numPage,
       };
-      if (checkboxTypes) {
+      if (store.checkboxTypes) {
         store.scrollToElement("restaurantRow")
-        params.types = checkboxTypes;
+        params.types = store.checkboxTypes;
+        console.log(params.types)
+      }
+      if (store.searchName) {
+        store.scrollToElement("restaurantRow")
+        params.search = store.searchName;
+        console.log(params.search)
       }
       axios.get(`${store.apiURL}/restaurants`, {
         params,
@@ -163,7 +170,7 @@ export default {
   //Unmounted
   unmounted() {
     window.removeEventListener('resize', this.handleWindowResize);
-  }
+  },  
 };
 </script>
 
@@ -172,7 +179,7 @@ export default {
 
 
 //From search bar
-form {
+div {
   .bm-form {
     position: relative;
 
