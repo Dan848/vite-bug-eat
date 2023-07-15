@@ -49,6 +49,7 @@ export default {
     }
   },
   mounted() {
+    store.searchName = "";
     store.show = false;
     store.types = null;
     this.getTypes();

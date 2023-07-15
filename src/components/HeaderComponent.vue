@@ -13,7 +13,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- {{ --Navbar Start-- }} -->
-        <div class="drop-menu collapse navbar-collapse justify-content-between bg-primary rounded-bottom-5"
+        <div class="drop-menu collapse navbar-collapse justify-content-center bg-primary rounded-bottom-5"
           id="navbarNavDropdown" :class="{ show: store.show }">
           <ul class="navbar-nav mb-2 mb-lg-0">
             <!-- {{ --Simple Anchor Link-- }} -->
@@ -61,31 +61,9 @@ export default {
 
   .logo {
     width: 100px;
+    position: relative;
+    z-index: 1011;
   }
-
-  .drop-menu {
-    z-index: 1010;
-
-    li a {
-      font-size: 1rem;
-      color: white;
-
-      &:hover {
-        padding-bottom: 17px;
-        border-bottom: 3px solid $secondary;
-        color: $secondary;
-      }
-    }
-  }
-}
-
-.active {
-  padding-bottom: 18px;
-  border-bottom: 2px solid $secondary;
-  color: $secondary !important;
-}
-
-@media screen and (max-width:991px) {
 
   .drop-menu {
     z-index: 1010;
@@ -99,18 +77,74 @@ export default {
       color: white;
 
       &:hover {
-        padding-bottom: 0px !important;
-        border-bottom: 0px solid $secondary !important;
+        padding-bottom: 0px;
+        border-bottom: 0px solid $secondary;
         color: $secondary;
       }
     }
   }
-
-
   .active {
     padding-bottom: 0px;
     border-bottom: 0px solid $secondary;
-    color: $secondary !important;
+    color: $secondary;
   }
 }
+
+
+
+// @media screen and (max-width:1800p) {
+
+//   .drop-menu {
+//     z-index: 1010;
+//     padding-top: 1rem;
+//     margin-top: 8px;
+//     text-align: center;
+
+//     li a {
+//       text-decoration: none;
+//       font-size: 1rem;
+//       color: white;
+
+//       &:hover {
+//         padding-bottom: 0px !important;
+//         border-bottom: 0px solid $secondary !important;
+//         color: $secondary;
+//       }
+//     }
+//   }
+
+
+//   .active {
+//     padding-bottom: 0px;
+//     border-bottom: 0px solid $secondary;
+//     color: $secondary !important;
+//   }
+// }
+
+@media screen and (min-width: 992px){
+  .drop-menu {
+    padding-top: 0!important;
+    margin-top: 0!important;
+    z-index: 1010;
+    transform: translateX(-50px);
+    li a {
+      font-size: 1rem;
+      color: white;
+
+      &:hover {
+        padding-bottom: 17px!important;;
+        border-bottom: 3px solid $secondary !important;;
+        color: $secondary!important;;
+      }
+    }
+  }  
+
+  .active {
+  padding-bottom: 17px!important;
+  border-bottom: 3px solid $secondary !important;
+  color: $secondary !important;
+  }
+}
+
+
 </style>
