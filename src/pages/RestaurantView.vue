@@ -1,5 +1,5 @@
 <template>
-  <div v-if="store.restaurants != null">
+  <div v-if="!isLoading">
   <!-- Aside Sticky Bar -->
   <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
     <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>
@@ -113,6 +113,7 @@ export default {
       currentPage: null,
       lastPage: null,
       totalRestaurants: null,
+      isLoading: true
     };
   },
   //Methods
@@ -147,6 +148,7 @@ export default {
           this.currentPage = res.data.results.current_page;
           this.lastPage = res.data.results.last_page;
           this.totalRestaurants = res.data.results.total
+          this.isLoading = false
         });
     },
     //getTypes

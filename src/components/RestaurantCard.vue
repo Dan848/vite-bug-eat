@@ -4,7 +4,7 @@
       <div class="inner">
         <div class="box-img w-100 h-100 d-flex justify-content-center">
           <img
-            :src="'http://localhost:8000' + restaurant.image"
+            :src="restaurant.image"
             :alt="restaurant.name" class="w-100" />
         </div>
       </div>
