@@ -66,8 +66,8 @@ export default {
     store.searchName = "";
     store.show = false;
     store.types = null;
+    store.checkboxTypes = []
     this.getTypes();
-    console.log(store.restaurants);
   }
 };
 </script>

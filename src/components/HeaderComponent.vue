@@ -44,6 +44,7 @@ export default {
   methods: {
     getActive(index) {
       this.currentIndex = index
+      store.show = false
     }
   }
 };

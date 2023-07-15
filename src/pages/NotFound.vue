@@ -3,7 +3,7 @@
         <h1 class="text-center">L'URL digitata non esiste nel nostro sito.</h1>
         <h2 class="text-center">Sarai reindirizzato alla home.</h2>
         <div class="image">
-            <img src="/img/general/loader-image.png" alt="loaderImage">
+            <img src="/img/general/pizza-loader.png" alt="loaderImage">
         </div>
     </div>
 </template>

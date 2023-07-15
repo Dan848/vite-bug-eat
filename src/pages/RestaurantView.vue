@@ -189,13 +189,14 @@ export default {
   //Mounted
   mounted() {
     store.restaurants = null;
-    store.show = false;
     this.getTypes();
     this.getRestaurants(1); // Altrimenti, chiama la funzione getRestaurants senza il tipo specificato
     window.addEventListener("resize", this.handleWindowResize);
   },
   //Unmounted
   unmounted() {
+    store.restaurants = null;
+    store.checkboxTypes = []
     window.removeEventListener("resize", this.handleWindowResize);
   },
 };
