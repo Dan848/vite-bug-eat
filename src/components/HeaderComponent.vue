@@ -20,7 +20,7 @@
             <li class="px-3 text-uppercase pb-2 pb-lg-0" v-for="(item, index) in store.headerLinks">
 
               <router-link :to="{ name: item.routeName }" @click="getActive(index)"
-                :class="index === currentIndex ? 'active' : ''">
+                :class="{ 'active': $route.name == item.routeName }">
                 {{ item.label }}
               </router-link>
             </li>
