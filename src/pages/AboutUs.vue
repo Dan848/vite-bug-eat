@@ -33,7 +33,6 @@ export default {
     };
   },
   mounted() {
-    store.show = false;
   }
 };
 </script>

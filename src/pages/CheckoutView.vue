@@ -176,7 +176,6 @@ export default {
     },
   },
   mounted() {
-    store.show = false;
     this.getToken();
   },
   unmounted(){

@@ -64,7 +64,6 @@ export default {
   },
   mounted() {
     store.searchName = "";
-    store.show = false;
     store.types = null;
     store.checkboxTypes = []
     this.getTypes();

@@ -96,7 +96,6 @@ export default {
         };
     },
     mounted() {
-        store.show = false;
     },
     components: { CartComponent }
 };

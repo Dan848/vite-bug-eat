@@ -51,5 +51,7 @@ const router = createRouter({
     return { top: 0 };
   },
 });
-
+router.beforeEach(() => {
+  document.querySelector('.collapse').classList.remove('show');
+})
 export default router;
