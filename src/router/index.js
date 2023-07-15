@@ -26,7 +26,7 @@ const router = createRouter({
       component: SingleRestaurant,
     },
     {
-      path: "/orders/:id",
+      path: "/checkout",
       name: "checkout",
       component: CheckoutView,
     },
@@ -38,12 +38,12 @@ const router = createRouter({
     {
       path: "/workWithUs",
       name: "workWithUs",
-      component: CheckoutView,
+      component: OurMission,
     },
     {
       path: "/ourMission",
       name: "ourMission",
-      component: CheckoutView,
+      component: OurMission,
     },
   ],
   //Scroll when it Changes Routes
