@@ -43,10 +43,6 @@ export const store = reactive({
       label: "La nostra Mission",
       routeName: "ourMission",
     },
-    {
-      label: "Lavora con Noi",
-      routeName: "workWithUs",
-    },
   ],
   //Home Section Data
   sections: [
