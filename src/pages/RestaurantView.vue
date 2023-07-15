@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoading">
+  <div v-if="!isLoading">
   <!-- Aside Sticky Bar -->
   <div class="sticky-filters d-md-none text-white" @click="filtersOpen = true">
     <span class="fw-bold me-1">Filtri</span><i class="fa-solid fa-filter"></i>

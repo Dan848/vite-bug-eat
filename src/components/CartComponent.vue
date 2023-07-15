@@ -268,7 +268,7 @@ export default {
         max-height: 100vh;
         min-height: 100px;
         .delete-item {
-            color: rgb(226, 0, 0);
+            color: #d93646;
             cursor: pointer;
         }
     }
