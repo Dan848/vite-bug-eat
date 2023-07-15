@@ -14,6 +14,10 @@
     <div v-for="section in store.sections">
       <HomeSection :section="section" />
     </div>
+
+    <div>
+      <CartComponent />
+    </div>
   </div>
 
   <div v-else>
@@ -26,6 +30,7 @@ import HomeSection from "../components/HomeSection.vue";
 import SliderComponent from "../components/SliderComponent.vue";
 import JumbotronHome from "../components/JumbotronHome.vue";
 import LoaderComponent from "../components/LoaderComponent.vue";
+import CartComponent from "../components/CartComponent.vue";
 import axios from "axios";
 import { store } from "../data/store";
 export default {
@@ -34,7 +39,8 @@ export default {
     HomeSection,
     JumbotronHome,
     SliderComponent,
-    LoaderComponent
+    LoaderComponent,
+    CartComponent
   },
   data() {
     return {

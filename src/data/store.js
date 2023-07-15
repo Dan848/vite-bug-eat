@@ -34,7 +34,7 @@ export const store = reactive({
       label: "Ristoranti",
       routeName: "restaurantView",
     },
-
+    
     {
       label: "Chi siamo",
       routeName: "about-us",
@@ -49,7 +49,7 @@ export const store = reactive({
     {
       title: "Ci impegniamo a salvaguardare l’ambiente...",
       content:
-        "...adottando pratiche virtuose lungo tutta la catena “dal campo al vassoio”, partendo dalla scelta dei fornitori e arrivando fino alla gestione dei rifiuti, passando per una politica di risparmio energetico e per l’adozione di packaging a impatto zero.",
+      "...adottando pratiche virtuose lungo tutta la catena “dal campo al vassoio”, partendo dalla scelta dei fornitori e arrivando fino alla gestione dei rifiuti, passando per una politica di risparmio energetico e per l’adozione di packaging a impatto zero.",
       subtitle: "",
       image: "/img/eco-images/firstEco.png",
       inverted: false,
@@ -57,34 +57,34 @@ export const store = reactive({
     },
     {
       title:
-        "Bug-Eat si impegna per un modello di crescita socialmente responsabile ed ecologico.",
+      "Bug-Eat si impegna per un modello di crescita socialmente responsabile ed ecologico.",
       content:
         "Per noi, il cambiamento viene dall'interno: la nostra cultura interna determina l'impatto del core business. Siamo un fattore abilitante per la crescita delle piccole imprese e un'opportunità per i corrieri di generare entrate in modo rapido e accessibile. Sebbene la nostra tecnologia sia gratuita per cause senza scopo di lucro, ne facciamo buon uso anche per ridurre la nostra impronta di carbonio.",
-      subtitle: "",
-      image: "/img/eco-images/secondEco.png",
-      inverted: true,
-      routerLink: {},
-    },
-    {
-      title: "La sostenibilità è una delle anime di Bug-Eat, da sempre.",
-      content:
+        subtitle: "",
+        image: "/img/eco-images/secondEco.png",
+        inverted: true,
+        routerLink: {},
+      },
+      {
+        title: "La sostenibilità è una delle anime di Bug-Eat, da sempre.",
+        content:
         "È il criterio di riferimento costante nella creazione dei prodotti, nella progettazione dei punti vendita ed è ispirazione per le campagne di mobilitazione dove i Soci sono parte propositiva e attiva.",
-      subtitle: "",
-      image: "/img/eco-images/thirdEco.png",
-      inverted: false,
-      routerLink: {},
-    },
-    {
-      title: "Aiutamo le nostre amiche a sei zampe!",
-      content:
+        subtitle: "",
+        image: "/img/eco-images/thirdEco.png",
+        inverted: false,
+        routerLink: {},
+      },
+      {
+        title: "Aiutamo le nostre amiche a sei zampe!",
+        content:
         "Ciascun ordine effettuato su Bug-Eat contribuirà alla ricerca e allo sviluppo di nuovi metodi volti a preservare la sicurezza e il benessere della popolazione di api in Italia. Sostenendo Bug-Eat, stai supportando attivamente gli sforzi per proteggere questi preziosi insetti e preservare l'importante ruolo che svolgono nel nostro ecosistema. ",
-      subtitle: "",
-      image: "/img/eco-images/fourthEco.png",
-      inverted: true,
-      routerLink: {},
-    },
+        subtitle: "",
+        image: "/img/eco-images/fourthEco.png",
+        inverted: true,
+        routerLink: {},
+      },
   ],
-  //Team Page Data
+    //Team Page Data
   teams: [
     {
       name: "De Palma Vito",
@@ -98,80 +98,84 @@ export const store = reactive({
           github: 'https://github.com/vitodepi16',
           instagram: 'https://www.instagram.com/vito_depi/',
         }
-      ]
-    },
-    {
-      name: "Lucà Giuseppe",
-      role: "Mental Coach",
-      description: "Forza Messina",
-      profile_img: "/img/team/g-luca.jpg",
-      contacts: [
-        {
-          email: 'gluca0260@gmail.com',
-          linkedin: 'https://www.linkedin.com/in/giuseppe-luc%C3%A0-181132227/',
-          github: 'https://github.com/Plvmmu10',
-          instagram: 'https://www.instagram.com/peppe_luc10/',
-        }
-      ]
-    },
-    {
-      name: "Rossi Aniello",
-      role: "Junior Full stack developper",
-      description:
-        "Sono un ragazzo a cui piace programmare, risolvendo problemi, ma soprattutto creandone di nuovi",
-      profile_img: "/img/team/n-rossi.jpg",
-      contacts: [
-        {
-          email: 'rossianiello97@gmail.com',
-          linkedin: 'https://www.linkedin.com/in/aniello-rossi/',
-          github: 'https://github.com/NelloRossi97',
-          instagram: 'https://www.instagram.com/nello_ross/',
-        }
-      ]
-    },
-    {
-      name: "Ceravolo Daniele",
-      role: "Project manager",
-      description: "ORGANIZZATORE DI MENTI, E SONNAMBULO",
-      profile_img: "/img/team/d-ceravolo.jpeg",
-      contacts: [
-        {
-          email: 'daniele.ceravolo15@gmail.com',
-          linkedin: 'https://www.linkedin.com/in/daniele-ceravolo/',
-          github: 'https://github.com/Dan848',
-          instagram: 'https://www.instagram.com/daniele_dna/',
-        }
-      ]
-    },
-    {
-      name: "Libralato Michele ",
-      role: "Junior RE web Developer",
-      description: " Junior solo nell'anima. So de LATINA.",
-      profile_img: "/img/team/m-librato.png",
-      contacts: [
-        {
-          email: 'michele.libralato.ml@gmail.com',
-          linkedin: 'https://www.linkedin.com/in/michele-libralato-7ab470115/',
-          github: 'https://github.com/MLibralato91',
-          instagram: 'https://www.instagram.com/mic.libralato/',
-        }
-      ]
-    },
-    {
-      name: "Lumia Giorgio ",
-      role: "Full Stack Celiaco",
-      description: "Mi definisco un uomo pieno di inventiva e di problemi.",
-      profile_img: "/img/team/g-lumia.jpg",
-      contacts: [
-        {
-          email: 'giorgiolumia@gmail.com',
-          linkedin: 'https://www.linkedin.com/in/giorgio-lumia/',
-          github: 'https://github.com/G-Lumia',
-          instagram: 'https://www.instagram.com/giorgio_lumia/',
-        }
-      ]
-    },
+    ]
+  },
+  {
+    name: "Lucà Giuseppe",
+    role: "Mental Coach",
+    description: "Forza Messina",
+    profile_img: "/img/team/g-luca.jpg",
+    contacts: [
+      {
+        email: 'gluca0260@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/giuseppe-luc%C3%A0-181132227/',
+        github: 'https://github.com/Plvmmu10',
+        instagram: 'https://www.instagram.com/peppe_luc10/',
+      }
+    ]
+  },
+  {
+    name: "Rossi Aniello",
+    role: "Junior Full stack developper",
+    description:
+    "Sono un ragazzo a cui piace programmare, risolvendo problemi, ma soprattutto creandone di nuovi",
+    profile_img: "/img/team/n-rossi.jpg",
+    contacts: [
+      {
+        email: 'rossianiello97@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/aniello-rossi/',
+        github: 'https://github.com/NelloRossi97',
+        instagram: 'https://www.instagram.com/nello_ross/',
+      }
+    ]
+  },
+  {
+    name: "Ceravolo Daniele",
+    role: "Project manager",
+    description: "ORGANIZZATORE DI MENTI, E SONNAMBULO",
+    profile_img: "/img/team/d-ceravolo.jpeg",
+    contacts: [
+      {
+        email: 'daniele.ceravolo15@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/daniele-ceravolo/',
+        github: 'https://github.com/Dan848',
+        instagram: 'https://www.instagram.com/daniele_dna/',
+      }
+    ]
+  },
+  {
+    name: "Libralato Michele ",
+    role: "Junior RE web Developer",
+    description: " Junior solo nell'anima. So de LATINA.",
+    profile_img: "/img/team/m-librato.png",
+    contacts: [
+      {
+        email: 'michele.libralato.ml@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/michele-libralato-7ab470115/',
+        github: 'https://github.com/MLibralato91',
+        instagram: 'https://www.instagram.com/mic.libralato/',
+      }
+    ]
+  },
+  {
+    name: "Lumia Giorgio ",
+    role: "Full Stack Celiaco",
+    description: "Mi definisco un uomo pieno di inventiva e di problemi.",
+    profile_img: "/img/team/g-lumia.jpg",
+    contacts: [
+      {
+        email: 'giorgiolumia@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/giorgio-lumia/',
+        github: 'https://github.com/G-Lumia',
+        instagram: 'https://www.instagram.com/giorgio_lumia/',
+      }
+    ]
+  },
   ],
+  //Chekout Page
+  hostedFieldInstance: false,
+  token: "",
+
   //METHODS
   //Scroll to Top
   scrollToTop() {
@@ -189,7 +193,7 @@ export const store = reactive({
   addCart(item) {
     const cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
     const newItem = item;
-
+    
     // if no/new restaurant, reset cart, set restaurant, set quantity 1, push newitem
     if (
       Object.keys(cart.restaurant).length == 0 ||

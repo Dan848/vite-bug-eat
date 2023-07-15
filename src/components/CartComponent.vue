@@ -73,10 +73,6 @@
             </div>
             <!-- Cart Footer Button -->
             <div class="d-flex flex-column justify-content-center align-items-center  mb-2">
-                <!-- <button :disabled="store.cart.products.length < 1" type="submit"
-                    class="btn btn-primary rounded-5 fw-bold text-white mb-3">
-                    Vai al pagamento
-                </button> -->
                 <button @click="this.$router.push('/checkout')" :class="{'d-none' : $route.name === 'checkout'}" class="btn btn-primary rounded-5 fw-bold text-white mb-3" :disabled="store.cart.products. length < 1">
                     Vai al pagamento
                 </button>
@@ -84,7 +80,7 @@
                 <div :class="{'d-none' : $route.name === 'checkout'}" class="text-center text-decoration-underline small px-2" @click="modalOpen = true">
                     Svuota Carrello
                 </div>
-                <router-link :to="{ name: 'single-restaurant', params: { slug: store.cart.restaurant.slug } }" :class="{'d-none' : !($route.name === 'checkout')}" class="text-center text-black text-decoration-underline small px-2">
+                <router-link v-if="store.cart.restaurant.slug" :to="{ name: 'single-restaurant', params: { slug: store.cart.restaurant.slug } }" :class="{'d-none' : !($route.name === 'checkout')}" class="text-center text-black text-decoration-underline small px-2">
                     Torna al ristorante
                 </router-link>
             </div>
@@ -178,8 +174,6 @@ export default {
             const item = data;
             const cart = store.cart;
             localStorage.setItem("cart", JSON.stringify(cart));
-
-            console.log(item);
         },
         //Format data
         formatDateTime(dateTime) {
@@ -203,7 +197,6 @@ export default {
                     products: store.cart.products,
                 };
                 axios.post(`${store.apiURL}/orders/store`, data).then((res) => {
-                    console.log(res.data)
                 })
             } else {
                 //Qualcuno stampa il messaggio
@@ -229,9 +222,6 @@ export default {
         //Handle Resize For Cart
         window.addEventListener("resize", this.handleWindowResize);
     },
-    //Computed
-    computed: {
-    }
 }
 </script>
 

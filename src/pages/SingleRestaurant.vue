@@ -124,7 +124,6 @@ export default {
     // if (cartData) {
     //   store.cartItems = JSON.parse(cartData);
     // }
-    console.log(store.restaurants);
   },
 };
 </script>

@@ -63,9 +63,6 @@ export default {
       this.isOpen = !this.isOpen;
     }
   },
-  mounted() {
-    console.log(this.restaurant.products.length);
-  }
 };
 </script>
 

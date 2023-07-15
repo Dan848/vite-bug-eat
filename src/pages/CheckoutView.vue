@@ -53,8 +53,6 @@ export default {
   data() {
     return {
       store,
-      token: "",
-      hostedFieldInstance: false,
       nonce: "",
       error: "",
     };
@@ -63,9 +61,9 @@ export default {
     // Al submit...
     payWithCreditCard() {
       //...se ho ricevuto il token da braintree...
-      if (this.hostedFieldInstance) {
+      if (store.hostedFieldInstance) {
         //...genera un altro token da inviare per pagare
-        this.hostedFieldInstance
+        store.hostedFieldInstance
           .tokenize()
           .then((payload) => {
             //token
@@ -92,6 +90,7 @@ export default {
     },
     //Genera Campi Editabili da Braintree
     getHostedFields(token) {
+      console.log(token)
       braintree.client
         .create({
           authorization: token,
@@ -139,7 +138,7 @@ export default {
         })
         .then((hostedFieldInstance) => {
           // Use hostedFieldInstance to send data to Braintree
-          this.hostedFieldInstance = hostedFieldInstance;
+          store.hostedFieldInstance = hostedFieldInstance;
         })
         .catch((err) => {
           console.log(err);
@@ -151,13 +150,15 @@ export default {
     getToken() {
       axios.get(`${store.apiURL}/orders/generate`).then((res) => {
         //...chiama hosted fields
-        this.getHostedFields(res.data.token);
+        store.token = res.data.token;
       });
+
     },
   },
   mounted() {
-    this.getToken();
     store.show = false;
+    this.getToken();
+    this.getHostedFields(store.token);
   },
 };
 </script>
