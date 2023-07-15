@@ -135,7 +135,6 @@ export default {
     //Axios Call
     //getRestaurant
     getRestaurants(numPage) {
-      console.log(store.searchName);
       let params = {
         page: numPage,
       };
