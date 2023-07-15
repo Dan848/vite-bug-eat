@@ -121,13 +121,13 @@ export default {
       store.checkboxTypes = [];
       store.checkboxTypes.push(id);
       const type = store.checkboxTypes;
-      this.getRestaurants(1, type);
+      this.getRestaurants(1);
     },
 
     //Axios Call
     //getRestaurant
-
     getRestaurants(numPage) {
+      console.log(store.searchName);
       let params = {
         page: numPage,
       };
@@ -168,11 +168,7 @@ export default {
     store.restaurants = null;
     store.show = false;
     this.getTypes();
-    if (store.checkboxTypes) {
-      this.getRestaurants(1, store.checkboxTypes); // Chiama la funzione getRestaurants con il tipo specificato
-    } else {
-      this.getRestaurants(1); // Altrimenti, chiama la funzione getRestaurants senza il tipo specificato
-    }
+    this.getRestaurants(1); // Altrimenti, chiama la funzione getRestaurants senza il tipo specificato
     window.addEventListener('resize', this.handleWindowResize);
   },
   //Unmounted
