@@ -12,13 +12,11 @@ $fa-font-path: "./webfonts" !default;
 // SCROLL BAR CUSTOM
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
-  background: transparent;
+  width: 6px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 10px;
- 
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
@@ -28,9 +26,6 @@ $fa-font-path: "./webfonts" !default;
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #7b7a7a; 
-}
-::-webkit-scrollbar-track-piece{
-  background: trasparent;
 }
 
 body {
