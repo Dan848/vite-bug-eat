@@ -2,8 +2,8 @@
   <form id="pablo" class="container my-5">
     <div class="row justify-content-between flex-column flex-md-row align-items-center align-items-md-start">
       <CartComponent class="col-12 col-md-6 mb-5 mb-md-0" />
-      <div class="col-12 col-md-6">
-        <div>
+      <div class="col-12 col-md-6 position-relative">
+        <div :class="{'d-none' : isLoading}">
           <div class="form-group">
             <label>Nome Intestatario</label>
             <div id="intestatario" class="form-control"></div>
@@ -38,6 +38,10 @@
             Ordina e Paga
           </button>
         </div>
+        <div class="bg-white w-100 h-100 position-absolute loader text-center d-flex justify-content-center align-items-center " :class="{ 'd-none': !isLoading }">
+          <span><i class="fa-solid fa-circle-notch fa-spin fs-1"></i></span>
+          
+        </div>
         <div class="message">
           <div v-if="successMsg" class="mt-5 alert alert-success rounded-5">
             {{ successMsg }}
@@ -69,6 +73,7 @@ export default {
       nonce: "",
       errorMsg: "",
       successMsg: "",
+      isLoading: false
     };
   },
   methods: {
@@ -219,6 +224,13 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
+.loader {
+  top: 0;
+  padding-top: 100px;
+  width: 40px;
+  margin: auto;
+}
+
 .form-control {
   border-radius: 80px;
   // padding: 2rem 1rem;
