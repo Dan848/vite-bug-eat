@@ -39,11 +39,8 @@
           </button>
         </div>
         <div class="message">
-          <div v-if="successMsg" class="mt-5 alert alert-success rounded-5">
-            {{ successMsg }}
-          </div>
-          <div v-if="errorMsg" class="mt-5 alert alert-danger rounded-5">
-            {{ errorMsg }}
+          <div v-if="message" :class="error ? 'alert-danger' : 'alert-success'" class="mt-5 alert rounded-5">
+            {{ message }}
           </div>
         </div>
       </div>
@@ -67,8 +64,8 @@ export default {
       store,
       hostedFieldInstance: false,
       nonce: "",
-      errorMsg: "",
-      successMsg: "",
+      message: "",
+      error: false
     };
   },
   methods: {
@@ -116,11 +113,9 @@ export default {
               this.postPayment();
             })
             .catch((err) => {
-              this.errorMsg = err.message;
-              this.errorMsg =
+              this.message = err.message;
+              this.error = true
                 "Il pagamento non è andato buon fine, si prega di ricontrollare i dati forniti. ";
-
-              console.log(err.message);
             });
         }
       }
@@ -134,10 +129,11 @@ export default {
       };
       axios.post(`${store.apiURL}/orders/make-payment`, data).then((res) => {
         if(res.data.success){
-          this.successMsg = res.data.message;
+          this.message = res.data.message;
+          this.error = false
           this.sendForm()
         } else {
-          this.errorMsg = res.data.message
+          this.message = res.data.message
         }
       });
     },
@@ -193,8 +189,8 @@ export default {
           this.hostedFieldInstance = hostedFieldInstance;
         })
         .catch((err) => {
-          this.errorMsg = err.message;
-          console.log(this.errorMsg);
+          this.message = err.message;
+          this.error = true
         });
     },
 
