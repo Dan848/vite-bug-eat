@@ -187,12 +187,12 @@
             Svuota Carrello
           </div>
           <router-link
-            v-if="store.cart.restaurant.slug"
+          v-if="store.cart.restaurant.slug"
             :to="{
               name: 'single-restaurant',
               params: { slug: store.cart.restaurant.slug },
             }"
-            :class="{ 'd-none': !($route.name == 'checkout') }"
+            :class="{ }"
             class="text-center text-black text-decoration-underline small px-2"
           >
             Torna al ristorante
@@ -308,17 +308,6 @@ export default {
       const item = data;
       const cart = store.cart;
       localStorage.setItem("cart", JSON.stringify(cart));
-    },
-    //Format data
-    formatDateTime(dateTime) {
-      const year = dateTime.getFullYear();
-      const month = (dateTime.getMonth() + 1).toString().padStart(2, "0");
-      const day = dateTime.getDate().toString().padStart(2, "0");
-      const hours = dateTime.getHours().toString().padStart(2, "0");
-      const minutes = dateTime.getMinutes().toString().padStart(2, "0");
-      const seconds = dateTime.getSeconds().toString().padStart(2, "0");
-
-      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     },
     //Change Input when Filled
     handleFocus(id) {

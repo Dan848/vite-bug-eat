@@ -72,10 +72,22 @@ export default {
     };
   },
   methods: {
+    //Format data
+    formatDateTime(dateTime) {
+      const year = dateTime.getFullYear();
+      const month = (dateTime.getMonth() + 1).toString().padStart(2, "0");
+      const day = dateTime.getDate().toString().padStart(2, "0");
+      const hours = dateTime.getHours().toString().padStart(2, "0");
+      const minutes = dateTime.getMinutes().toString().padStart(2, "0");
+      const seconds = dateTime.getSeconds().toString().padStart(2, "0");
+
+      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    },
     //Send form data
     sendForm() {
       if (store.cart.products.length >= 1) {
         const data = {
+          restaurant_email: store.cart.restaurant.email,
           user_email: store.cart.user_email,
           shipment_address: store.cart.shipment_address,
           total_price: store.cart.totalPrice,
@@ -121,9 +133,12 @@ export default {
         amount: store.cart.totalPrice,
       };
       axios.post(`${store.apiURL}/orders/make-payment`, data).then((res) => {
-        res.data = this.successMsg;
-        this.successMsg = "Il pagamento è andato a buon fine !!";
-        console.log(this.successMsg);
+        if(res.data.success){
+          this.successMsg = res.data.message;
+          this.sendForm()
+        } else {
+          this.errorMsg = res.data.message
+        }
       });
     },
     //Genera Campi Editabili da Braintree
@@ -193,6 +208,7 @@ export default {
     },
   },
   mounted() {
+    store.cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
     this.getToken();
   },
   unmounted() {
