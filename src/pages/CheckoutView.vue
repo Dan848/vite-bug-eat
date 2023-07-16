@@ -38,6 +38,7 @@
             Ordina e Paga
           </button>
         </div>
+        <div class="mt-5 alert alert-sucess rounded-5">{{ successMsg }}</div>
         <div class="mt-5 alert alert-danger rounded-5">{{ errorMsg }}</div>
       </div>
     </div>
@@ -61,6 +62,7 @@ export default {
       hostedFieldInstance: false,
       nonce: "",
       errorMsg: "",
+      successMsg: "",
     };
   },
   methods: {
@@ -110,7 +112,9 @@ export default {
         amount: store.cart.totalPrice,
       };
       axios.post(`${store.apiURL}/orders/make-payment`, data).then((res) => {
-        console.log(res.data);
+        res.data = this.successMsg;
+        this.successMsg = "Il pagamento è andato a buon fine !!";
+        console.log(this.successMsg);
       });
     },
     //Genera Campi Editabili da Braintree
