@@ -1,5 +1,5 @@
 <template>
-  <form id="pablo" class="container my-5">
+  <form id="paymentForm" class="container my-5">
     <div class="row justify-content-between flex-column flex-md-row align-items-center align-items-md-start">
       <CartComponent class="col-12 col-md-6 mb-5 mb-md-0" />
       <div class="col-12 col-md-6">
@@ -40,7 +40,8 @@
             </button>
           </div>
           <div class="loader" :class="{ 'd-none': !isLoading }">
-            <span><i class="fa-solid fa-circle-notch fa-spin"></i></span>  
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <span class="fs-3">{{ loadingMessage }}</span>  
           </div>
         </div>
         
@@ -70,7 +71,8 @@ export default {
       store,
       hostedFieldInstance: false,
       nonce: "",
-      isLoading: true,
+      isLoading: false,
+      loadingMessage: 'Caricamento...',
       message: "",
       error: false
     };
@@ -105,11 +107,12 @@ export default {
     },
     // Al submit...
     payWithCreditCard(e) {
-      const form = document.getElementById("pablo");
+      const form = document.getElementById("paymentForm");
       if (form.checkValidity()) {
         e.preventDefault();
         //...se ho ricevuto il token da braintree...
         if (this.hostedFieldInstance) {
+          this.isLoading = true;
           //...genera un altro token da inviare per pagare
           this.hostedFieldInstance
             .tokenize()
@@ -137,10 +140,10 @@ export default {
       axios.post(`${store.apiURL}/orders/make-payment`, data).then((res) => {
         if(res.data.success){
           this.message = res.data.message;
-          this.error = false
-          this.sendForm()
+          this.error = false;
+          this.sendForm();
         } else {
-          this.message = res.data.message
+          this.message = res.data.message;
         }
       });
     },
@@ -194,15 +197,18 @@ export default {
         .then((hostedFieldInstance) => {
           // Use hostedFieldInstance to send data to Braintree
           this.hostedFieldInstance = hostedFieldInstance;
+          this.isLoading = false;
         })
         .catch((err) => {
           this.message = err.message;
-          this.error = true
+          this.error = true;
+          this.isLoading = false;
         });
     },
 
     //API genera token e...
     getToken() {
+      this.isLoading = true;
       axios.get(`${store.apiURL}/orders/generate`).then((res) => {
         //...chiama hosted fields
         store.token = res.data.token;
@@ -232,6 +238,7 @@ export default {
   left: 0;
   margin: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
