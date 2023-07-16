@@ -174,7 +174,7 @@ export default {
       });
     },
     handleWindowResize() {
-      this.filtersOpen = window.innerWidth <= 768 ? false : true;
+      this.filtersOpen = window.innerWidth < 768 ? false : true;
     },
     getTypeName(typeId) {
       const type = store.types.find((type) => type.id === typeId);
