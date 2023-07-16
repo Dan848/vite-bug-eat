@@ -42,6 +42,7 @@ body {
 
     .fade {
         background-color: rgba(black, $alpha: 0.7);
+        z-index: 1250;
     }
 }
 </style>

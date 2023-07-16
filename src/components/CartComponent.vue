@@ -1,9 +1,9 @@
 <template>
     <div>
         <!-- Cart Card -->
-        <div class="cart py-2 px-3 flex-column" :class="isOpen ? 'd-flex' : 'd-none'">
+        <div class="cart py-2 px-3 flex-column" :class="{'position-sticky mt-3 rounded-5 translate-0 transition-0' : (!store.isTablet && $route.name == 'single-restaurant') || $route.name == 'checkout', 'translate-0' :isOpen }">
             <!-- Cart Title -->
-            <i class="fa-solid fa-xmark fs-4 fw-bolder d-md-none" @click="isOpen = false">
+            <i class="fa-solid fa-xmark fs-4 fw-bolder" :class="{'d-none' : (!store.isTablet && $route.name == 'single-restaurant') || $route.name == 'checkout'}" @click="isOpen = false">
             </i>
             <div :class="{'d-none' : !($route.name == 'checkout')}">
                 <h3 class="text-center fw-bold mt-3 pb-0 px-3">I tuoi dati</h3>
@@ -55,13 +55,16 @@
                     <div class="col-4">{{ product.name }}</div>
                     <!-- Prod Counter -->
                     <div class="col-4">
+                        <!-- Counter -->
                         <CounterProduct @onMinus="removeCart(product, index)" @onPlus="store.addCart(product)"
-                            :quantity="product.quantity" />
+                            :quantity="product.quantity" :class="{'d-none' : $route.name == 'checkout'}"/>
+                            <!-- Checkout Quantity -->
+                            <div class="fw-medium text-center" :class="{'d-none' : $route.name != 'checkout'}" >{{ product.quantity + ' x ' + product.price + '€'}}</div>
                     </div>
                     <!-- Prod Price -->
                     <div class="col-4 pe-1 text-end text-nowrap d-flex justify-content-end">
                         <div>{{ (product.price * product.quantity).toFixed(2) }}€</div>
-                        <i @click.stop="deleteItem(index, product)" class="fa-solid fa-trash ms-2 delete-item p-1">
+                        <i @click.stop="deleteItem(index, product)" :class="{'d-none' : $route.name == 'checkout'}" class="fa-solid fa-trash ms-2 delete-item p-1">
                         </i>
                     </div>
                 </li>
@@ -90,7 +93,7 @@
         <!-- /Cart Card -->
 
         <!-- Cart Bubble -->
-        <div class="sticky-bubble d-flex justify-content-center align-items-center d-md-none rounded-circle" :class="{'top-70' : $route.path !== '/restaurants/:slug'}"
+        <div class="sticky-bubble d-flex justify-content-center align-items-center rounded-circle" :class="{'d-none' : (!store.isTablet && $route.name == 'single-restaurant') || $route.name == 'checkout', 'top-70': $route.name != 'single-restaurant'}"
             @click="isOpen = true">
             <i class="fa-solid fa-cart-shopping fs-3"></i>
             <span class="rounded-circle item-counter" v-if="store.cart.products.length > 0">{{ cartProducts() }}</span>
@@ -105,7 +108,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { store } from "../data/store";
 import CounterProduct from "./CounterProduct.vue";
 import ModalComponent from "./ModalComponent.vue";
@@ -118,7 +120,7 @@ export default {
     data() {
         return {
             store,
-            isOpen: window.innerWidth >= 768 ? true : false,
+            isOpen: false,
             modalOpen: false,
             modalBody: 'Sei sicuro di voler svuotare il carrello?'
         }
@@ -163,7 +165,7 @@ export default {
         },
         //Handle Resize
         handleWindowResize() {
-            this.isOpen = window.innerWidth <= 768 ? false : true;
+            store.isTablet = window.innerWidth < 768 ? true : false
         },
         //Remove Scrollbar when Offcanvas
         setBodyOverflow() {
@@ -226,17 +228,17 @@ export default {
 //OffCanvas
 .cart {
     max-width: 100%;
-    position: fixed !important;
+    position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
     background-color: white;
-    z-index: 1010;
+    z-index: 1110;
     border: 1px solid $primary;
     margin-top: none !important;
     max-height: 100vh;
-    overflow-y: auto;
+    transform: translateX(550px)!important;
+    transition: transform 0.5s;
     .fa-xmark {
         position: absolute;
         top: 18px;
@@ -358,6 +360,14 @@ export default {
     }
 }
 
+//Cart Style
+.translate-0{
+    transform: translateX(0)!important;
+}
+
+.transition-0{
+    transition: none!important;
+}
 
 //Bubble
 .sticky-bubble {
@@ -385,25 +395,35 @@ export default {
     }
 }
 
-//Generic styles
+//Bubble Styles
 .top-70{
   top: 70px !important;
 }
 
 //Card
-@media screen and (min-width: 768px) {
+
+@media screen and (min-width: 361px) {
     .cart {
-        max-width: 100%;
-        position: -webkit-sticky !important;
-        position: sticky !important;
+        width: 100%;
+        max-height: 100vh;
+        position: fixed;
         top: 0;
         border: 1px solid $primary;
-        margin-top: 1rem;
-        border-radius: 2rem;
         ul{
-            max-height: 100vh;
-            min-height: 100px;
+            display: block;
+            min-height: 100%;
         }
     }
 }
+
+@media screen and (min-width: 576px) {
+    .cart {
+        border-top-left-radius: 2rem;
+        border-bottom-left-radius: 2rem;
+        max-width: 550px;
+        position: fixed;
+        top: 0;
+    }
+}
+
 </style>

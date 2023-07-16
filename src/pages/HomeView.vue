@@ -63,6 +63,7 @@ export default {
     }
   },
   mounted() {
+    store.cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
     store.searchName = "";
     store.types = null;
     store.checkboxTypes = []

@@ -6,6 +6,7 @@ export const store = reactive({
   apiURL: "http://127.0.0.1:8000/api",
   //Hamburger menu show
   show: false,
+  isTablet: window.innerWidth < 768 ? true : false,
   //Data
   restaurants: null,
   restaurant: null,

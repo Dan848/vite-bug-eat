@@ -3,7 +3,6 @@
     <div class="row justify-content-between">
       <CartComponent class="col-6" />
       <div class="col-6">
-        <div>Che succede se scrivo qui</div>
         <div>
           <div class="form-group">
             <label>Nome Intestatario</label>
@@ -27,11 +26,12 @@
           </div>
           <button
             type="submit"
-            class="btn btn-primary rounded-5 w-100 mt-3"
+            class="btn btn-primary rounded-5 text-white fw-bold px-4 py-2 mt-3"
             @click="payWithCreditCard" :disabled="!this.hostedFieldInstance || !store.cart.user_email || !store.cart.user_name || !store.cart.shipment_address">
-            Submit
+            Ordina e Paga
           </button>
         </div>
+        <div class="mt-5 alert alert-danger rounded-5">{{ errorMsg }}</div>
       </div>
     </div>
   </form>
@@ -53,7 +53,7 @@ export default {
       store,
       hostedFieldInstance: false,
       nonce: "",
-      error: "",
+      errorMsg: "",
     };
   },
   methods: {
@@ -91,7 +91,7 @@ export default {
             this.postPayment();
           })
           .catch((err) => {
-            this.error = err.message;
+            this.errorMsg = err.message;
             console.log(err.message);
           });
         }
@@ -160,8 +160,8 @@ export default {
           this.hostedFieldInstance = hostedFieldInstance;
         })
         .catch((err) => {
-          console.log(err);
-          this.error = err.message;
+          this.errorMsg = err.message;
+          console.log(this.errorMsg)
         });
     },
 
