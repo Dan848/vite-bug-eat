@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column justify-content-center align-items-center py-5">
     <div>
-      <CartComponent/>
+      <CartComponent v-if="store.cart.products.length > 0"/>
     </div>
     <div class="mission-image">
        
@@ -96,6 +96,7 @@ export default {
         };
     },
     mounted() {
+      store.cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
       store.checkboxTypes = [];
       store.searchName = "";
     },

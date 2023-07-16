@@ -144,6 +144,7 @@ export default {
     //Axios Call
     //getRestaurant
     getRestaurants(numPage) {
+      this.isLoading = true
       let params = {
         page: numPage,
       };

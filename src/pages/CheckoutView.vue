@@ -3,24 +3,26 @@
     <div class="row justify-content-between flex-column flex-md-row align-items-center align-items-md-start">
       <CartComponent class="col-12 col-md-6 mb-5 mb-md-0" />
       <div class="col-12 col-md-6">
-        <div class="position-relative">
+        <h2 class="text-center mt-3 fw-medium">Dati pagamento</h2>
+        <!-- Form Payment -->
+        <div class="position-relative fw-medium">
           <div class="form-group">
-            <label>Nome Intestatario</label>
-            <div id="intestatario" class="form-control"></div>
+            <label>Nome Titolare</label>
+            <div id="holder" class="form-control"></div>
           </div>
           <div class="form-group">
-            <label>Credit Card Number</label>
-            <div id="credito" class="form-control"></div>
+            <label>Numero Carta</label>
+            <div id="credit" class="form-control"></div>
           </div>
           <div class="form-group">
             <div class="row">
               <div class="col-6">
-                <label>Expire Date</label>
-                <div id="scadi" class="form-control"></div>
+                <label>Data di Scadenza</label>
+                <div id="expire" class="form-control"></div>
               </div>
               <div class="col-6">
                 <label>CVV</label>
-                <div id="civ" class="form-control"></div>
+                <div id="cvv" class="form-control"></div>
               </div>
             </div>
           </div>
@@ -34,23 +36,20 @@
                 !store.cart.user_email ||
                 !store.cart.user_name ||
                 !store.cart.shipment_address
-              "
-            >
+              ">
               Ordina e Paga
             </button>
           </div>
-          <div class="loader" :class="{ 'd-none': !isLoading }">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-            <span class="fs-3">{{ loadingMessage }}</span>  
-          </div>
-        </div>
-        
-        <div class="message">
           <div v-if="message" :class="error ? 'alert-danger' : 'alert-success'" class="mt-5 alert rounded-5">
             {{ message }}
           </div>
+          <div class="loader" :class="{ 'd-none': !isLoading }">
+            <i :class="{'d-none' : completeOrder}" class="fa-solid fa-circle-notch fa-spin"></i> <i :class="{'d-none' : !completeOrder}" class="fa-solid fa-circle-check"></i>
+            <span class="fs-3">{{ loadingMessage }}</span>  
+          </div>
         </div>
       </div>
+      <!-- /Form -->
     </div>
   </form>
 </template>
@@ -71,10 +70,11 @@ export default {
       store,
       hostedFieldInstance: false,
       nonce: "",
-      isLoading: false,
+      isLoading: true,
       loadingMessage: 'Caricamento...',
       message: "",
-      error: false
+      error: false,
+      completeOrder: false
     };
   },
   methods: {
@@ -91,7 +91,7 @@ export default {
     },
     //Send form data
     sendForm() {
-      if (store.cart.products.length >= 1) {
+      this.loadingMessage = "Invio Ordine"
         const data = {
           restaurant_email: store.cart.restaurant.email,
           user_email: store.cart.user_email,
@@ -99,11 +99,20 @@ export default {
           total_price: store.cart.totalPrice,
           date_time: this.formatDateTime(new Date()),
           products: store.cart.products,
-        };
-        axios.post(`${store.apiURL}/orders/store`, data).then((res) => {});
-      } else {
-        //Qualcuno stampa il messaggio
-      }
+        }
+        axios.post(`${store.apiURL}/orders/store`, data).then((res) => {
+          if(res.data.success){
+            this.loadingMessage = "Ordine effettuato. Controlla l'email. A breve verrai reindirizzato alla lista dei ristoranti"
+            this.completeOrder = true
+            setTimeout(() => {
+              store.cart.restaurant = {};
+              store.cart.products = [];
+              store.cart.totalPrice = 0;
+              localStorage.setItem("cart", JSON.stringify(store.cart));
+                this.$router.push('/restaurantview');
+            }, 6000);
+          }
+        });
     },
     // Al submit...
     payWithCreditCard(e) {
@@ -112,6 +121,7 @@ export default {
         e.preventDefault();
         //...se ho ricevuto il token da braintree...
         if (this.hostedFieldInstance) {
+          this.loadingMessage = "Pagamento in corso..."
           this.isLoading = true;
           //...genera un altro token da inviare per pagare
           this.hostedFieldInstance
@@ -125,7 +135,7 @@ export default {
             .catch((err) => {
               this.message = err.message;
               this.error = true
-                "Il pagamento non è andato buon fine, si prega di ricontrollare i dati forniti. ";
+              this.isLoading = false
             });
         }
       }
@@ -141,9 +151,11 @@ export default {
         if(res.data.success){
           this.message = res.data.message;
           this.error = false;
+          this.loadingMessage = "Pagamento effettuato"
           this.sendForm();
         } else {
           this.message = res.data.message;
+          this.error = true;
         }
       });
     },
@@ -167,27 +179,27 @@ export default {
             },
             fields: {
               number: {
-                selector: "#credito",
-                placeholder: "Enter Credit Card",
+                selector: "#credit",
+                placeholder: "4111 1111 1111 1111",
                 maxCardLength: 16,
                 maskInput: { character: "*", showLastFour: true },
                 attribute: "aria-required",
                 supportedCardBrands: { "card-brand-id": true },
               },
               cvv: {
-                selector: "#civ",
-                placeholder: "Enter CVV",
+                selector: "#cvv",
+                placeholder: "Es: 404",
                 maskInput: true,
                 minlength: 3,
                 maxlength: 3,
               },
               expirationDate: {
-                selector: "#scadi",
-                placeholder: "00 / 0000",
+                selector: "#expire",
+                placeholder: "MM / AAAA",
                 expirationDate: "MM/YY",
               },
               cardholderName: {
-                selector: "#intestatario",
+                selector: "#holder",
                 placeholder: "Es: Aniello Rossi",
               },
             },
@@ -218,10 +230,15 @@ export default {
   },
   mounted() {
     store.cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
+    if(store.cart.products.length <1){
+      this.$router.push('/restaurantview')
+    }
     this.getToken();
   },
   unmounted() {
-    this.hostedFieldInstance.teardown();
+    if(this.hostedFieldInstance){
+      this.hostedFieldInstance.teardown();
+    }
   },
 };
 </script>
