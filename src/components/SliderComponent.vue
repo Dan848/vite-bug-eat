@@ -104,7 +104,6 @@ export default {
     }
   },
   mounted() {
-    store.checkboxTypes = []
     this.sliderContainer = this.$refs.sliderContainer;
     this.sliderWidth = this.sliderContainer.offsetWidth;
     window.addEventListener('resize', this.handleWindowResize);

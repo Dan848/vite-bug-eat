@@ -190,13 +190,13 @@ export default {
   mounted() {
     store.restaurants = null;
     this.getTypes();
-    this.getRestaurants(1); // Altrimenti, chiama la funzione getRestaurants senza il tipo specificato
+    this.getRestaurants(1);
+    store.cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
     window.addEventListener("resize", this.handleWindowResize);
   },
   //Unmounted
   unmounted() {
     store.restaurants = null;
-    store.checkboxTypes = []
     window.removeEventListener("resize", this.handleWindowResize);
   },
 };

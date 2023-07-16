@@ -96,6 +96,8 @@ export default {
         };
     },
     mounted() {
+      store.checkboxTypes = [];
+      store.searchName = "";
     },
     components: { CartComponent }
 };

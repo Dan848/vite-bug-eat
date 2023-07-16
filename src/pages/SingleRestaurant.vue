@@ -117,6 +117,8 @@ export default {
 
   mounted() {
     store.restaurant = null;
+    store.checkboxTypes = [];
+    store.searchName = "";
     //Get Restaurant 
     this.getRestaurant();
     // const cartData = localStorage.getItem("cart");
