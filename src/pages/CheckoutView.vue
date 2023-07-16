@@ -14,7 +14,7 @@
           </div>
           <div class="form-group">
             <div class="row">
-              <div class="col-6">1
+              <div class="col-6">
                 <label>Expire Date</label>
                 <div id="scadi" class="form-control"></div>
               </div>
@@ -27,11 +27,25 @@
           <button
             type="submit"
             class="btn btn-primary rounded-5 text-white fw-bold px-4 py-2 mt-3"
-            @click="payWithCreditCard" :disabled="!this.hostedFieldInstance || !store.cart.user_email || !store.cart.user_name || !store.cart.shipment_address">
+            @click="payWithCreditCard"
+            :disabled="
+              !this.hostedFieldInstance ||
+              !store.cart.user_email ||
+              !store.cart.user_name ||
+              !store.cart.shipment_address
+            "
+          >
             Ordina e Paga
           </button>
         </div>
-        <div class="mt-5 alert alert-danger rounded-5">{{ errorMsg }}</div>
+        <div class="message">
+          <div v-if="successMsg" class="mt-5 alert alert-success rounded-5">
+            {{ successMsg }}
+          </div>
+          <div v-if="errorMsg" class="mt-5 alert alert-danger rounded-5">
+            {{ errorMsg }}
+          </div>
+        </div>
       </div>
     </div>
   </form>
@@ -54,6 +68,7 @@ export default {
       hostedFieldInstance: false,
       nonce: "",
       errorMsg: "",
+      successMsg: "",
     };
   },
   methods: {
@@ -67,33 +82,34 @@ export default {
           date_time: this.formatDateTime(new Date()),
           products: store.cart.products,
         };
-        axios.post(`${store.apiURL}/orders/store`, data).then((res) => {
-          
-        })
+        axios.post(`${store.apiURL}/orders/store`, data).then((res) => {});
       } else {
-          //Qualcuno stampa il messaggio
+        //Qualcuno stampa il messaggio
       }
     },
     // Al submit...
     payWithCreditCard(e) {
-      const form = document.getElementById("pablo")
-      if (form.checkValidity()){
-        e.preventDefault()
+      const form = document.getElementById("pablo");
+      if (form.checkValidity()) {
+        e.preventDefault();
         //...se ho ricevuto il token da braintree...
         if (this.hostedFieldInstance) {
           //...genera un altro token da inviare per pagare
           this.hostedFieldInstance
-          .tokenize()
-          .then((payload) => {
-            //token
-            this.nonce = payload.nonce;
-            //API make-payment
-            this.postPayment();
-          })
-          .catch((err) => {
-            this.errorMsg = err.message;
-            console.log(err.message);
-          });
+            .tokenize()
+            .then((payload) => {
+              //token
+              this.nonce = payload.nonce;
+              //API make-payment
+              this.postPayment();
+            })
+            .catch((err) => {
+              this.errorMsg = err.message;
+              this.errorMsg =
+                "Il pagamento non è andato buon fine, si prega di ricontrollare i dati forniti. ";
+
+              console.log(err.message);
+            });
         }
       }
     },
@@ -105,7 +121,9 @@ export default {
         amount: store.cart.totalPrice,
       };
       axios.post(`${store.apiURL}/orders/make-payment`, data).then((res) => {
-        console.log(res.data);
+        res.data = this.successMsg;
+        this.successMsg = "Il pagamento è andato a buon fine !!";
+        console.log(this.successMsg);
       });
     },
     //Genera Campi Editabili da Braintree
@@ -161,7 +179,7 @@ export default {
         })
         .catch((err) => {
           this.errorMsg = err.message;
-          console.log(this.errorMsg)
+          console.log(this.errorMsg);
         });
     },
 
@@ -170,17 +188,16 @@ export default {
       axios.get(`${store.apiURL}/orders/generate`).then((res) => {
         //...chiama hosted fields
         store.token = res.data.token;
-          this.getHostedFields(store.token)
+        this.getHostedFields(store.token);
       });
-
     },
   },
   mounted() {
     this.getToken();
   },
-  unmounted(){
+  unmounted() {
     this.hostedFieldInstance.teardown();
-  }
+  },
 };
 </script>
 
