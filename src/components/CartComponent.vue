@@ -3,15 +3,15 @@
     <!-- Cart Card -->
 
     <div
-      class="cart py-2 px-3 flex-column"
+      class="cart py-2 px-3 flex-column overflow-y-auto"
       :class="{
         'position-sticky mt-3 rounded-5 translate-0 transition-0 z-1':
           (!store.isTablet && $route.name == 'single-restaurant') ||
           $route.name == 'checkout',
-        'translate-0': isOpen,
+        'translate-0': isOpen, 'vh-75': $route.name == 'checkout'
       }"
     >
-      <div class="proava">
+      <div>
         <!-- Cart Title -->
         <i
           class="fa-solid fa-xmark fs-4 fw-bolder"
@@ -112,7 +112,7 @@
         />
         <!-- Product List -->
         <ul
-          :class="{ 'd-none': store.cart.products.length < 1 }"
+          :class="{ 'd-none': store.cart.products.length < 1, 'max-height-300': $route.name == 'checkout' }"
           class="list-unstyled overflow-y-auto cart-products container-fluid"
         >
           <!-- Single Product -->
@@ -384,8 +384,9 @@ export default {
 
   ul {
     font-weight: 500;
-
+    max-height: 95vh;
     min-height: 100px;
+    overflow-y: auto;
     .delete-item {
       color: #d93646;
       cursor: pointer;
@@ -532,6 +533,10 @@ export default {
   top: 70px !important;
 }
 
+//General
+.max-height-300{
+  max-height: 200px !important;
+}
 //Card
 
 @media screen and (min-width: 361px) {
