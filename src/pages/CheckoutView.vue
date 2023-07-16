@@ -1,8 +1,8 @@
 <template>
   <form id="pablo" class="container my-5">
-    <div class="row justify-content-between">
-      <CartComponent class="col-6" />
-      <div class="col-6">
+    <div class="row justify-content-between flex-column flex-md-row align-items-center align-items-md-start">
+      <CartComponent class="col-12 col-md-6 mb-5 mb-md-0" />
+      <div class="col-12 col-md-6">
         <div>
           <div class="form-group">
             <label>Nome Intestatario</label>

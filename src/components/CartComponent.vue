@@ -3,12 +3,12 @@
     <!-- Cart Card -->
 
     <div
-      class="cart py-2 px-3 flex-column"
+      class="cart py-2 px-3 flex-column overflow-y-auto"
       :class="{
         'position-sticky mt-3 rounded-5 translate-0 transition-0 z-1':
           (!store.isTablet && $route.name == 'single-restaurant') ||
           $route.name == 'checkout',
-        'translate-0': isOpen,
+        'translate-0': isOpen, 'vh-75': $route.name == 'checkout'
       }"
     >
       <div>
@@ -112,7 +112,7 @@
         />
         <!-- Product List -->
         <ul
-          :class="{ 'd-none': store.cart.products.length < 1 }"
+          :class="{ 'd-none': store.cart.products.length < 1, 'max-height-300': $route.name == 'checkout' }"
           class="list-unstyled overflow-y-auto cart-products container-fluid"
         >
           <!-- Single Product -->
@@ -168,7 +168,6 @@
         <!-- Cart Footer Button -->
         <div
           class="d-flex flex-column justify-content-center align-items-center mb-2"
-          :class="{ 'd-none': $route.name === 'checkout' }"
         >
           <button
             @click="this.$router.push('/checkout')"
@@ -192,9 +191,7 @@
               name: 'single-restaurant',
               params: { slug: store.cart.restaurant.slug },
             }"
-            :class="{ }"
-            class="text-center text-black text-decoration-underline small px-2"
-          >
+            class="text-center text-black text-decoration-underline small px-2">
             Torna al ristorante
           </router-link>
         </div>
@@ -373,8 +370,9 @@ export default {
 
   ul {
     font-weight: 500;
-
+    max-height: 95vh;
     min-height: 100px;
+    overflow-y: auto;
     .delete-item {
       color: #d93646;
       cursor: pointer;
@@ -521,6 +519,10 @@ export default {
   top: 70px !important;
 }
 
+//General
+.max-height-300{
+  max-height: 200px !important;
+}
 //Card
 
 @media screen and (min-width: 361px) {
