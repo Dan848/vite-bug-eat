@@ -45,7 +45,7 @@
                   <span>Ristoranti vicino a te</span>
                 </div>
                 <div v-for="restaurant in store.restaurants"
-                  class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4">
+                  class="my-4 d-flex justify-content-center col-12 col-lg-6 col-xl-4 ms-1">
                   <router-link :to="{
                     name: 'single-restaurant',
                     params: { slug: restaurant.slug },
@@ -125,7 +125,7 @@ export default {
   data() {
     return {
       store,
-      filtersOpen: window.innerWidth <= 768 ? false : true,
+      filtersOpen: window.innerWidth < 768 ? false : true,
       currentPage: null,
       lastPage: null,
       totalRestaurants: null,
