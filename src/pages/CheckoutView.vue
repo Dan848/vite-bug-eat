@@ -38,7 +38,7 @@
             Ordina e Paga
           </button>
         </div>
-        <div class="mt-5 alert alert-sucess rounded-5">{{ successMsg }}</div>
+        <div class="mt-5 alert alert-success rounded-5">{{ successMsg }}</div>
         <div class="mt-5 alert alert-danger rounded-5">{{ errorMsg }}</div>
       </div>
     </div>
