@@ -7,7 +7,7 @@
        
         <h2  class="fs-4 fw-bold">"BUG-EAT Eco-Sostenibile: Ordina, Gusta e Cambia il Mondo!"</h2>
     </div>
-    <div class="container text-center">
+    <div class="container ">
       <p class="py-5 lh-lg fs-6 small ">
         Benvenuti nel sito di <span class="text-primary fw-semibold">BUG-EAT </span>, il food-delivery più eco-sostenibile del mercato!
         Siamo fieri di abbracciare la causa della deforestazione e di fare la
