@@ -76,6 +76,7 @@ export default {
     sendForm() {
       if (store.cart.products.length >= 1) {
         const data = {
+          restaurant_email: store.cart.restaurant.email,
           user_email: store.cart.user_email,
           shipment_address: store.cart.shipment_address,
           total_price: store.cart.totalPrice,
@@ -121,9 +122,12 @@ export default {
         amount: store.cart.totalPrice,
       };
       axios.post(`${store.apiURL}/orders/make-payment`, data).then((res) => {
-        res.data = this.successMsg;
-        this.successMsg = "Il pagamento è andato a buon fine !!";
-        console.log(this.successMsg);
+        if(res.data.success){
+          this.successMsg = res.data.message;
+          this.sendForm()
+        } else {
+          this.errorMsg = res.data.message
+        }
       });
     },
     //Genera Campi Editabili da Braintree
@@ -193,6 +197,7 @@ export default {
     },
   },
   mounted() {
+    store.cart = JSON.parse(localStorage.getItem("cart")) || store.cart;
     this.getToken();
   },
   unmounted() {

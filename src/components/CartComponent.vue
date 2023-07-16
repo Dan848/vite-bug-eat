@@ -11,7 +11,7 @@
         'translate-0': isOpen,
       }"
     >
-      <div class="proava">
+      <div>
         <!-- Cart Title -->
         <i
           class="fa-solid fa-xmark fs-4 fw-bolder"
@@ -187,12 +187,12 @@
             Svuota Carrello
           </div>
           <router-link
-            v-if="store.cart.restaurant.slug"
+          v-if="store.cart.restaurant.slug"
             :to="{
               name: 'single-restaurant',
               params: { slug: store.cart.restaurant.slug },
             }"
-            :class="{ 'd-none': !($route.name == 'checkout') }"
+            :class="{ }"
             class="text-center text-black text-decoration-underline small px-2"
           >
             Torna al ristorante
