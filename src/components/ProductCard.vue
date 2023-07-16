@@ -7,7 +7,7 @@
       <h3 class="fw-bold">{{ product.name }}</h3>
       <p class="text-" v-if="product.description">{{ product.description }}</p>
       <div class="d-flex justify-content-between align-items-center">
-        <div class="badge rounded-pill text-bg-light">{{ product.price }}€</div>
+        <div class="badge rounded-pill">{{ product.price }}€</div>
         <!-- <CounterProduct/> -->
       </div>
     </div>
@@ -44,8 +44,10 @@ li {
     color: #979ca5;
   }
   .badge {
-    background-color: #ff1818;
-    color: black;
+    background-color: #789f52 !important;
+    color: white;
+    font-weight: 400;
+    font-size: small;
   }
 }
 </style>
