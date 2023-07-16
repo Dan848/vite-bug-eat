@@ -178,11 +178,10 @@
             Vai al pagamento
           </button>
 
-          <div
+          <div v-if="store.cart.products.length > 0"
             :class="{ 'd-none': $route.name === 'checkout' }"
             class="text-center text-decoration-underline small px-2"
-            @click="modalOpen = true"
-          >
+            @click="modalOpen = true">
             Svuota Carrello
           </div>
           <router-link
@@ -190,7 +189,7 @@
             :to="{
               name: 'single-restaurant',
               params: { slug: store.cart.restaurant.slug },
-            }"
+            }" :class="{'d-none' : ($route.name != 'checkout')}"
             class="text-center text-black text-decoration-underline small px-2">
             Torna al ristorante
           </router-link>
