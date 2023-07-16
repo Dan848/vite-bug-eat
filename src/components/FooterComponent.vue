@@ -60,6 +60,9 @@
               <!-- Links -->
               <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
               <p>
+                <a href="http://localhost:5174/">Home</a>
+              </p>
+              <p>
                 <a href="http://localhost:5174/restaurantview">i nostri ristoranti</a>
               </p>
               <p>
@@ -67,9 +70,6 @@
               </p>
               <p>
                 <a href="http://localhost:5174/ourMission">La nostra mission</a>
-              </p>
-              <p>
-                <a href="http://localhost:5174/workWithUs">Lavora con noi</a>
               </p>
             </div>
             <!-- Grid column -->
