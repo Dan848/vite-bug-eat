@@ -192,7 +192,7 @@
               name: 'single-restaurant',
               params: { slug: store.cart.restaurant.slug },
             }"
-            :class="{ 'd-none': !($route.name === 'checkout') }"
+            :class="{ 'd-none': !($route.name == 'checkout') }"
             class="text-center text-black text-decoration-underline small px-2"
           >
             Torna al ristorante
