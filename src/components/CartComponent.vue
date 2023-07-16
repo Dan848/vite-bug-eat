@@ -5,7 +5,7 @@
     <div
       class="cart py-2 px-3 flex-column"
       :class="{
-        'position-sticky mt-3 rounded-5 translate-0 transition-0':
+        'position-sticky mt-3 rounded-5 translate-0 transition-0 z-1':
           (!store.isTablet && $route.name == 'single-restaurant') ||
           $route.name == 'checkout',
         'translate-0': isOpen,
