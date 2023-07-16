@@ -168,7 +168,6 @@
         <!-- Cart Footer Button -->
         <div
           class="d-flex flex-column justify-content-center align-items-center mb-2"
-          :class="{ 'd-none': $route.name === 'checkout' }"
         >
           <button
             @click="this.$router.push('/checkout')"
@@ -192,9 +191,7 @@
               name: 'single-restaurant',
               params: { slug: store.cart.restaurant.slug },
             }"
-            :class="{ }"
-            class="text-center text-black text-decoration-underline small px-2"
-          >
+            class="text-center text-black text-decoration-underline small px-2">
             Torna al ristorante
           </router-link>
         </div>
