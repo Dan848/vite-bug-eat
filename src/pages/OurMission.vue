@@ -4,18 +4,18 @@
       <CartComponent/>
     </div>
     <div class="mission-image">
-        <img src="/img/ourMission/ant.jpg" alt="ant">
+       
         <h2  class="fs-4 fw-bold">"BUG-EAT Eco-Sostenibile: Ordina, Gusta e Cambia il Mondo!"</h2>
     </div>
     <div class="container text-center">
       <p class="py-5 lh-lg fs-6 small ">
         Benvenuti nel sito di <span class="text-primary fw-semibold">BUG-EAT </span>, il food-delivery più eco-sostenibile del mercato!
         Siamo fieri di abbracciare la causa della deforestazione e di fare la
-        nostra parte per un futuro più <span class="text-primary fw-semibold" >verde e sostenibile.</span>  Una delle nostre
+        nostra parte per un futuro più <span class="text-primary fs-5 fw-semibold" >verde e sostenibile.</span>  Una delle nostre
         principali preoccupazioni è l'impatto ambientale della nostra attività.
         Abbiamo adottato diverse misure per ridurre la nostra impronta <span class="text-primary fs-5 fw-semibold"> ECOLOGICA</span>
         e preservare le foreste. Innanzitutto, utilizziamo imballaggi ecologici
-        e biodegradabili per tutti i nostri ordini. Questo significa che ogni
+        e biodegradabili per tutti i nostri ordini. <br> Questo significa che ogni
         volta che ricevete un pasto da noi, potete godervelo sapendo che il
         nostro imballaggio <span class="text-danger fs-5 fw-semibold">non</span>  contribuisce all'inquinamento ambientale. <br>
         Inoltre, collaboriamo strettamente con fornitori locali che condividono
@@ -40,8 +40,8 @@
         della comunità. Inoltre, ci impegniamo a monitorare costantemente le
         nostre pratiche e ad adottare nuove soluzioni sostenibili man mano che
         diventano disponibili. <span class="fs-5 text-capitalize fw-semibold"> <br><br>
-        <div class="mission-image">
-            <img src="/img/ourMission/tree.jpg" alt="earth">
+        <div class="mission-image ">
+            <img src="/img/ourMission/tree.jpg" alt="earth" class="">
             <h2  class="fs-4 fw-bold">"BUG-EAT Eco-Sostenibile: Ordina, Gusta e Cambia il Mondo!"</h2>
         </div> 
           Ordina il tuo pasto oggi e fai la differenza
@@ -115,10 +115,11 @@ ul{
   img{
     width:70%;
     border-radius: 80px;
-    margin-bottom: 2rem;
+    margin-bottom:3rem;
   }
   h2{
     text-align: center;
+    margin-bottom: 2rem;
   }
   display: flex;
   flex-direction: column;
