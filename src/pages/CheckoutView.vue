@@ -2,8 +2,8 @@
   <form id="pablo" class="container my-5">
     <div class="row justify-content-between flex-column flex-md-row align-items-center align-items-md-start">
       <CartComponent class="col-12 col-md-6 mb-5 mb-md-0" />
-      <div class="col-12 col-md-6 position-relative">
-        <div :class="{'d-none' : isLoading}">
+      <div class="col-12 col-md-6">
+        <div class="position-relative">
           <div class="form-group">
             <label>Nome Intestatario</label>
             <div id="intestatario" class="form-control"></div>
@@ -24,30 +24,29 @@
               </div>
             </div>
           </div>
-          <button
-            type="submit"
-            class="btn btn-primary rounded-5 text-white fw-bold px-4 py-2 mt-3"
-            @click="payWithCreditCard"
-            :disabled="
-              !this.hostedFieldInstance ||
-              !store.cart.user_email ||
-              !store.cart.user_name ||
-              !store.cart.shipment_address
-            "
-          >
-            Ordina e Paga
-          </button>
-        </div>
-        <div class="bg-white w-100 h-100 position-absolute loader text-center d-flex justify-content-center align-items-center " :class="{ 'd-none': !isLoading }">
-          <span><i class="fa-solid fa-circle-notch fa-spin fs-1"></i></span>
-          
-        </div>
-        <div class="message">
-          <div v-if="successMsg" class="mt-5 alert alert-success rounded-5">
-            {{ successMsg }}
+          <div class="text-center">
+            <button
+              type="submit"
+              class="btn btn-primary rounded-5 text-white fw-bold px-4 py-2 mt-3"
+              @click="payWithCreditCard"
+              :disabled="
+                !this.hostedFieldInstance ||
+                !store.cart.user_email ||
+                !store.cart.user_name ||
+                !store.cart.shipment_address
+              "
+            >
+              Ordina e Paga
+            </button>
           </div>
-          <div v-if="errorMsg" class="mt-5 alert alert-danger rounded-5">
-            {{ errorMsg }}
+          <div class="loader" :class="{ 'd-none': !isLoading }">
+            <span><i class="fa-solid fa-circle-notch fa-spin"></i></span>  
+          </div>
+        </div>
+        
+        <div class="message">
+          <div v-if="message" :class="error ? 'alert-danger' : 'alert-success'" class="mt-5 alert rounded-5">
+            {{ message }}
           </div>
         </div>
       </div>
@@ -71,9 +70,9 @@ export default {
       store,
       hostedFieldInstance: false,
       nonce: "",
-      errorMsg: "",
-      successMsg: "",
-      isLoading: false
+      isLoading: true,
+      message: "",
+      error: false
     };
   },
   methods: {
@@ -121,11 +120,9 @@ export default {
               this.postPayment();
             })
             .catch((err) => {
-              this.errorMsg = err.message;
-              this.errorMsg =
+              this.message = err.message;
+              this.error = true
                 "Il pagamento non è andato buon fine, si prega di ricontrollare i dati forniti. ";
-
-              console.log(err.message);
             });
         }
       }
@@ -139,10 +136,11 @@ export default {
       };
       axios.post(`${store.apiURL}/orders/make-payment`, data).then((res) => {
         if(res.data.success){
-          this.successMsg = res.data.message;
+          this.message = res.data.message;
+          this.error = false
           this.sendForm()
         } else {
-          this.errorMsg = res.data.message
+          this.message = res.data.message
         }
       });
     },
@@ -198,8 +196,8 @@ export default {
           this.hostedFieldInstance = hostedFieldInstance;
         })
         .catch((err) => {
-          this.errorMsg = err.message;
-          console.log(this.errorMsg);
+          this.message = err.message;
+          this.error = true
         });
     },
 
@@ -225,10 +223,19 @@ export default {
 <style lang="scss" scoped>
 @use "../assets/partials/variable.scss" as *;
 .loader {
+  background: white;
+  color: $primary;
+  position: absolute;
   top: 0;
-  padding-top: 100px;
-  width: 40px;
+  right: 0;
+  bottom: 0;
+  left: 0;
   margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 4rem;
 }
 
 .form-control {
