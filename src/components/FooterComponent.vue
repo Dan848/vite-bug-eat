@@ -63,7 +63,7 @@
                 <a href="http://localhost:5174/">Home</a>
               </p>
               <p>
-                <a href="http://localhost:5174/restaurantview">i nostri ristoranti</a>
+                <a href="http://localhost:5174/restaurantview">I nostri ristoranti</a>
               </p>
               <p>
                 <a href="http://localhost:5174/about-us">Chi siamo</a>
@@ -81,13 +81,13 @@
               <p><i class="fas fa-home me-3 text-secondary"></i> Italy</p>
               <p>
                 <i class="fas fa-envelope me-3 text-secondary"></i>
-                bugmaker@gmail.com
+                info@bugeat.com
               </p>
               <p>
-                <i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88
+                <i class="fas fa-phone me-3 text-secondary"></i> + 39 345 18 98 118
               </p>
               <p>
-                <i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89
+                <i class="fas fa-print me-3 text-secondary"></i> + 39 340 89 26 090
               </p>
             </div>
             <!-- Grid column -->
