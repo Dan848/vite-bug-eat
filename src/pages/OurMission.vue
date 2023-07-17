@@ -64,7 +64,7 @@
           <h2 class="important fs-3"> BUG-EAT Eco-Sostenibile: Ordina, Gusta e Cambia il Mondo!</h2>
           <p class="fs-5">Ordina il tuo pasto oggi e fai la differenza
             con ogni boccone!</p>
-          <router-link class="bg-success text-light rounded p-2" to="/restaurantview"> Ordina ora </router-link>
+          <router-link class="bg-primary text-light rounded p-2" to="/restaurantview"> Ordina ora </router-link>
         </div>
       </span>
       </p>

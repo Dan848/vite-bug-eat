@@ -4,9 +4,9 @@
     :id="'product-' + product.id"
   >
     <div>
-      <div class="d-flex justify-content-between align-items-center mb-3 mb-lg-0">
+      <div class="d-flex justify-content-between flex-sm-row flex-column-reverse align-items-center mb-3 mb-lg-0">
         <h3 class="fw-bold">{{ product.name }}</h3>
-        <img :src="product.image" :alt="product.name" class="d-lg-none ms-5" v-if="product.image != null">
+        <img :src="product.image" :alt="product.name" class="d-lg-none mb-4 mb-sm-0 mx-sm-3" v-if="product.image != null">
       </div>
       <p class="text-" v-if="product.description">{{ product.description }}</p>
       <div class="d-flex justify-content-between align-items-center">

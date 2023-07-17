@@ -133,9 +133,15 @@ export default {
               this.postPayment();
             })
             .catch((err) => {
-              this.message = err.message;
               this.error = true
               this.isLoading = false
+              if(err.message == "All fields are empty. Cannot tokenize empty card fields."){
+                this.message = 'I campi sono vuoti, completali tutti';
+              } else if(err.message == "Some payment input fields are invalid. Cannot tokenize invalid card fields."){
+                this.message = "Alcuni campi inseriti non sono validi";
+              } else {
+                this.message = err.message;
+              }
             });
         }
       }
@@ -199,6 +205,7 @@ export default {
                 expirationDate: "MM/YY",
               },
               cardholderName: {
+                maxlength: 55,
                 selector: "#holder",
                 placeholder: "Es: Aniello Rossi",
               },
