@@ -498,6 +498,7 @@ export default {
   color: white;
   z-index: 1005;
   cursor: pointer;
+  border: 3px solid white;
   &:hover {
     background-color: #8cad6c;
   }
