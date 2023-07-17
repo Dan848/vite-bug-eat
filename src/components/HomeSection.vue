@@ -82,6 +82,9 @@ section {
   .sectionImg-box {
     max-width: 350px;
     max-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
       max-height: 100%;
       max-width: 100%;
