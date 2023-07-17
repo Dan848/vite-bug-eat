@@ -117,7 +117,7 @@
                       <i class="fa-solid fa-angle-left"></i>
                     </button>
                   </li>
-                  <li class="page-item" v-for="n in lastPage">
+                  <li class="page-item d-none d-sm-block" v-for="n in lastPage">
                     <button
                       :class="{
                         'page-link-current page-link': true,
@@ -341,6 +341,13 @@ div {
   &:hover {
     cursor: pointer;
     background-color: #8cad6c;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .pagination {
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

@@ -4,13 +4,17 @@
     :id="'product-' + product.id"
   >
     <div>
-      <h3 class="fw-bold">{{ product.name }}</h3>
+      <div class="d-flex justify-content-between align-items-center mb-3 mb-lg-0">
+        <h3 class="fw-bold">{{ product.name }}</h3>
+        <img :src="product.image" :alt="product.name" class="d-lg-none ms-5" v-if="product.image != null">
+      </div>
       <p class="text-" v-if="product.description">{{ product.description }}</p>
       <div class="d-flex justify-content-between align-items-center">
         <div class="badge rounded-pill">{{ product.price }}€</div>
         <!-- <CounterProduct/> -->
       </div>
     </div>
+    <img :src="product.image" :alt="product.name" v-if="product.image != null" class="img-right mx-4 d-none d-lg-block">
     <div class="fa-solid fa-plus fs-3"></div>
   </li>
 </template>
@@ -49,5 +53,8 @@ li {
     font-weight: 400;
     font-size: small;
   }
+}
+img{
+  max-width: 90px;
 }
 </style>
