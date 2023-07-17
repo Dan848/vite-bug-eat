@@ -6,7 +6,7 @@
     </div>
     <div class="container">
       <div>
-        <CartComponent v-if="store.cart.products.length > 0"/>
+        <CartComponent v-if="store.cart.products.length > 0" />
       </div>
       <!-- Slider -->
       <SliderComponent :types="store.types" :imgStartUrl="store.imgStartUrl" @onClick="handleSlider"
@@ -55,7 +55,7 @@
                   </router-link>
                   <div v-else>
                     <RestaurantCard :key="restaurant.id" :restaurant="restaurant" :imgStartUrl="store.imgStartUrl"
-                        :isSelected="false" />
+                      :isSelected="false" />
                   </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@
                       <i class="fa-solid fa-angle-left"></i>
                     </button>
                   </li>
-                  <li class="page-item" v-for="n in lastPage">
+                  <li class="page-item d-none d-sm-block" v-for="n in lastPage">
                     <button :class="{
                       'page-link-current page-link': true,
                       active: currentPage === n,
@@ -120,7 +120,7 @@ export default {
     SidebarComponent,
     LoaderComponent,
     CartComponent
-},
+  },
   //Data
   data() {
     return {
@@ -290,6 +290,13 @@ div {
   &:hover {
     cursor: pointer;
     background-color: #8cad6c;
+  }
+}
+
+@media screen and (max-width:575px) {
+  .pagination {
+    display: flex;
+    justify-content: center;
   }
 }
 </style>
